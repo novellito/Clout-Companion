@@ -1,0 +1,38 @@
+$nice-red: #ff3547;
+.calc-card {
+    margin-top: 10%;
+}
+
+.amounts input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid $nice-red;
+    -webkit-box-shadow: 0 1px 0 0 $nice-red;
+    box-shadow: 0 1px 0 0 $nice-red;
+}
+
+.amounts input[type=text]:focus:not([readonly])+label {
+    color: $nice-red;
+    font-size: 1.1em;
+}
+
+.amounts input[type=text] {
+    font-size: 2em;
+}
+
+.amounts .form-control:focus {
+    border-bottom: 1px solid $nice-red;
+    -webkit-box-shadow: 0 1px 0 0 $nice-red;
+    box-shadow: 0 1px 0 0 $nice-red;
+}
+
+.md-form .prefix.fa-dollar {
+    margin-top: .3em;
+}
+
+.amounts {
+    .md-form label {
+        color: white;
+    }
+    input[type=text] {
+        border-bottom: 1px solid white;
+    }
+}
