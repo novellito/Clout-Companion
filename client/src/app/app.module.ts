@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { CalculatorComponent } from './components/calculator/calculator.component';
 import { ResourcesComponent } from './components/resources/resources.component';
 import { ExtrasComponent } from './components/extras/extras.component';
+import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -27,8 +28,11 @@ export function getAuthHttp(http: Http) {
   }), http);
 }
 
+
+
+
 const appRoutes: Routes = [ 
-  {path: '', component: AppComponent},
+  {path: '', component: HomeComponent},
   {path: 'calculator', component: CalculatorComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'extras', component: ExtrasComponent},
@@ -44,7 +48,9 @@ const appRoutes: Routes = [
     ResourcesComponent,
     ExtrasComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    HomeComponent
+
   ],
   imports: [
     BrowserModule,

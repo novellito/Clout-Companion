@@ -1,14 +1,14 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark red">
   
 <!-- Navbar brand -->
-<logo><a class="navbar-brand" [routerLink]="['/']" >Clout Companion</a></logo>
+<logo><a class="navbar-brand" [routerLink]="['/']" [routerLinkActiveOptions] = "{exact:true}">Clout Companion</a></logo>
 
 <!-- Collapsible content -->
 <links class="d-lg-flex justify-content-end">
 
 <!-- Links -->
 <ul class="navbar-nav" >
-   <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+   <li class="nav-item" [routerLinkActive]="['active']" >
        <a class="nav-link waves-light" [routerLink]="['/calculator']" mdbRippleRadius>Calculator</a>
    </li>
    <li class="nav-item" [routerLinkActive]="['active']">
