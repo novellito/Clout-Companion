@@ -11,11 +11,11 @@ $nice-red: #ff3547;
 
 .amounts input[type=text]:focus:not([readonly])+label {
     color: $nice-red;
-    font-size: 1.1em;
+    font-size: 1.1rem;
 }
 
 .amounts input[type=text] {
-    font-size: 2em;
+    font-size: 2rem;
 }
 
 .amounts .form-control:focus {
@@ -29,10 +29,45 @@ $nice-red: #ff3547;
 }
 
 .amounts {
+    
+    width: 60%;
+    margin: 0 auto;
     .md-form label {
         color: white;
+        width:100%;
     }
     input[type=text] {
         border-bottom: 1px solid white;
+        // width: 70%;
+     
+    }
+
+    a{
+        color:white;
+    }
+    a:hover{
+        color:$nice-red;
+    }
+    
+}
+
+
+.fees {
+   
+    h4{
+        font-weight: bold;
+        color:white;
+    }
+    p{
+        font-size:1.3em;
+        margin-bottom:0px;
+    }
+
+   
+}
+
+@media (max-width:768px) {
+    .fees{
+        margin: .5em 0em;
     }
 }

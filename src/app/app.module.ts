@@ -10,9 +10,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { CalculatorComponent } from './components/calculator/calculator.component';
 import { ResourcesComponent } from './components/resources/resources.component';
 import { ExtrasComponent } from './components/extras/extras.component';
+import { HomeComponent } from './components/home/home.component';
 
 const appRoutes: Routes = [ 
-  {path: '', component: AppComponent},
+  {path: '', component: HomeComponent},
   {path: 'calculator', component: CalculatorComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'extras', component: ExtrasComponent}
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     CalculatorComponent,
     ResourcesComponent,
-    ExtrasComponent
+    ExtrasComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
