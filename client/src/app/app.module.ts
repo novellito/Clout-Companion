@@ -28,9 +28,6 @@ export function getAuthHttp(http: Http) {
   }), http);
 }
 
-
-
-
 const appRoutes: Routes = [ 
   {path: '', component: HomeComponent},
   {path: 'calculator', component: CalculatorComponent},
