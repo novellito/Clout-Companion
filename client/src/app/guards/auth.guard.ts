@@ -13,10 +13,12 @@ export class AuthGuard implements CanActivate {
 
     checkLogin(): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            this.facebookService.isLoggedIn().then(() => {
+            this.facebookService.isLoggedIn().then((res) => {
                 resolve(true);
-            }).catch(() => {
-                this.router.navigate(['/welcome']);
+            }).catch((e) => {
+
+                this.router.navigate(['/']);
+                console.log('why u rejecting');
                 reject(false);
             });
         });
