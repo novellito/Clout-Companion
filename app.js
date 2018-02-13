@@ -11,7 +11,7 @@ const flash      = require('connect-flash');
 
 
 // Connect To Database
-mongoose.connect(config.database);
+mongoose.connect(config.database,{useMongoClient: true});
 
 // On Connection
 mongoose.connection.on('connected', () => {
@@ -31,13 +31,22 @@ const facebook = require('./routes/facebook');
 // Port Number
 const port = process.env.PORT || 8080;
 
+var corsOption = {
+  origin: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  exposedHeaders: ['x-auth-token']
+};
 // CORS Middleware
-app.use(cors());
+app.use(cors(corsOption));
 
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Body Parser Middleware
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 
 app.use(passport.initialize());
@@ -54,9 +63,9 @@ app.get('/', (req, res) => {
 });
 
 
-// app.get('*', (req, res)=>{
-//   res.sendFile(path.join(__dirname, 'public/index.html'));
-// });
+  // app.get('*', (req, res)=>{
+  //   res.sendFile(path.join(__dirname, 'public/index.html'));
+  // });
 
 
 // Start Server
