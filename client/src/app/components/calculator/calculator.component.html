@@ -4,7 +4,7 @@
 
     <div class="col-md-8 ">
 
-      <div class="calc-card card red lighten-3 z-depth-2">
+      <div class="calc-card card red lighten-3 z-depth-2" id="accordion">
 
         <div class="h3 card-header red lighten-1 white-text text-center">
           Paypal
@@ -23,7 +23,7 @@
             </div>
 
             <div class="text-center">
-              <button class="btn red accent-2 waves-light" (click)="calcPaypal(paypal.value)">Calculate</button>
+              <button id="calc" class="btn red accent-2 waves-light" (click)="calcPaypal(paypal.value)">Calculate</button>
               <div>
 
                 <a (click)="resetVals(); paypal.value='' ">reset</a>
@@ -39,16 +39,17 @@
 
     <div *ngIf="displayPaypal" class="col-md-8 " style="margin-bottom:-5%;">
 
-      <div class="card red lighten-3 z-depth-2" style="margin-top:2%;">
+      <div class="card red lighten-3 z-depth-2">
 
-        <div class="h3 card-header red lighten-1 white-text text-center">
+        <!-- <div class="h3 card-header red lighten-1 white-text text-center">
           Fees Breakdown
-        </div>
+        </div> -->
 
+        <!-- <div  class="collapse" > -->
+          
+        <!-- <div class="card-body"> -->
 
-        <div class="card-body">
-
-          <div class="d-flex justify-content-center text-center row">
+          <div id="calc" class="collapse d-flex justify-content-center text-center row" role="tabpanel" data-parent="#accordion">
             <div class="col-md-4 col-xs-12 fees">
               <h4> Total Fees </h4>
               <p>$ {{this.amt.paypalFees}}</p>
@@ -67,7 +68,7 @@
           </div>
         </div>
         <!--end of outer card body-->
-      </div>
+      <!-- </div> -->
 
     </div>
 
