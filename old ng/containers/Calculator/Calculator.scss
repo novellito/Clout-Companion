@@ -1,0 +1,47 @@
+@media screen and (min-width: 992px) {
+  .navbar {
+    padding: 0 50px;
+  }
+}
+
+.calculator-card {
+  background-color: #424242;
+}
+.collapsible {
+  border: none;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  .collapsible-header {
+    align-items: center;
+    background-color: #424242;
+    color: white;
+    border-bottom: 1px solid rgb(48, 48, 48);
+  }
+  .collapsible-body {
+    color: white;
+    text-align: center;
+    border: none;
+    .calculate {
+      text-align: center;
+    }
+    .input-field {
+      margin: auto;
+      width: 60%;
+    }
+  }
+}
+
+.calc-icon {
+  margin-right: 1rem;
+  &.paypal {
+    width: 37px;
+    height: 28px;
+  }
+  &.stockx {
+    width: 35px;
+    height: 35px;
+  }
+  &.grailed {
+    width: 35px;
+    height: 35px;
+  }
+}
