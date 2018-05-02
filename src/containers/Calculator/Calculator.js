@@ -1,99 +1,86 @@
 import React, { Component } from 'react';
-import AppNavbar from '../../components/AppNavbar/AppNavbar';
-import CalculatorInput from '../../components/CalculatorInput/CalculatorInput';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
-import Paypal from '../../assets/paypal-icon.svg';
-import Grailed from '../../assets/grailed-icon.png';
-import Stockx from '../../assets/stockx-icon.png';
 import {
   calculatePaypal,
   calculateGrailed
 } from '../../components/CalculatorInput/Formulas';
+import AppNavbar from '../../components/AppNavbar/AppNavbar';
+import CalculatorInput from '../../components/CalculatorInput/CalculatorInput';
+import CalculatorHeader from './CalculatorHeader';
+import Paypal from '../../assets/paypal-icon.svg';
+import Grailed from '../../assets/grailed-icon.png';
+import Stockx from '../../assets/stockx-icon.png';
 import './Calculator.css';
+
 class Calculator extends Component {
   state = {
-    value: '',
-    calculatorType: '',
-    result: ''
+    paypalValue: '',
+    paypalResult: '',
+    grailedValue: '',
+    grailedResult: ''
   };
 
-  setValue = value => {
-    this.setState({ value });
-  };
-
-  setCurrentCalc = calculatorType => {
-    this.setState({ calculatorType });
-  };
-
-  doCalculation = e => {
-    // calculatePaypal();
-    // calculateGrailed();
-    if (e.type === 'click' || e.key === 'Enter') {
-      this.setState({ result: this.state.value });
+  // Function to set the value of each calculator input field
+  setValue = (value, type) => {
+    switch (type) {
+      case 'Paypal':
+        this.setState({ paypalValue: value }, () => {
+          this.state.paypalValue === ''
+            ? this.setState({ paypalResult: '' })
+            : this.setState({
+                paypalResult: calculatePaypal(this.state.paypalValue)
+              });
+        });
+        break;
+      case 'Grailed':
+        this.setState({ grailedValue: value }, () => {
+          this.state.grailedValue === ''
+            ? this.setState({ grailedResult: '' })
+            : this.setState({
+                grailedResult: calculateGrailed(this.state.grailedValue)
+              });
+        });
+        break;
     }
   };
-  // TODO: just calculate without having to hit enter?
+
   render() {
     return (
       <div>
         <AppNavbar />
         <div className="row">
-          <div className="col s12 m6 offset-m3 ">
+          <div className="col s12 m10 l6 offset-l3 offset-m1 ">
             <h1 className="comp-title">Fee Calculator</h1>
-            <ul className="collapsible">
-              <li>
-                <div className="collapsible-header">
-                  <img
-                    className="calc-icon paypal"
-                    src={Paypal}
-                    alt="Calculate Paypal Fees"
-                  />
-                  Paypal
-                </div>
-                <div className="collapsible-body">
-                  <CalculatorInput
-                    onClick={() => this.setCurrentCalc('Paypal')}
-                    doCalc={e => this.doCalculation(e)}
-                    setValue={this.setValue}
-                    result={this.state.result}
-                  />
-                </div>
-              </li>
-              <li>
-                <div className="collapsible-header">
-                  <img
-                    className="calc-icon grailed"
-                    src={Grailed}
-                    alt="Calculate Grailed Fees"
-                  />
-                  Grailed
-                </div>
-                <div className="collapsible-body">
-                  <CalculatorInput
-                    onClick={() => this.setCurrentCalc('Grailed')}
-                    doCalc={this.doCalculation}
-                    setValue={this.setValue}
-                  />
-                </div>
-              </li>
-              <li>
-                <div className="collapsible-header">
-                  <img
-                    className="calc-icon stockx"
-                    src={Stockx}
-                    alt="Calculate Stockx Fees"
-                  />
-                  Stockx
-                </div>
-                <div className="collapsible-body">
-                  <CalculatorInput
-                    onClick={() => this.setCurrentCalc('Stockx')}
-                    doCalc={this.doCalculation}
-                    setValue={this.setValue}
-                  />
-                </div>
-              </li>
-            </ul>
+            <Collapsible>
+              <CollapsibleItem
+                header={<CalculatorHeader name="Paypal" image={Paypal} />}
+              >
+                <CalculatorInput
+                  setValue={this.setValue}
+                  result={this.state.paypalResult}
+                  type={'Paypal'}
+                />
+              </CollapsibleItem>
+              <CollapsibleItem
+                header={<CalculatorHeader name="Grailed" image={Grailed} />}
+              >
+                <CalculatorInput
+                  setValue={this.setValue}
+                  result={this.state.grailedResult}
+                  type={'Grailed'}
+                />
+              </CollapsibleItem>
+              {/* <CollapsibleItem
+                header={<CalculatorHeader name="Stockx" image={Stockx} />}
+              >
+                <CalculatorInput
+                  onClick={() => this.setCurrentCalc('Stockx')}
+                  setValue={this.setValue}
+                  // result={}
+                  type={this.state.calculatorType}
+                />
+              </CollapsibleItem> */}
+            </Collapsible>
           </div>
         </div>
       </div>

@@ -1,0 +1,73 @@
+$nice-red: #ff3547;
+.calc-card:first-child {
+    margin-top: 10%;
+}
+
+.amounts input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid $nice-red;
+    -webkit-box-shadow: 0 1px 0 0 $nice-red;
+    box-shadow: 0 1px 0 0 $nice-red;
+}
+
+.amounts input[type=text]:focus:not([readonly])+label {
+    color: $nice-red;
+    font-size: 1.1rem;
+}
+
+.amounts input[type=text] {
+    font-size: 2rem;
+}
+
+.amounts .form-control:focus {
+    border-bottom: 1px solid $nice-red;
+    -webkit-box-shadow: 0 1px 0 0 $nice-red;
+    box-shadow: 0 1px 0 0 $nice-red;
+}
+
+.md-form .prefix.fa-dollar {
+    margin-top: .3em;
+}
+
+.amounts {
+    
+    width: 60%;
+    margin: 0 auto;
+    .md-form label {
+        color: white;
+        width:100%;
+    }
+    input[type=text] {
+        border-bottom: 1px solid white;
+        // width: 70%;
+     
+    }
+
+    a{
+        color:white;
+    }
+    a:hover{
+        color:$nice-red;
+    }
+    
+}
+
+
+.fees {
+   
+    h4{
+        font-weight: bold;
+        color:white;
+    }
+    p{
+        font-size:1.3em;
+        margin-bottom:0px;
+    }
+
+   
+}
+
+@media (max-width:768px) {
+    .fees{
+        margin: .5em 0em;
+    }
+}

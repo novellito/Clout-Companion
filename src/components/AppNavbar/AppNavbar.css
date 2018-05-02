@@ -1,0 +1,12 @@
+.navbar {
+  background-color: #cc0000; }
+
+#nav-mobile {
+  background-color: #303030; }
+
+.side-nav li > a {
+  color: white;
+  font-size: 15px; }
+
+.nav-active {
+  background-color: rgba(0, 0, 0, 0.1); }

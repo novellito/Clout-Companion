@@ -1,34 +1,30 @@
 import React from 'react';
-
+import { PaypalResult, GrailedResult } from './CalculationResult';
+// Component that handles the input field for the calculators
 const CalculatorInput = props => {
-  const setContent = e => {
-    props.setValue(e.target.value);
-  };
   return (
     <div>
       <div className="row">
         <div className="input-field">
           <input
-            onKeyPress={props.doCalc}
-            onClick={e => props.onClick(e)}
-            onChange={setContent}
-            id="first_name"
+            onChange={e => props.setValue(e.target.value, props.type)}
+            id="price"
             type="text"
             className="validate"
           />
-          <label htmlFor="first_name">Enter Price</label>
+          <label htmlFor="price">Enter Price ($)</label>
         </div>
-
-        <div className="calculate">
-          <button
-            onClick={e => props.doCalc(e)}
-            className="waves-effect waves-light btn btn-sm btn-primary"
-          >
-            Calculate
-          </button>
-        </div>
-        <div className="result">{props.result === '' ? '' : props.result}</div>
       </div>
+      {props.result !== '' && props.type === 'Paypal' ? (
+        <PaypalResult {...props} />
+      ) : (
+        ''
+      )}
+      {props.result !== '' && props.type === 'Grailed' ? (
+        <GrailedResult {...props} />
+      ) : (
+        ''
+      )}
     </div>
   );
 };

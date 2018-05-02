@@ -1,12 +1,25 @@
 import React from 'react';
 import { Navbar, NavItem } from 'react-materialize';
+import { NavLink } from 'react-router-dom';
+import './AppNavbar.css';
 const AppNavbar = () => {
   return (
     <Navbar brand="logo" className="navbar" right>
-      <NavItem onClick={() => console.log('test click')}>
-        Getting started
-      </NavItem>
-      <NavItem href="components.html">Components</NavItem>
+      <li>
+        <NavLink exact activeClassName="nav-active" to="/">
+          Calculator
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName="nav-active" to="/resources">
+          Resources
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName="nav-active" to="/login">
+          Login
+        </NavLink>
+      </li>
     </Navbar>
   );
 };
