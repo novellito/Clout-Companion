@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #303030; }
+
+.btn-primary {
+  background-color: #ff3547; }
+  .btn-primary:hover {
+    background-color: #fd5968; }
+  .btn-primary:focus {
+    background-color: #ff3547; }
+
+.btn-sm {
+  height: 32.4px;
+  line-height: 32.4px;
+  font-size: 13px;
+  padding: 0 16px; }
+
+input[type='text']:not(.browser-default):focus:not([readonly]),
+input[type='text'].valid:not(.browser-default),
+input[type='text'].valid:not(.browser-default):focus {
+  border-bottom: 1px solid #ff3547;
+  box-shadow: 0 1px 0 0 #ff3547;
+  color: white; }
+
+input[type='text']:focus:not(.browser-default):focus + label {
+  color: #ff3547; }
+
+.comp-title {
+  color: white;
+  text-align: center; }
