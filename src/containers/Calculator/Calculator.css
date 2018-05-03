@@ -1,12 +1,6 @@
 .comp-title {
   font-size: 2.8rem; }
 
-@media screen and (min-width: 992px) {
-  .navbar {
-    padding: 0 50px; }
-  .comp-title {
-    font-size: 3.2rem; } }
-
 .calculator-card {
   background-color: #424242; }
 
@@ -22,11 +16,10 @@
       align-items: center; }
   .collapsible .collapsible-body {
     color: white;
-    text-align: center;
     border: none; }
     .collapsible .collapsible-body .input-field {
       margin: auto;
-      width: 60%; }
+      width: 100%; }
 
 .calc-icon {
   margin-right: 1rem; }
@@ -39,3 +32,21 @@
   .calc-icon.Grailed {
     width: 35px;
     height: 35px; }
+
+.result {
+  text-align: center;
+  margin: 7px 0; }
+
+@media only screen and (min-width: 424px) {
+  .collapsible-body .row {
+    display: flex;
+    margin-bottom: 0;
+    width: 75%; } }
+
+@media screen and (min-width: 992px) {
+  .navbar {
+    padding: 0 50px; }
+  .comp-title {
+    font-size: 3.2rem; }
+  .collapsible-body .row {
+    width: 80%; } }

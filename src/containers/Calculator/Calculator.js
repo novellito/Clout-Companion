@@ -16,8 +16,12 @@ class Calculator extends Component {
   state = {
     paypalValue: '',
     paypalResult: '',
+    paypalShipping: '',
+    paypalCheckbox: false,
     grailedValue: '',
-    grailedResult: ''
+    grailedResult: '',
+    grailedShipping: '',
+    grailedCheckbox: false
   };
 
   // Function to set the value of each calculator input field
@@ -41,9 +45,47 @@ class Calculator extends Component {
               });
         });
         break;
+      default:
+        console.log('default');
+        break;
     }
   };
 
+  setShipping = (value, type) => {
+    switch (type) {
+      case 'Paypal':
+        this.setState({ paypalShipping: value }, () => {
+          this.state.paypalShipping === ''
+            ? this.setState({ paypalShipping: '' })
+            : this.setState({
+                paypalShipping: value
+              });
+        });
+        break;
+      case 'Grailed':
+        this.setState({ grailedShipping: value }, () => {
+          this.state.grailedValue === ''
+            ? this.setState({ grailedShipping: '' })
+            : this.setState({
+                grailedShipping: value
+              });
+        });
+        break;
+      default:
+        console.log('default');
+        break;
+    }
+  };
+  toggleCheckBox = (e, type) => {
+    switch (type) {
+      case 'Paypal':
+        this.setState({ paypalCheckbox: !this.state.paypalCheckbox });
+        break;
+      case 'Grailed':
+        this.setState({ grailedCheckbox: !this.state.grailedCheckbox });
+        break;
+    }
+  };
   render() {
     return (
       <div>
@@ -56,8 +98,13 @@ class Calculator extends Component {
                 header={<CalculatorHeader name="Paypal" image={Paypal} />}
               >
                 <CalculatorInput
+                  toggleCheckBox={this.toggleCheckBox}
                   setValue={this.setValue}
+                  setShipping={this.setShipping}
+                  checkBox={this.state.paypalCheckbox}
+                  shippingCost={this.state.paypalShipping}
                   result={this.state.paypalResult}
+                  currValue={this.state.paypalValue}
                   type={'Paypal'}
                 />
               </CollapsibleItem>
@@ -66,7 +113,12 @@ class Calculator extends Component {
               >
                 <CalculatorInput
                   setValue={this.setValue}
+                  setShipping={this.setShipping}
                   result={this.state.grailedResult}
+                  toggleCheckBox={this.toggleCheckBox}
+                  shippingCost={this.state.grailedShipping}
+                  currValue={this.state.grailedValue}
+                  checkBox={this.state.grailedCheckbox}
                   type={'Grailed'}
                 />
               </CollapsibleItem>

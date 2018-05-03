@@ -22,8 +22,6 @@ export const calculateGrailed = amount => {
     receive: roundTo(amount - grailedFees - ppFees),
     askFor: roundTo((parseFloat(`${amount}`) + PERCENTAGE) / 0.911)
   };
-
-  console.log('calculateGrailed');
 };
 
 // https://stackoverflow.com/questions/15762768/javascript-math-round-to-two-decimal-places

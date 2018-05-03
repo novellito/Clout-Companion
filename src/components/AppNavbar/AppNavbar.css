@@ -1,6 +1,9 @@
 .navbar {
   background-color: #cc0000; }
 
+nav .brand-logo {
+  font-size: 1.8rem; }
+
 #nav-mobile {
   background-color: #303030; }
 
