@@ -2,7 +2,6 @@ import React from 'react';
 
 // Component to render the results of each calculator
 export const PaypalResult = props => {
-  console.log(props);
   return (
     <div>
       <p className="result">Total Fees: ${props.result.fees}</p>
@@ -10,7 +9,7 @@ export const PaypalResult = props => {
       <p className="result">
         Ask for: <b>${props.result.askFor}</b> if you want ${props.currValue}
       </p>
-      {props.shippingCost > 0 ? (
+      {props.shippingCost > 0 && props.checkBox ? (
         <p className="result">
           Grand Total: ${props.result.receive - props.shippingCost}
         </p>
@@ -30,7 +29,7 @@ export const GrailedResult = props => {
       <p className="result">
         Ask for: <b>${props.result.askFor}</b> if you want ${props.currValue}
       </p>
-      {props.shippingCost > 0 ? (
+      {props.shippingCost > 0 && props.checkBox ? (
         <p className="result">
           Grand Total: ${props.result.receive - props.shippingCost}
         </p>

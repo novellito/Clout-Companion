@@ -9,22 +9,24 @@ const CalculatorInput = props => {
     <div>
       <div className="row calc-inputs">
         <Input
-          onChange={e => props.setValue(e.target.value, props.type)}
+          onChange={e => props.setValue(e)}
           id="price"
           type="text"
           className="validate"
           label="Enter Price ($)"
+          name={props.type}
         />
 
         {props.checkBox ? <ShippingInput {...props} /> : ''}
       </div>
       <div className="row">
         <Input
-          onChange={e => props.toggleCheckBox(e, props.type)}
+          onChange={e => props.toggleCheckBox(e)}
           name="shipping"
           type="checkbox"
           checked={props.checkBox}
           label="toggle shipping"
+          name={props.type}
         />
       </div>
       {props.result !== '' && props.type === 'Paypal' ? (
