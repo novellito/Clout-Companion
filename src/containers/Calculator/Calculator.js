@@ -66,9 +66,8 @@ class Calculator extends Component {
   setShipping = e => {
     const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, '');
     const validate = this.verifyValueInput(parsedValue);
-    console.log(parsedValue);
-    console.log(validate);
-    if ((validate === -1 && validate !== undefined)|| parsedValue > this.state[e.target.name]) {
+    if ((validate === -1 && validate !== undefined)) {
+      console.log('eree');
       this.setState({ [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:-1} });
     } else if (validate === 0) {
       this.setState({ [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:0}  });

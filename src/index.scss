@@ -36,6 +36,9 @@ input[type='text']:focus:not(.browser-default):focus + label {
   color: $primary-color;
 }
 
+input[type='text']:not(.browser-default):disabled + label {
+  color:red!important;
+}
 .comp-title {
   color: white;
   text-align: center;
