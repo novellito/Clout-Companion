@@ -3,8 +3,8 @@ import React from 'react';
 // Component to render the results of each calculator
 export const PaypalResult = props => {
   let message = null;
-  if (props.result === -1) message = 'Please enter a valid number';
-  else if (props.result === 0) message = 'Please enter a value greater than 0';
+  if (props.result.status === -1) message = 'Please enter a valid number';
+  else if (props.result.status === 0) message = 'Please enter a value greater than 0';
   return (
     <div>
       {message !== null ? (
@@ -21,7 +21,7 @@ export const PaypalResult = props => {
           </p>
           {props.shippingCost > 0 && props.checkBox ? (
             <p className="result">
-              Grand Total: ${props.result.receive - props.shippingCost}
+              Grand Total: ${(props.result.receive - props.shippingCost).toFixed(2)}
             </p>
           ) : (
             ''
@@ -34,8 +34,8 @@ export const PaypalResult = props => {
 
 export const GrailedResult = props => {
   let message = null;
-  if (props.result === -1) message = 'Please enter a valid number';
-  else if (props.result === 0) message = 'Please enter a value greater than 0';
+  if (props.result.status === -1) message = 'Please enter a valid number';
+  else if (props.result.status === 0) message = 'Please enter a value greater than 0';
   return (
     <div>
       {message !== null ? (
@@ -52,7 +52,7 @@ export const GrailedResult = props => {
           </p>
           {props.shippingCost > 0 && props.checkBox ? (
             <p className="result">
-              Grand Total: ${props.result.receive - props.shippingCost}
+              Grand Total: ${(props.result.receive - props.shippingCost).toFixed(2)}
             </p>
           ) : (
             ''
@@ -64,8 +64,8 @@ export const GrailedResult = props => {
 };
 export const StockXResult = props => {
   let message = null;
-  if (props.result === -1) message = 'Please enter a valid number';
-  else if (props.result === 0) message = 'Please enter a value greater than 0';
+  if (props.result.status === -1) message = 'Please enter a valid number';
+  else if (props.result.status === 0) message = 'Please enter a value greater than 0';
   return (
     <div>
       {message !== null ? (

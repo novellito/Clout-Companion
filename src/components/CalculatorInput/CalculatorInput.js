@@ -9,7 +9,6 @@ const CalculatorInput = props => {
     <div>
       <div className="row calc-inputs">
         <Input
-          // onKeyPress={e => props.setValue(e)}
           onChange={e => props.setValue(e)}
           id="price"
           type="text"

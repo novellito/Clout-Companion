@@ -31,17 +31,17 @@ class Calculator extends Component {
   setValue = e => {
     let calculation = null;
     // Determine which calculation to make
-    const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, '');
+    const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, ''); // remove leading 0's and extra spaces
     const validate = this.verifyValueInput(parsedValue);
 
     if (validate === -1) {
-      this.setState({ [e.target.name + 'Result']: -1 });
+      this.setState({ [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:-1} });
     } else if (validate === 0) {
-      this.setState({ [e.target.name + 'Result']: 0 });
+      this.setState({ [e.target.name + 'Result']:{...this.state[e.target.name+'Result'],status:0} });
     } else {
       switch (e.target.name) {
         case 'Paypal':
-          calculation = calculatePaypal(parsedValue); // strip leading 0's
+          calculation = calculatePaypal(parsedValue);
           break;
         case 'Grailed':
           calculation = calculateGrailed(parsedValue);
@@ -54,7 +54,7 @@ class Calculator extends Component {
         [e.target.name + 'Result']: calculation
       });
     }
-    if (parsedValue === '' || null)
+    if (parsedValue === '' || parsedValue === null) // clear values
       this.setState({
         [e.target.name]: '',
         [e.target.name + 'Result']: '',
@@ -62,19 +62,38 @@ class Calculator extends Component {
       });
   };
 
+  // Set & validate the shipping price
+  setShipping = e => {
+    const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, '');
+    const validate = this.verifyValueInput(parsedValue);
+    console.log(parsedValue);
+    console.log(validate);
+    if ((validate === -1 && validate !== undefined)|| parsedValue > this.state[e.target.name]) {
+      this.setState({ [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:-1} });
+    } else if (validate === 0) {
+      this.setState({ [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:0}  });
+    } else {
+      this.setState({
+        [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:'' },
+        [e.target.name + 'Shipping']: e.target.value
+      });
+    }
+
+    if (parsedValue === '' || parsedValue === null) // clear values
+    this.setState({
+      [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:''},
+      [e.target.name + 'Shipping']: ''
+    });
+  };
+
   // verify that the input only contains numbers and 1 decimal
   verifyValueInput = value => {
-    let regex = value.match(/^[0-9]\d*(\.\d+)?$/);
+    let regex = value.match(/^[0-9]\d*(\.\d{1,2})?$/);
     if (regex === null) {
       return -1;
     } else if (parseFloat(regex[0]) <= 0) {
       return 0;
     }
-  };
-
-  // Set the shipping price
-  setShipping = e => {
-    this.setState({ [e.target.name + 'Shipping']: e.target.value });
   };
 
   // Keep track of whether the user wants to include shipping fees
