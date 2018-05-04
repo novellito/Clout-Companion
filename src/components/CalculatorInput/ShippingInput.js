@@ -3,15 +3,19 @@ import { Input } from 'react-materialize';
 
 // component for handling the shipping price value
 const ShippingInput = props => {
+console.log(props.shippingCost);
   return (
     <Input
       onChange={e => props.setShipping(e)}
       id="shipping"
+      className="active"
       type="text"
-      className="validate"
-      label="Shipping Price ($)"
+      value={props.shippingCost}
+      label={
+        props.currValue === '' ? 'Enter A Price First' : 'Shipping Price ($)'
+      }
       name={props.type}
-      disabled={props.currValue===''?true:false}
+      disabled={props.currValue === '' ? true : false}
     />
   );
 };

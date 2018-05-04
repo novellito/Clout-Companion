@@ -27,8 +27,11 @@ input[type='text'].valid:not(.browser-default):focus {
 input[type='text']:focus:not(.browser-default):focus + label {
   color: #ff3547; }
 
-input[type='text']:not(.browser-default):disabled + label {
-  color: red !important; }
+input[type='text']:not(.browser-default):disabled {
+  color: #9e9e9ea8;
+  border-bottom: 1px solid #9e9e9ea8; }
+  input[type='text']:not(.browser-default):disabled + label {
+    color: #9e9e9ea8; }
 
 .comp-title {
   color: white;

@@ -25,7 +25,8 @@ class Calculator extends Component {
     GrailedCheckbox: false,
     Stockx: '',
     StockxResult: '',
-    StockxRate: 0.095
+    StockxRate: 0.095,
+    shippingField:''
   };
   // Function to set the value of each calculator input field
   setValue = e => {
@@ -34,11 +35,22 @@ class Calculator extends Component {
     const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, ''); // remove leading 0's and extra spaces
     const validate = this.verifyValueInput(parsedValue);
 
-    if (validate === -1) {
-      this.setState({ [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:-1} });
-    } else if (validate === 0) {
-      this.setState({ [e.target.name + 'Result']:{...this.state[e.target.name+'Result'],status:0} });
+    if (validate === -1) { // invalid character input
+      this.setState({
+        [e.target.name + 'Result']: {
+          ...this.state[e.target.name + 'Result'],
+          status: -1
+        }
+      });
+    } else if (validate === 0) { // user entered a 0
+      this.setState({
+        [e.target.name + 'Result']: {
+          ...this.state[e.target.name + 'Result'],
+          status: 0
+        }
+      });
     } else {
+      // do appropriate calculation
       switch (e.target.name) {
         case 'Paypal':
           calculation = calculatePaypal(parsedValue);
@@ -54,40 +66,63 @@ class Calculator extends Component {
         [e.target.name + 'Result']: calculation
       });
     }
-    if (parsedValue === '' || parsedValue === null) // clear values
+    console.log(e.target.nextSibling);
+    
+    if (parsedValue === '' || parsedValue === null) {
+      // clear values
       this.setState({
         [e.target.name]: '',
         [e.target.name + 'Result']: '',
-        [e.target.name + 'Shipping']: ''
+        [e.target.name + 'Shipping']: '',
       });
+      this.state.shippingField.className = '';
+    }
   };
 
   // Set & validate the shipping price
   setShipping = e => {
+    this.setState({ shippingField: e.target.nextSibling }); // Store reference for the shipping input field
     const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, '');
     const validate = this.verifyValueInput(parsedValue);
-    if ((validate === -1 && validate !== undefined)) {
-      console.log('eree');
-      this.setState({ [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:-1} });
-    } else if (validate === 0) {
-      this.setState({ [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:0}  });
+    if (validate === -1 && validate !== undefined) { // invalid character input
+      this.setState({
+        [e.target.name + 'Result']: {
+          ...this.state[e.target.name + 'Result'],
+          status: -1
+        }
+      });
+    } else if (validate === 0) { // user entered a 0
+      this.setState({
+        [e.target.name + 'Result']: {
+          ...this.state[e.target.name + 'Result'],
+          status: 0
+        }
+      });
     } else {
       this.setState({
-        [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:'' },
+        [e.target.name + 'Result']: {
+          ...this.state[e.target.name + 'Result'],
+          status: ''
+        },
         [e.target.name + 'Shipping']: e.target.value
       });
     }
 
-    if (parsedValue === '' || parsedValue === null) // clear values
-    this.setState({
-      [e.target.name + 'Result']: {...this.state[e.target.name+'Result'],status:''},
-      [e.target.name + 'Shipping']: ''
-    });
+    if (parsedValue === '' || parsedValue === null) {
+      // clear values
+      this.setState({
+        [e.target.name + 'Result']: {
+          ...this.state[e.target.name + 'Result'],
+          status: ''
+        },
+        [e.target.name + 'Shipping']: ''
+      });
+    }
   };
 
   // verify that the input only contains numbers and 1 decimal
   verifyValueInput = value => {
-    let regex = value.match(/^[0-9]\d*(\.\d{1,2})?$/);
+    let regex = value.match(/^[0-9]\d*(\.{0,1})(\d{1,2})?$/);
     if (regex === null) {
       return -1;
     } else if (parseFloat(regex[0]) <= 0) {
