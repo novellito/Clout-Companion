@@ -21,6 +21,14 @@
       margin: auto;
       width: 100%; }
 
+.select-wrapper span.caret {
+  color: white; }
+
+.dropdown-content {
+  background-color: #424242; }
+  .dropdown-content li span {
+    color: white; }
+
 .calc-icon {
   margin-right: 1rem; }
   .calc-icon.Paypal {

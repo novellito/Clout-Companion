@@ -26,6 +26,17 @@
     }
   }
 }
+.select-wrapper span.caret {
+  color:white
+}
+
+.dropdown-content {
+  background-color:#424242;
+
+  li span {
+    color:white;
+  }
+}
 
 .calc-icon {
   margin-right: 1rem;

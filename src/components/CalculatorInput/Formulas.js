@@ -6,21 +6,32 @@ const PERCENTAGE = 0.3;
 const GRAILED_RATE = 0.06;
 
 export const calculatePaypal = amount => {
-  const fees = roundTo(amount * RATE + PERCENTAGE);
+  const fees = roundTo(parseFloat(amount) * RATE + PERCENTAGE);
   return {
     fees,
-    receive: roundTo(amount - fees),
-    askFor: roundTo((parseFloat(`${amount}`) + PERCENTAGE) / 0.971)
+    receive: roundTo(parseFloat(amount) - fees),
+    askFor: roundTo((parseFloat(amount) + PERCENTAGE) / 0.971)
   };
 };
 export const calculateGrailed = amount => {
-  const ppFees = roundTo(amount * RATE + PERCENTAGE);
-  const grailedFees = roundTo(amount * GRAILED_RATE);
+  const ppFees = roundTo(parseFloat(amount) * RATE + PERCENTAGE);
+  const grailedFees = roundTo(parseFloat(amount) * GRAILED_RATE);
   return {
     fees: ppFees,
     grailedFees,
     receive: roundTo(amount - grailedFees - ppFees),
-    askFor: roundTo((parseFloat(`${amount}`) + PERCENTAGE) / 0.911)
+    askFor: roundTo((parseFloat(amount) + PERCENTAGE) / 0.911)
+  };
+};
+
+export const calculateStockx = (amount, rate) => {
+  const transactionFee = amount * rate;
+  const payProcFee = amount * 0.03;
+  return {
+    transactionFee,
+    payProcFee,
+    receive: roundTo(parseFloat(amount) - transactionFee - payProcFee),
+    askFor: Math.floor(parseFloat(amount) / (1 - (0.03 + parseFloat(rate)))) + 1
   };
 };
 

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
 import {
   calculatePaypal,
-  calculateGrailed
+  calculateGrailed,
+  calculateStockx
 } from '../../components/CalculatorInput/Formulas';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
 import CalculatorInput from '../../components/CalculatorInput/CalculatorInput';
@@ -21,32 +22,54 @@ class Calculator extends Component {
     Grailed: '',
     GrailedResult: '',
     GrailedShipping: '',
-    GrailedCheckbox: false
+    GrailedCheckbox: false,
+    Stockx: '',
+    StockxResult: '',
+    StockxRate: 0.095
   };
   // Function to set the value of each calculator input field
   setValue = e => {
     let calculation = null;
-
     // Determine which calculation to make
-    switch (e.target.name) {
-      case 'Paypal':
-        calculation = calculatePaypal(e.target.value);
-        break;
-      case 'Grailed':
-        calculation = calculateGrailed(e.target.value);
-        break;
-    }
+    const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, '');
+    const validate = this.verifyValueInput(parsedValue);
 
-    e.target.value === ''
-      ? this.setState({
-          [e.target.name]: '',
-          [e.target.name + 'Result']: '',
-          [e.target.name + 'Shipping']: ''
-        })
-      : this.setState({
-          [e.target.name]: e.target.value,
-          [e.target.name + 'Result']: calculation
-        });
+    if (validate === -1) {
+      this.setState({ [e.target.name + 'Result']: -1 });
+    } else if (validate === 0) {
+      this.setState({ [e.target.name + 'Result']: 0 });
+    } else {
+      switch (e.target.name) {
+        case 'Paypal':
+          calculation = calculatePaypal(parsedValue); // strip leading 0's
+          break;
+        case 'Grailed':
+          calculation = calculateGrailed(parsedValue);
+          break;
+        default:
+          calculation = calculateStockx(parsedValue, this.state.StockxRate);
+      }
+      this.setState({
+        [e.target.name]: parsedValue,
+        [e.target.name + 'Result']: calculation
+      });
+    }
+    if (parsedValue === '' || null)
+      this.setState({
+        [e.target.name]: '',
+        [e.target.name + 'Result']: '',
+        [e.target.name + 'Shipping']: ''
+      });
+  };
+
+  // verify that the input only contains numbers and 1 decimal
+  verifyValueInput = value => {
+    let regex = value.match(/^[0-9]\d*(\.\d+)?$/);
+    if (regex === null) {
+      return -1;
+    } else if (parseFloat(regex[0]) <= 0) {
+      return 0;
+    }
   };
 
   // Set the shipping price
@@ -61,6 +84,17 @@ class Calculator extends Component {
       [e.target.name + 'Shipping']: ''
     });
   };
+
+  // Update the selected stockx rate
+  changeStockxRate = StockxRate => {
+    this.setState({ StockxRate });
+    if (this.state.Stockx !== '') {
+      this.setState({
+        StockxResult: calculateStockx(this.state.Stockx, this.state.StockxRate)
+      });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -97,16 +131,17 @@ class Calculator extends Component {
                   shippingCost={this.state.GrailedShipping}
                 />
               </CollapsibleItem>
-              {/* <CollapsibleItem
+              <CollapsibleItem
                 header={<CalculatorHeader name="Stockx" image={Stockx} />}
               >
                 <CalculatorInput
-                  onClick={() => this.setCurrentCalc('Stockx')}
+                  type={'Stockx'}
                   setValue={this.setValue}
-                  // result={}
-                  type={this.state.calculatorType}
+                  currValue={this.state.Stockx}
+                  result={this.state.StockxResult}
+                  stockxRate={this.changeStockxRate}
                 />
-              </CollapsibleItem> */}
+              </CollapsibleItem>
             </Collapsible>
           </div>
         </div>
