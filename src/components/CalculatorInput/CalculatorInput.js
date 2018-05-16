@@ -38,7 +38,6 @@ const CalculatorInput = props => {
         <div className="row">
           <Input
             onChange={e => props.toggleCheckBox(e)}
-            name="shipping"
             type="checkbox"
             label="toggle shipping"
             name={props.type}

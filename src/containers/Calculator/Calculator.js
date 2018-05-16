@@ -66,22 +66,23 @@ class Calculator extends Component {
         [e.target.name + 'Result']: calculation
       });
     }
-    console.log(e.target.nextSibling);
-    
+  
     if (parsedValue === '' || parsedValue === null) {
       // clear values
+      let labelRef = this.state.shippingField; // create this so state is not mutated directly
       this.setState({
         [e.target.name]: '',
         [e.target.name + 'Result']: '',
         [e.target.name + 'Shipping']: '',
       });
-      this.state.shippingField.className = '';
+      labelRef.className = '';
     }
   };
 
   // Set & validate the shipping price
   setShipping = e => {
-    this.setState({ shippingField: e.target.nextSibling }); // Store reference for the shipping input field
+
+    this.setState({shippingField: e.target.nextSibling}); // Store reference for the shipping input field
     const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, '');
     const validate = this.verifyValueInput(parsedValue);
     if (validate === -1 && validate !== undefined) { // invalid character input

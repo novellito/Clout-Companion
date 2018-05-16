@@ -1,0 +1,78 @@
+UI:
+
+  Containers:
+    ☐ User dashboard
+    ☐ App.js
+
+  Components:
+    ✔ Navbar @done(18-05-15 22:40)
+    ☐ Landing Page
+    ☐ Calculators
+        ☐ Test Calculator Components
+    ☐ Useful Resources 
+    ☐ Contact links / Donate
+    ☐ Items (either bought or sold)
+        ☐ Item
+ 
+Backend:
+
+  Database:
+    ☐ Set up User schemas
+    ☐ Set up Item Schemas
+
+  use format /api/:something
+  Endpoints:
+    ☐  Login
+        ☐ Facebook 
+        ☐ Twitter
+    ☐ User info
+    ☐ Items info
+
+  Login:
+      ☐ Facebook Login
+      ☐ Twitter Login
+  
+  Features:
+    ✔ Paypal fees calculator @done(18-05-15 22:40)
+    ✔ Grailed fees calculator @done(18-05-15 22:40)
+    ✔ Stockx fees calculator @done(18-05-15 22:40)
+    ☐ Useful resources & guides section
+    ☐ Manage Profits & Inventory 
+        ☐ Look for react components (npm) that displays data in charts (look at nivo)
+        ☐ Download list as a csv
+  
+  Infastructure:
+    ☐ Set up folder structure
+    ☐ Set up redux
+        ☐ Set up reducers & actions
+    ☐ Set up routing
+  
+  Misc:
+    ☐ Ensure overall responsiveness
+  
+----------------------------------------------------------
+remember to somehow say these are your opinions
+Resources Page: 
+  
+  Copping Guides:
+      ☐ Jigs (youTube vids)
+      ☐ How to cop manual (autofill,fillr)
+      ☐ How not to get scammed
+
+  Where to Buy/Sell:
+    Now you've successfully copped something..where should you sell it?
+    ☐ ebay,grailed,discord groups,fb,insta,twitter...etc.
+  
+  // explain footsites, supreme, shopify
+  Bots:
+
+  Proxies & Servers:
+    ☐ Description
+      ☐ List some popular ones
+  
+  Shipping Resources:
+    ☐ Invoice template (from discord message)
+    ☐ shipping guide from r/supremeclothing
+
+  some useful terms
+  Slang:
