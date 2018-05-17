@@ -26,7 +26,7 @@ class Calculator extends Component {
     Stockx: '',
     StockxResult: '',
     StockxRate: 0.095,
-    shippingField: ''
+    shippingField: { Paypal: '', Grailed: '' }
   };
   // Function to set the value of each calculator input field
   setValue = e => {
@@ -35,8 +35,8 @@ class Calculator extends Component {
     const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, ''); // remove leading 0's and extra spaces
     const validate = this.verifyValueInput(parsedValue);
 
+    // invalid character input
     if (validate === -1) {
-      // invalid character input
       this.setState({
         [e.target.name + 'Result']: {
           ...this.state[e.target.name + 'Result'],
@@ -44,7 +44,7 @@ class Calculator extends Component {
         }
       });
     } else if (validate === 0) {
-      // user entered a 0
+      //user entered 0
       this.setState({
         [e.target.name + 'Result']: {
           ...this.state[e.target.name + 'Result'],
@@ -70,20 +70,32 @@ class Calculator extends Component {
     }
 
     if (parsedValue === '' || parsedValue === null) {
+      let labelRef = this.state.shippingField[e.target.name]; // create this so state is not mutated directly
       // clear values
-      let labelRef = this.state.shippingField; // create this so state is not mutated directly
+      if (
+        // remove th3e active class from correct label
+        this.state[e.target.name + 'Checkbox'] &&
+        this.state[e.target.name + 'Shipping'] !== ''
+      )
+        labelRef.className = '';
       this.setState({
         [e.target.name]: '',
         [e.target.name + 'Result']: '',
-        [e.target.name + 'Shipping']: ''
+        [e.target.name + 'Shipping']: '',
+        shippingField: ''
       });
-      labelRef.className = '';
     }
   };
 
   // Set & validate the shipping price
   setShipping = e => {
-    this.setState({ shippingField: e.target.nextSibling }); // Store reference for the shipping input field
+    // update the correct shipping field
+    this.setState({
+      shippingField: {
+        ...this.state.shippingField,
+        [e.target.name]: e.target.nextSibling
+      }
+    }); // Store reference for the shipping input field
     const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, '');
     const validate = this.verifyValueInput(parsedValue);
     if (validate === -1 && validate !== undefined) {

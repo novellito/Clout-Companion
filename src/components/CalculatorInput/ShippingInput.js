@@ -6,8 +6,7 @@ const ShippingInput = props => {
   return (
     <Input
       onChange={e => props.setShipping(e)}
-      id="shipping"
-      className="active"
+      className={props.type + 'Shipping'}
       type="text"
       value={props.shippingCost}
       label={
