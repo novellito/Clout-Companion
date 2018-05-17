@@ -7,8 +7,8 @@ UI:
   Components:
     ✔ Navbar @done(18-05-15 22:40)
     ☐ Landing Page
-    ☐ Calculators
-        ☐ Test Calculator Components
+    ✔ Calculators @done(18-05-16 23:29)
+        ✔ Test Calculator Components @done(18-05-16 23:29)
     ☐ Useful Resources 
     ☐ Contact links / Donate
     ☐ Items (either bought or sold)
@@ -42,10 +42,10 @@ Backend:
         ☐ Download list as a csv
   
   Infastructure:
-    ☐ Set up folder structure
-    ☐ Set up redux
-        ☐ Set up reducers & actions
-    ☐ Set up routing
+    ✔ Set up folder structure @done(18-05-16 23:39)
+    ✔ Set up redux @done(18-05-16 23:39)
+        ✔ Set up reducers & actions @done(18-05-16 23:39)
+    ✔ Set up routing @done(18-05-16 23:39)
   
   Misc:
     ☐ Ensure overall responsiveness
@@ -57,11 +57,12 @@ Resources Page:
   Copping Guides:
       ☐ Jigs (youTube vids)
       ☐ How to cop manual (autofill,fillr)
-      ☐ How not to get scammed
-
+      ☐ yeezy supply autofill?
+      
   Where to Buy/Sell:
     Now you've successfully copped something..where should you sell it?
     ☐ ebay,grailed,discord groups,fb,insta,twitter...etc.
+    ☐ How not to get scammed
   
   // explain footsites, supreme, shopify
   Bots:
