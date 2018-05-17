@@ -6,7 +6,7 @@ const CalculatorHeader = props => {
       <img
         className={'calc-icon ' + props.name}
         src={props.image}
-        alt="Calculate Stockx Fees"
+        alt={props.alt}
       />
       {props.name}
     </div>

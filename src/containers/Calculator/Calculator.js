@@ -26,7 +26,7 @@ class Calculator extends Component {
     Stockx: '',
     StockxResult: '',
     StockxRate: 0.095,
-    shippingField:''
+    shippingField: ''
   };
   // Function to set the value of each calculator input field
   setValue = e => {
@@ -35,14 +35,16 @@ class Calculator extends Component {
     const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, ''); // remove leading 0's and extra spaces
     const validate = this.verifyValueInput(parsedValue);
 
-    if (validate === -1) { // invalid character input
+    if (validate === -1) {
+      // invalid character input
       this.setState({
         [e.target.name + 'Result']: {
           ...this.state[e.target.name + 'Result'],
           status: -1
         }
       });
-    } else if (validate === 0) { // user entered a 0
+    } else if (validate === 0) {
+      // user entered a 0
       this.setState({
         [e.target.name + 'Result']: {
           ...this.state[e.target.name + 'Result'],
@@ -66,14 +68,14 @@ class Calculator extends Component {
         [e.target.name + 'Result']: calculation
       });
     }
-  
+
     if (parsedValue === '' || parsedValue === null) {
       // clear values
       let labelRef = this.state.shippingField; // create this so state is not mutated directly
       this.setState({
         [e.target.name]: '',
         [e.target.name + 'Result']: '',
-        [e.target.name + 'Shipping']: '',
+        [e.target.name + 'Shipping']: ''
       });
       labelRef.className = '';
     }
@@ -81,18 +83,19 @@ class Calculator extends Component {
 
   // Set & validate the shipping price
   setShipping = e => {
-
-    this.setState({shippingField: e.target.nextSibling}); // Store reference for the shipping input field
+    this.setState({ shippingField: e.target.nextSibling }); // Store reference for the shipping input field
     const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, '');
     const validate = this.verifyValueInput(parsedValue);
-    if (validate === -1 && validate !== undefined) { // invalid character input
+    if (validate === -1 && validate !== undefined) {
+      // invalid character input
       this.setState({
         [e.target.name + 'Result']: {
           ...this.state[e.target.name + 'Result'],
           status: -1
         }
       });
-    } else if (validate === 0) { // user entered a 0
+    } else if (validate === 0) {
+      // user entered a 0
       this.setState({
         [e.target.name + 'Result']: {
           ...this.state[e.target.name + 'Result'],
@@ -158,7 +161,13 @@ class Calculator extends Component {
             <h1 className="comp-title">Fee Calculator</h1>
             <Collapsible>
               <CollapsibleItem
-                header={<CalculatorHeader name="Paypal" image={Paypal} />}
+                header={
+                  <CalculatorHeader
+                    name="Paypal"
+                    image={Paypal}
+                    alt="Calculate Paypal Fees"
+                  />
+                }
               >
                 <CalculatorInput
                   type={'Paypal'}
@@ -172,7 +181,13 @@ class Calculator extends Component {
                 />
               </CollapsibleItem>
               <CollapsibleItem
-                header={<CalculatorHeader name="Grailed" image={Grailed} />}
+                header={
+                  <CalculatorHeader
+                    name="Grailed"
+                    image={Grailed}
+                    alt="Calculate Grailed Fees"
+                  />
+                }
               >
                 <CalculatorInput
                   type={'Grailed'}
@@ -186,7 +201,13 @@ class Calculator extends Component {
                 />
               </CollapsibleItem>
               <CollapsibleItem
-                header={<CalculatorHeader name="Stockx" image={Stockx} />}
+                header={
+                  <CalculatorHeader
+                    name="Stockx"
+                    image={Stockx}
+                    alt="Calculate Stockx Fees"
+                  />
+                }
               >
                 <CalculatorInput
                   type={'Stockx'}
