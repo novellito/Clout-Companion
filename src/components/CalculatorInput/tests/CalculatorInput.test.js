@@ -2,8 +2,8 @@ import React from 'react';
 
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import CalculatorInput from './CalculatorInput';
-import { PaypalResult, GrailedResult, StockXResult } from './CalculationResult';
+import CalculatorInput from '../CalculatorInput';
+import { PaypalResult, GrailedResult, StockXResult } from '../CalculationResult';
 
 configure({ adapter: new Adapter() }); // connect enzyme
 
@@ -20,12 +20,14 @@ describe('<CalculatorInput/>', () => {
     });
     expect(wrapper.find(PaypalResult)).toHaveLength(1);
   });
+
   it('should render GrailedResult input', () => {
     wrapper.setProps({
       type: 'Grailed'
     });
     expect(wrapper.find(GrailedResult)).toHaveLength(1);
   });
+  
   it('should render StockXResult input', () => {
     wrapper.setProps({
       type: 'Stockx'

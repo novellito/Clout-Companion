@@ -7,7 +7,7 @@ import CalculatorInput from '../../components/CalculatorInput/CalculatorInput';
 
 configure({ adapter: new Adapter() }); // connect enzyme
 
-// Test cases to make sure calculator workds for each component
+// Test cases to make sure calculator works for each component
 describe('<Calculator/>', () => {
   let wrapper;
   let data;
@@ -20,6 +20,7 @@ describe('<Calculator/>', () => {
       }
     };
   });
+
   it('should render 3 CalculatorInput components', () => {
     expect(wrapper.find(CalculatorInput)).toHaveLength(3);
   });
