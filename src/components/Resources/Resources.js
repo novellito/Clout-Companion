@@ -1,7 +1,8 @@
 import React from 'react';
 import AppNavbar from '../AppNavbar/AppNavbar';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
-import CoppingGuide from './CoppingGuides';
+import CoppingGuide from './ResourceSubcomponents/CoppingGuides';
+import WTBS from './ResourceSubcomponents/WTBS';
 import RowContainer from '../../hoc/rowContainer';
 import './Resources.css';
 
@@ -16,7 +17,7 @@ const Resources = () => {
             <CoppingGuide />
           </CollapsibleItem>
           <CollapsibleItem header="Where to buy/sell">
-            {/* <CoppingGuide /> */}
+            <WTBS />
           </CollapsibleItem>
           <CollapsibleItem header="Bots">
             {/* <CoppingGuide /> */}
