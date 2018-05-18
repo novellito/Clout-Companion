@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
+import RowContainer from '../../hoc/rowContainer';
 import {
   calculatePaypal,
   calculateGrailed,
@@ -168,70 +169,68 @@ class Calculator extends Component {
     return (
       <div>
         <AppNavbar />
-        <div className="row">
-          <div className="col s12 m10 l6 offset-l3 offset-m1 ">
-            <h1 className="comp-title">Fee Calculator</h1>
-            <Collapsible>
-              <CollapsibleItem
-                header={
-                  <CalculatorHeader
-                    name="Paypal"
-                    image={Paypal}
-                    alt="Calculate Paypal Fees"
-                  />
-                }
-              >
-                <CalculatorInput
-                  type={'Paypal'}
-                  setValue={this.setValue}
-                  currValue={this.state.Paypal}
-                  setShipping={this.setShipping}
-                  result={this.state.PaypalResult}
-                  checkBox={this.state.PaypalCheckbox}
-                  toggleCheckBox={this.toggleCheckBox}
-                  shippingCost={this.state.PaypalShipping}
+        <RowContainer>
+          <h1 className="comp-title">Fee Calculator</h1>
+          <Collapsible>
+            <CollapsibleItem
+              header={
+                <CalculatorHeader
+                  name="Paypal"
+                  image={Paypal}
+                  alt="Calculate Paypal Fees"
                 />
-              </CollapsibleItem>
-              <CollapsibleItem
-                header={
-                  <CalculatorHeader
-                    name="Grailed"
-                    image={Grailed}
-                    alt="Calculate Grailed Fees"
-                  />
-                }
-              >
-                <CalculatorInput
-                  type={'Grailed'}
-                  setValue={this.setValue}
-                  currValue={this.state.Grailed}
-                  setShipping={this.setShipping}
-                  result={this.state.GrailedResult}
-                  checkBox={this.state.GrailedCheckbox}
-                  toggleCheckBox={this.toggleCheckBox}
-                  shippingCost={this.state.GrailedShipping}
+              }
+            >
+              <CalculatorInput
+                type={'Paypal'}
+                setValue={this.setValue}
+                currValue={this.state.Paypal}
+                setShipping={this.setShipping}
+                result={this.state.PaypalResult}
+                checkBox={this.state.PaypalCheckbox}
+                toggleCheckBox={this.toggleCheckBox}
+                shippingCost={this.state.PaypalShipping}
+              />
+            </CollapsibleItem>
+            <CollapsibleItem
+              header={
+                <CalculatorHeader
+                  name="Grailed"
+                  image={Grailed}
+                  alt="Calculate Grailed Fees"
                 />
-              </CollapsibleItem>
-              <CollapsibleItem
-                header={
-                  <CalculatorHeader
-                    name="Stockx"
-                    image={Stockx}
-                    alt="Calculate Stockx Fees"
-                  />
-                }
-              >
-                <CalculatorInput
-                  type={'Stockx'}
-                  setValue={this.setValue}
-                  currValue={this.state.Stockx}
-                  result={this.state.StockxResult}
-                  stockxRate={this.changeStockxRate}
+              }
+            >
+              <CalculatorInput
+                type={'Grailed'}
+                setValue={this.setValue}
+                currValue={this.state.Grailed}
+                setShipping={this.setShipping}
+                result={this.state.GrailedResult}
+                checkBox={this.state.GrailedCheckbox}
+                toggleCheckBox={this.toggleCheckBox}
+                shippingCost={this.state.GrailedShipping}
+              />
+            </CollapsibleItem>
+            <CollapsibleItem
+              header={
+                <CalculatorHeader
+                  name="Stockx"
+                  image={Stockx}
+                  alt="Calculate Stockx Fees"
                 />
-              </CollapsibleItem>
-            </Collapsible>
-          </div>
-        </div>
+              }
+            >
+              <CalculatorInput
+                type={'Stockx'}
+                setValue={this.setValue}
+                currValue={this.state.Stockx}
+                result={this.state.StockxResult}
+                stockxRate={this.changeStockxRate}
+              />
+            </CollapsibleItem>
+          </Collapsible>
+        </RowContainer>
       </div>
     );
   }

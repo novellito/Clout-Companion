@@ -23,12 +23,13 @@ Backend:
   use format /api/:something
   Endpoints:
     ☐  Login
-        ☐ Facebook 
+        ☐ Facebook
         ☐ Twitter
     ☐ User info
     ☐ Items info
 
   Login:
+    https://medium.com/@alexanderleon/implement-social-authentication-with-react-restful-api-9b44f4714fa
       ☐ Facebook Login
       ☐ Twitter Login
   
@@ -55,25 +56,29 @@ remember to somehow say these are your opinions
 Resources Page: 
   
   Copping Guides:
-      ☐ Jigs (youTube vids)
+      ☐ Jigs (youTube vids) - multiple people jig
+        https://www.youtube.com/results?search_query=keith+adams+multiple+people+jig
+        have a TLDW for it
       ☐ How to cop manual (autofill,fillr)
       ☐ yeezy supply autofill?
       
-  Where to Buy/Sell:
+  Buying/Selling Guide:
     Now you've successfully copped something..where should you sell it?
     ☐ ebay,grailed,discord groups,fb,insta,twitter...etc.
-    ☐ How not to get scammed
+    ☐ How not to get scammed (don't accept gifted...etc.)
+    ☐ Invoice template (from discord message)
+    ☐ shipping guide from r/supremeclothing
   
   // explain footsites, supreme, shopify
   Bots:
+    maybe have a table of the bots
 
   Proxies & Servers:
     ☐ Description
-      ☐ List some popular ones
+      ☐ List some popular ones (with their twitter links)
   
-  Shipping Resources:
-    ☐ Invoice template (from discord message)
-    ☐ shipping guide from r/supremeclothing
-
   some useful terms
   Slang:
+
+  Extras:
+    maybe donate here or twitter links
