@@ -5,10 +5,12 @@ UI:
     ☐ App.js
 
   Components:
-    ✔ Navbar @done(18-05-15 22:40)
+    ☐ Navbar
+      ☐ update navbar to suit material inspo
     ☐ Landing Page
-    ✔ Calculators @done(18-05-16 23:29)
+    ☐ Calculators
         ✔ Test Calculator Components @done(18-05-16 23:29)
+        ☐ Add different views for various devices
     ☐ Useful Resources 
     ☐ Contact links / Donate
     ☐ Items (either bought or sold)
@@ -56,11 +58,8 @@ remember to somehow say these are your opinions
 Resources Page: 
   
   Copping Guides:
-      ☐ Jigs (youTube vids) - multiple people jig
-        https://www.youtube.com/results?search_query=keith+adams+multiple+people+jig
-        have a TLDW for it
-      ☐ How to cop manual (autofill,fillr)
-      ☐ yeezy supply autofill?
+      ✔ Jigs (youTube vids) - multiple people jig @done(18-05-18 13:53)
+      ✔ How to cop manual (autofill,fillr) @done(18-05-18 13:53)
       
   Buying/Selling Guide:
     Now you've successfully copped something..where should you sell it?
