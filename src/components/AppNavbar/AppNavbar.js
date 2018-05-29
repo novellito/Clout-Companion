@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './AppNavbar.css';
 const AppNavbar = () => {
   return (
-    <Navbar brand="Clout Companion" className="navbar" right>
+    <Navbar brand="test" className="navbar" right>
       <li>
         <NavLink exact activeClassName="nav-active" to="/">
           Calculator

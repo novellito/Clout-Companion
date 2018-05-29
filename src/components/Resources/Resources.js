@@ -2,8 +2,9 @@ import React from 'react';
 import AppNavbar from '../AppNavbar/AppNavbar';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
 import CoppingGuide from './ResourceSubcomponents/CoppingGuides';
-import WTBS from './ResourceSubcomponents/WTBS';
+import ShippingRes from './ResourceSubcomponents/ShippingRes';
 import RowContainer from '../../hoc/rowContainer';
+
 import './Resources.css';
 
 const Resources = () => {
@@ -16,16 +17,13 @@ const Resources = () => {
           <CollapsibleItem header="Copping Guides">
             <CoppingGuide />
           </CollapsibleItem>
-          <CollapsibleItem header="Where to buy/sell">
-            <WTBS />
+          <CollapsibleItem header="Shipping Resources">
+            <ShippingRes />
           </CollapsibleItem>
           <CollapsibleItem header="Bots">
             {/* <CoppingGuide /> */}
           </CollapsibleItem>
           <CollapsibleItem header="Proxies & Servers">
-            {/* <CoppingGuide /> */}
-          </CollapsibleItem>
-          <CollapsibleItem header="Shipping Resources">
             {/* <CoppingGuide /> */}
           </CollapsibleItem>
           <CollapsibleItem header="Slang">

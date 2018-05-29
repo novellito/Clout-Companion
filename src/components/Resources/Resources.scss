@@ -20,12 +20,20 @@
 #Invoice-template {
   resize: none;
 }
+
 .vid-container {
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 30px;
   height: 0;
   overflow: hidden;
+}
+
+.template {
+  height: 250px;
+  overflow: scroll;
+  overflow-x: hidden;
+  text-align: left;
 }
 
 .vid-container iframe {

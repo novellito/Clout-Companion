@@ -22,6 +22,12 @@
   height: 0;
   overflow: hidden; }
 
+.template {
+  height: 250px;
+  overflow: scroll;
+  overflow-x: hidden;
+  text-align: left; }
+
 .vid-container iframe {
   position: absolute;
   top: 0;
