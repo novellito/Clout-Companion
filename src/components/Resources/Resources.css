@@ -8,9 +8,17 @@
       color: #ffffffb5; }
   .section-title ~ p:not(.section-title) {
     margin-top: 0; }
+  .section-title + p {
+    margin-bottom: 0; }
 
 .ytp-title-link.yt-uix-sessionlink {
   font-size: 200px; }
+
+.copy {
+  color: white; }
+  .copy:hover {
+    cursor: pointer;
+    color: #ffffffb5; }
 
 #Invoice-template {
   resize: none; }
@@ -26,7 +34,10 @@
   height: 250px;
   overflow: scroll;
   overflow-x: hidden;
-  text-align: left; }
+  text-align: left;
+  padding: 10px; }
+  .template ul li {
+    margin: 5px 0; }
 
 .vid-container iframe {
   position: absolute;

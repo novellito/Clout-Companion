@@ -11,12 +11,22 @@
   ~ p:not(.section-title) {
     margin-top: 0;
   }
+  + p {
+    margin-bottom: 0;
+  }
 }
 
 .ytp-title-link.yt-uix-sessionlink {
   font-size: 200px;
 }
+.copy {
+  color: white;
 
+  &:hover {
+    cursor: pointer;
+    color: #ffffffb5;
+  }
+}
 #Invoice-template {
   resize: none;
 }
@@ -34,6 +44,10 @@
   overflow: scroll;
   overflow-x: hidden;
   text-align: left;
+  padding: 10px;
+  ul li {
+    margin: 5px 0;
+  }
 }
 
 .vid-container iframe {

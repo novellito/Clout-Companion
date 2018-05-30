@@ -4,10 +4,37 @@ import Clipboard from './Clipboard';
 const ShippingRes = () => {
   return (
     <Fragment>
+      <h1 className="section-title">Double Boxing</h1>
+
+      <a
+        href="https://www.youtube.com/channel/UCN8OxuBrKg6YJ-Kv4UB5Hjg"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        (Credits to CJ Sneakers)
+      </a>
+      <p>
+        Double boxing is a very important process that must be taken to make
+        sure your package arrives properly. The following video shows how to
+        double box your sneakers.
+      </p>
+
+      <div className="vid-container">
+        <iframe
+          width="460"
+          height="315"
+          src="https://www.youtube.com/embed/V8yZWXY-irc?showinfo=0"
+          frameborder="0"
+          title="How to double box"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        />
+      </div>
       <h1 className="section-title">Paypal Invoice Template</h1>
+      <p>Use the following template when making Paypal invoices</p>
       <div className="template">
-        <p>Invoice for [Item Name, size, condition]</p>
         <ul>
+          <li>Invoice for [Item Name, size, condition]</li>
           <li>100% Authentic</li>
           <li>[Condition]</li>
           <li>[Items Included]</li>
@@ -22,7 +49,7 @@ const ShippingRes = () => {
           <li>SHIPPING INFO</li>
           <li>
             Once payment is received, item will be shipped within 24 hours via
-            USPS (United States Postal Service). -USPS Priority Mail to be able
+            USPS (United States Postal Service). - USPS Priority Mail to be able
             to track the package manually and with signature confirmation to
             ensure the item is received at the PayPal confirmed address that is
             provided.
@@ -33,7 +60,7 @@ const ShippingRes = () => {
             un-received item or lost merchandise shall be resolved with PayPal.
           </li>
           <li>
-            -Any unauthorized chargebacks for this item are fraudulent and will
+            Any unauthorized chargebacks for this item are fraudulent and will
             be resolved through PayPal's dispute center in fairness to both
             buyer and seller.
           </li>

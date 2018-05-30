@@ -4,7 +4,7 @@ import { Collapsible, CollapsibleItem } from 'react-materialize';
 import CoppingGuide from './ResourceSubcomponents/CoppingGuides';
 import ShippingRes from './ResourceSubcomponents/ShippingRes';
 import RowContainer from '../../hoc/rowContainer';
-
+import Bots from './ResourceSubcomponents/Bots';
 import './Resources.css';
 
 const Resources = () => {
@@ -21,7 +21,7 @@ const Resources = () => {
             <ShippingRes />
           </CollapsibleItem>
           <CollapsibleItem header="Bots">
-            {/* <CoppingGuide /> */}
+            <Bots />
           </CollapsibleItem>
           <CollapsibleItem header="Proxies & Servers">
             {/* <CoppingGuide /> */}

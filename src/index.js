@@ -7,6 +7,7 @@ import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import thunk from 'redux-thunk';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 const rootReducer = combineReducers({
   // ctr: counterReducer,

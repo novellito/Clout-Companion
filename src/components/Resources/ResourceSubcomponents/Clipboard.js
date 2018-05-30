@@ -12,8 +12,8 @@ class Clipboard extends React.Component {
         - [Items Included]
         - Pictures were provided to the buyer and he has agreed that condition is satisfactory for purchase.
         - Original box and accessories if applicable [List any accessories- og box, laces, etc]
-          SHIPPING INFO
-        - Once payment is received, item will be shipped within 24 hours via USPS (United States Postal Service). -USPS Priority Mail to be able to track the package manually and with signature confirmation to ensure the item is received at the PayPal confirmed address that is provided.
+        SHIPPING INFO
+        - Once payment is received, item will be shipped within 24 hours via USPS (United States Postal Service). - USPS Priority Mail to be able to track the package manually and with signature confirmation to ensure the item is received at the PayPal confirmed address that is provided.
         TERMS & CONDITIONS
         - A tracking number will be provided, therefore any claim of un-received item or lost merchandise shall be resolved with PayPal.
         - Any unauthorized chargebacks for this item are fraudulent and will be resolved through PayPal's dispute center in fairness to both buyer and seller.
@@ -21,18 +21,23 @@ class Clipboard extends React.Component {
         - Upon payment of this invoice, the buyer acknowledges that "charge-backs" or "unauthorized purchases/transactions" initiated via their bank and/or creditor should be recognized by PayPal as an attempt to fraudulently keep the merchandise of the seller while receiving reimbursement`
   };
 
+  copy = () => {
+    this.setState({ copied: true }, () => {
+      setTimeout(() => {
+        this.setState({ copied: false });
+      }, 1200);
+    });
+  };
+
   render() {
     return (
       <div>
-        <CopyToClipboard
-          text={this.state.template}
-          onCopy={() => this.setState({ copied: true })}
-        >
-          <button className="">Copy to clipboard</button>
+        <CopyToClipboard text={this.state.template} onCopy={() => this.copy()}>
+          <a className="copy">Copy to clipboard</a>
         </CopyToClipboard>
 
         {this.state.copied ? (
-          <span style={{ color: 'red' }}>Copied.</span>
+          <span style={{ color: 'red' }}>&nbsp; - Copied!</span>
         ) : null}
       </div>
     );
