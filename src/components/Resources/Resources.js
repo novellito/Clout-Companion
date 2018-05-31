@@ -6,6 +6,7 @@ import ShippingRes from './ResourceSubcomponents/ShippingRes';
 import RowContainer from '../../hoc/rowContainer';
 import Bots from './ResourceSubcomponents/Bots';
 import ProSer from './ResourceSubcomponents/ProSer';
+import Slang from './ResourceSubcomponents/Slang';
 import './Resources.css';
 
 const Resources = () => {
@@ -28,7 +29,7 @@ const Resources = () => {
             <ProSer />
           </CollapsibleItem>
           <CollapsibleItem header="Slang">
-            {/* <CoppingGuide /> */}
+            <Slang />
           </CollapsibleItem>
         </Collapsible>
       </RowContainer>
