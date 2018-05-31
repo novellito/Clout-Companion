@@ -39,6 +39,12 @@
   .template ul li {
     margin: 5px 0; }
 
+i {
+  color: white; }
+  i:hover {
+    cursor: pointer;
+    color: #ffffffb5; }
+
 .vid-container iframe {
   position: absolute;
   top: 0;

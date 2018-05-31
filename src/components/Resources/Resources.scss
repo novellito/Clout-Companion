@@ -50,6 +50,13 @@
   }
 }
 
+i {
+  color: white;
+  &:hover {
+    cursor: pointer;
+    color: #ffffffb5;
+  }
+}
 .vid-container iframe {
   position: absolute;
   top: 0;
