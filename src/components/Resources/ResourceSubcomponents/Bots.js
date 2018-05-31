@@ -14,7 +14,7 @@ const Bots = () => {
             <th data-field="bot">Bot</th>
             <th data-field="type">Sites Supported</th>
             <th data-field="twitter">Twitter</th>
-            <th data-field="website">website</th>
+            <th data-field="website">Website</th>
           </tr>
         </thead>
 
