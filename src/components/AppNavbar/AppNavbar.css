@@ -1,5 +1,13 @@
 .navbar {
-  background-color: #cc0000; }
+  background-color: #303030; }
+  .navbar li a:hover {
+    color: black;
+    background-color: white; }
+
+.cc-logo {
+  position: relative;
+  width: 85%;
+  margin-top: 5%; }
 
 nav .brand-logo {
   font-size: 1.8rem; }
@@ -7,9 +15,17 @@ nav .brand-logo {
 #nav-mobile {
   background-color: #303030; }
 
+.nav-active {
+  color: black;
+  background-color: white; }
+
 .side-nav li > a {
   color: white;
   font-size: 15px; }
+  .side-nav li > a.nav-active {
+    color: black; }
 
-.nav-active {
-  background-color: rgba(0, 0, 0, 0.1); }
+@media (min-width: 600px) {
+  .cc-logo {
+    margin-top: 5%;
+    width: 100%; } }

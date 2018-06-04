@@ -1,10 +1,12 @@
 import React from 'react';
 import { Navbar } from 'react-materialize';
 import { NavLink } from 'react-router-dom';
+import Logo from '../../assets/ccLogo.png';
 import './AppNavbar.css';
 const AppNavbar = () => {
+  const Img = <img className="cc-logo" src={Logo} />;
   return (
-    <Navbar brand="test" className="navbar" right>
+    <Navbar brand={Img} className="navbar" right>
       <li>
         <NavLink exact activeClassName="nav-active" to="/">
           Calculator

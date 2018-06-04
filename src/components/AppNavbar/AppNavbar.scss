@@ -1,7 +1,17 @@
 .navbar {
-  background-color: #cc0000;
+  background-color: rgb(48, 48, 48);
+  li a {
+    &:hover {
+      color: black;
+      background-color: white;
+    }
+  }
 }
-
+.cc-logo {
+  position: relative;
+  width: 85%;
+  margin-top: 5%;
+}
 nav .brand-logo {
   font-size: 1.8rem;
 }
@@ -10,11 +20,22 @@ nav .brand-logo {
   background-color: rgb(48, 48, 48);
 }
 
+.nav-active {
+  color: black;
+  background-color: white;
+}
 .side-nav li > a {
   color: white;
   font-size: 15px;
+
+  &.nav-active {
+    color: black;
+  }
 }
 
-.nav-active {
-  background-color: rgba(0, 0, 0, 0.1);
+@media (min-width: 600px) {
+  .cc-logo {
+    margin-top: 5%;
+    width: 100%;
+  }
 }
