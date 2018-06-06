@@ -4,9 +4,9 @@ module.exports = function(passport) {
   passport.use(
     new Strategy(
       {
-        consumerKey: '',
-        consumerSecret: '',
-        callbackURL: 'http://localhost:3000/twitter/return'
+        consumerKey: process.env.twitterKey,
+        consumerSecret: process.env.twitterSecret,
+        callbackURL: 'http://localhost:5000/twitter/return'
       },
       function(token, tokenSecret, profile, callback) {
         console.log(profile);
