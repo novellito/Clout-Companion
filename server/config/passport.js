@@ -1,25 +1,19 @@
-var passport = require('passport');
-var Strategy = require('passport-twitter').Strategy;
-module.exports = function(passport) {
+const passport = require('passport');
+const TwitterTokenStrategy = require('passport-twitter-token');
+const User = require('../models/user');
+
+module.exports = () => {
   passport.use(
-    new Strategy(
+    new TwitterTokenStrategy(
       {
         consumerKey: process.env.twitterKey,
-        consumerSecret: process.env.twitterSecret,
-        callbackURL: 'http://localhost:5000/twitter/return'
+        consumerSecret: process.env.twitterSecret
       },
-      function(token, tokenSecret, profile, callback) {
-        console.log(profile);
-        return callback(null, profile);
+      (token, tokenSecret, profile, done) => {
+        User.upsertTwitterUser(profile, (err, user) => {
+          return done(err, user);
+        });
       }
     )
   );
-
-  passport.serializeUser(function(user, callback) {
-    callback(null, user);
-  });
-
-  passport.deserializeUser(function(obj, callback) {
-    callback(null, obj);
-  });
 };
