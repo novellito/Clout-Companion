@@ -25,15 +25,19 @@ export default class Login extends Component {
     });
   };
 
-  onSuccess = res => {
-    console.log(res);
+  onTwitSuccess = async res => {
     const token = res.headers.get('x-auth-token');
-    res.json().then(user => {
-      console.log(user);
+    const user = await res.json();
+    if (user.status) {
+      console.log('user not authenticated');
+    } else {
       this.setState({ isAuthenticated: true, user: user, token: token });
-    });
+    }
+    console.log(user);
   };
-
+  onTwitFail = err => {
+    console.log('user not authenticated');
+  };
   componentClicked = () => console.log('clicked');
 
   render() {
@@ -82,8 +86,8 @@ export default class Login extends Component {
     ) : (
       <TwitterLogin
         loginUrl="http://localhost:5000/api/login/auth/twitter"
-        onFailure={this.onFailed}
-        onSuccess={this.onSuccess}
+        onFailure={this.onTwitFail}
+        onSuccess={this.onTwitSuccess}
         requestTokenUrl="http://localhost:5000/api/login/auth/twitter/reverse"
       />
     );

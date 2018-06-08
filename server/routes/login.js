@@ -63,17 +63,22 @@ router.post(
       },
       (err, r, body) => {
         if (err) {
-          return res.send(500, { message: err.message });
+          return res.status(500).send({ message: err.message });
         }
+        try {
+          const bodyString =
+            '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
+          const parsedBody = JSON.parse(bodyString);
 
-        const bodyString =
-          '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
-        const parsedBody = JSON.parse(bodyString);
-
-        req.body['oauth_token'] = parsedBody.oauth_token;
-        req.body['oauth_token_secret'] = parsedBody.oauth_token_secret;
-        req.body['user_id'] = parsedBody.user_id;
-        next();
+          req.body['oauth_token'] = parsedBody.oauth_token;
+          req.body['oauth_token_secret'] = parsedBody.oauth_token_secret;
+          req.body['user_id'] = parsedBody.user_id;
+          next();
+        } catch (err) {
+          return res
+            .status(409)
+            .send({ status: 409, message: 'Could not be authenticated' });
+        }
       }
     );
   },
