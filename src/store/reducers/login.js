@@ -2,12 +2,11 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   isLoggedIn: false,
-  userId: '',
-  user: ''
+  userId: null,
+  user: null
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case actionTypes.USER_LOGIN:
       return {
@@ -15,6 +14,13 @@ const reducer = (state = initialState, action) => {
         isLoggedIn: true,
         userId: action.userData.userId,
         user: action.userData.user
+      };
+    case actionTypes.USER_LOGOUT:
+      return {
+        ...state,
+        isLoggedIn: false,
+        userId: null,
+        user: null
       };
   }
   return state;

@@ -8,24 +8,15 @@ import TwitterLogin from 'react-twitter-auth';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
 
 class Login extends Component {
-  state = {
-    isLoggedIn: false,
-    userId: '',
-    user: ''
-  };
-
   // call back function after fb button is clicked
+  // Redirects user if they login
   onFBLogin = res => {
     console.log(res);
     if (res.status === undefined && !res.name) {
       console.log('user not authenticated');
     } else {
       this.props.onLogin(res.userID, res.name);
-      // this.setState({
-      //   isLoggedIn: true,
-      //   userId: res.userID,
-      //   user: res.name
-      // });
+
       fetch('http://localhost:3000/api/login/facebook', {
         body: JSON.stringify({ username: res.name, id: res.userID }),
         headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -38,30 +29,28 @@ class Login extends Component {
   };
 
   // called when a twitter connection has been established
+  // Redirects user if they login
   onTwitSuccess = async res => {
-    console.log(res);
     const token = res.headers.get('x-auth-token');
     const user = await res.json();
+
     // user has declined authorization
     if (user.status) {
       console.log('user not authenticated');
     } else {
-      this.props.onLogin(user.userID, user.username);
-      // this.setState({ isLoggedIn: true, user: user });
+      this.props.onLogin(user.userId, user.username);
+      // redirect user
     }
     console.log(user);
   };
+
+  // callback function to log when a twitter user fails to login
   onTwitFail = err => {
     console.log('user not authenticated');
   };
 
-  logout = () => {
-    this.setState({ isLoggedIn: false, user: '' });
-  };
-
   render() {
     let fbContent;
-    console.log(this.props);
     if (this.props.isLog) {
       fbContent = (
         <div
@@ -89,10 +78,10 @@ class Login extends Component {
     let content = !!this.props.isLog ? (
       <div>
         <p>Authenticated</p>
-        <div>{this.props.uname.user}</div>
+        <div>{this.props.uname}</div>
         <div>{this.props.uid}</div>
         <div>
-          <button onClick={this.logout} className="button">
+          <button onClick={() => this.props.onLogout()} className="button">
             Log out
           </button>
         </div>
@@ -127,7 +116,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onLogin: (userId, user) =>
-      dispatch({ type: actionTypes.USER_LOGIN, userData: { userId, user } })
+      dispatch({ type: actionTypes.USER_LOGIN, userData: { userId, user } }),
+    onLogout: () => dispatch({ type: actionTypes.USER_LOGOUT })
   };
 };
 
