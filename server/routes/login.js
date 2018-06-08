@@ -5,29 +5,28 @@ const expressJwt = require('express-jwt');
 const request = require('request');
 const passport = require('passport');
 
-const createToken = function(auth) {
-  return jwt.sign(
+// function to generate the jwt token
+const generateToken = (req, res, next) => {
+  req.token = jwt.sign(
     {
-      id: auth.id
+      id: req.auth.id
     },
     process.env.jwtSecret,
     {
       expiresIn: 60 * 120
     }
   );
-};
-
-const generateToken = (req, res, next) => {
-  req.token = createToken(req.auth);
   return next();
 };
 
+// send the token
 const sendToken = (req, res) => {
   res.setHeader('x-auth-token', req.token);
   return res.status(200).send(JSON.stringify(req.user));
 };
 
-router.route('/auth/twitter/reverse').post(function(req, res) {
+// Route to receive the request token from twitter
+router.post('/auth/twitter/reverse', function(req, res) {
   request.post(
     {
       url: 'https://api.twitter.com/oauth/request_token',
@@ -48,7 +47,9 @@ router.route('/auth/twitter/reverse').post(function(req, res) {
   );
 });
 
-router.route('/auth/twitter').post(
+// Route to receive oauth information and pass into the passport middleware
+router.post(
+  '/auth/twitter',
   (req, res, next) => {
     request.post(
       {
@@ -91,17 +92,5 @@ router.route('/auth/twitter').post(
   generateToken,
   sendToken
 );
-
-//token handling middleware
-const authenticate = expressJwt({
-  secret: process.env.jwtSecret,
-  requestProperty: 'auth',
-  getToken: function(req) {
-    if (req.headers['x-auth-token']) {
-      return req.headers['x-auth-token'];
-    }
-    return null;
-  }
-});
 
 module.exports = router;

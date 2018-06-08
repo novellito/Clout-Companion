@@ -15,7 +15,7 @@ const UserSchema = mongoose.Schema({
   // update for notes & items
 });
 
-UserSchema.statics.upsertTwitterUser = function(profile, cb) {
+UserSchema.statics.upsertNewUser = function(profile, cb) {
   return this.findOne(
     {
       userId: profile.id
