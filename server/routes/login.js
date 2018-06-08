@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const request = require('request');
 const passport = require('passport');
+const UserModel = require('../models/user');
 
 // function to generate the jwt token
 const generateToken = (req, res, next) => {
@@ -85,7 +86,7 @@ router.post(
   passport.authenticate('twitter-token', { session: false }),
   (req, res, next) => {
     if (!req.user) {
-      return res.send(401, 'User Not Authenticated');
+      return res.status(401).send('User Not Authenticated');
     }
     // prepare token for API
     req.auth = {
@@ -97,5 +98,13 @@ router.post(
   generateToken,
   sendToken
 );
+
+// Route for adding a facebook user to the db / checking if they exist
+router.post('/facebook', (req, res) => {
+  UserModel.upsertNewUser(req.body, (err, user) => {
+    console.log(`User ${user.username} has been verified!`);
+    res.status(200).send({ msg: `User ${user.username} has been verified!` });
+  });
+});
 
 module.exports = router;
