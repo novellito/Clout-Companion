@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actionTypes from '../../store/actions/actionTypes';
+
 import FacebookLogin from 'react-facebook-login';
 import Logout from './LogoutBtn';
 import TwitterLogin from 'react-twitter-auth';
+import AppNavbar from '../../components/AppNavbar/AppNavbar';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     isLoggedIn: false,
     userId: '',
-    name: '',
     user: ''
   };
 
@@ -17,11 +20,12 @@ export default class Login extends Component {
     if (res.status === undefined && !res.name) {
       console.log('user not authenticated');
     } else {
-      this.setState({
-        isLoggedIn: true,
-        userId: res.userID,
-        name: res.name
-      });
+      this.props.onLogin(res.userID, res.name);
+      // this.setState({
+      //   isLoggedIn: true,
+      //   userId: res.userID,
+      //   user: res.name
+      // });
       fetch('http://localhost:3000/api/login/facebook', {
         body: JSON.stringify({ username: res.name, id: res.userID }),
         headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -35,13 +39,15 @@ export default class Login extends Component {
 
   // called when a twitter connection has been established
   onTwitSuccess = async res => {
+    console.log(res);
     const token = res.headers.get('x-auth-token');
     const user = await res.json();
     // user has declined authorization
     if (user.status) {
       console.log('user not authenticated');
     } else {
-      this.setState({ isLoggedIn: true, user: user });
+      this.props.onLogin(user.userID, user.username);
+      // this.setState({ isLoggedIn: true, user: user });
     }
     console.log(user);
   };
@@ -55,8 +61,8 @@ export default class Login extends Component {
 
   render() {
     let fbContent;
-
-    if (this.state.isLoggedIn) {
+    console.log(this.props);
+    if (this.props.isLog) {
       fbContent = (
         <div
           style={{
@@ -66,7 +72,7 @@ export default class Login extends Component {
             padding: '20px'
           }}
         >
-          <h2>Welcome {this.state.name}</h2>
+          <h2>Welcome {this.props.uname}</h2>
         </div>
       );
     } else {
@@ -80,11 +86,11 @@ export default class Login extends Component {
       );
     }
 
-    let content = !!this.state.isLoggedIn ? (
+    let content = !!this.props.isLog ? (
       <div>
         <p>Authenticated</p>
-        <div>{this.state.user.username}</div>
-        <div>{this.state.user.userId}</div>
+        <div>{this.props.uname.user}</div>
+        <div>{this.props.uid}</div>
         <div>
           <button onClick={this.logout} className="button">
             Log out
@@ -101,10 +107,31 @@ export default class Login extends Component {
     );
 
     return (
-      <div className="App">
+      <div>
+        <AppNavbar />
         {content}
         {fbContent}
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    isLog: state.login.isLoggedIn,
+    uid: state.login.userId,
+    uname: state.login.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: (userId, user) =>
+      dispatch({ type: actionTypes.USER_LOGIN, userData: { userId, user } })
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

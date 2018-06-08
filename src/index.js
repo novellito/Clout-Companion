@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
-import './index.css';
+import { Provider } from 'react-redux';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import loginReducer from './store/reducers/login';
 import thunk from 'redux-thunk';
+
+import './index.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 const rootReducer = combineReducers({
-  // ctr: counterReducer,
-  // res: resultReducer
+  login: loginReducer
 });
 
 const logger = store => {
@@ -33,7 +34,9 @@ const store = createStore(
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>,
   document.getElementById('root')
 );
