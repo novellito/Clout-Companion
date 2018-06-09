@@ -7,15 +7,28 @@ const UserModel = require('../models/user');
 
 // function to generate the jwt token
 const generateToken = (req, res, next) => {
-  req.token = jwt.sign(
-    {
-      id: req.auth.id
-    },
-    process.env.jwtSecret,
-    {
-      expiresIn: 5 //60 * 120
-    }
-  );
+  // generate token for a fb user
+  if (req.body.fb) {
+    req.token = jwt.sign(
+      {
+        id: req.body.id
+      },
+      process.env.jwtSecret,
+      {
+        expiresIn: 5 //60 * 120
+      }
+    );
+  } else {
+    req.token = jwt.sign(
+      {
+        id: req.auth.id
+      },
+      process.env.jwtSecret,
+      {
+        expiresIn: 5 //60 * 120
+      }
+    );
+  }
   return next();
 };
 
@@ -119,10 +132,17 @@ router.post(
 );
 
 // Route for adding a facebook user to the db / checking if they exist
-router.post('/facebook', (req, res) => {
+router.post('/facebook', generateToken, (req, res) => {
+  res.setHeader('x-auth-token', req.token);
+  console.log(req.body);
   UserModel.upsertNewUser(req.body, (err, user) => {
     console.log(`User ${user.username} has been verified!`);
-    res.status(200).send({ msg: `User ${user.username} has been verified!` });
+    res
+      .status(200)
+      .send({
+        uid: user.username,
+        msg: `User ${user.username} has been verified!`
+      });
   });
 });
 

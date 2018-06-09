@@ -8,9 +8,6 @@ import TwitterLogin from 'react-twitter-auth';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
 
 class Login extends Component {
-  state = {
-    tempTok: null
-  };
   componentDidMount() {
     localStorage.clear();
   }
@@ -27,12 +24,16 @@ class Login extends Component {
         'Content-Type': 'application/json'
       };
       try {
-        let response = await axios.post(
+        const axiosPost = await axios.post(
           'http://localhost:3000/api/login/facebook',
-          JSON.stringify({ username: res.name, id: res.userID }),
+          JSON.stringify({ fb: true, username: res.name, id: res.userID }),
           { headers }
         );
-        console.log(response);
+        localStorage.setItem('jwt', axiosPost.headers['x-auth-token']);
+        localStorage.setItem('uid', axiosPost.data.uid);
+        this.props.history.push('/dashboard');
+        console.log(localStorage);
+        console.log(axiosPost);
       } catch (err) {
         console.log(err);
       }
@@ -44,7 +45,6 @@ class Login extends Component {
   onTwitSuccess = async res => {
     const token = res.headers.get('x-auth-token');
     const user = await res.json();
-    console.log(res);
     // user has declined authorization
     if (user.status) {
       console.log('user not authenticated');
@@ -54,9 +54,7 @@ class Login extends Component {
       console.log(localStorage);
       this.props.onLogin(user.userId, user.username);
       this.props.history.push('/dashboard');
-      // redirect user
     }
-    console.log(user);
   };
 
   // callback function to log when a twitter user fails to login
