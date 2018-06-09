@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const expressJwt = require('express-jwt');
 const request = require('request');
 const passport = require('passport');
 const UserModel = require('../models/user');
@@ -14,7 +13,7 @@ const generateToken = (req, res, next) => {
     },
     process.env.jwtSecret,
     {
-      expiresIn: 60 * 120
+      expiresIn: 5 //60 * 120
     }
   );
   return next();
@@ -25,6 +24,31 @@ const sendToken = (req, res) => {
   res.setHeader('x-auth-token', req.token);
   return res.status(200).send(JSON.stringify(req.user));
 };
+
+// Authorization middleware for managing requests
+const authorize = (req, res, next) => {
+  console.log(req.headers.authorization);
+  console.log(req.body);
+  console.log(req.headers.authorization.split(' ')[1]);
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    jwt.verify(token, process.env.jwtSecret);
+    next();
+  } catch (err) {
+    console.log(err.message);
+    // User made a request in the app but their token has expired so send a new token
+    if (err.message === 'jwt expired') {
+      res.status(401).json({ message: 'Token has expired!' });
+    } else {
+      res.status(401).json({ message: 'Invalid Token - Auth Failed!' });
+    }
+  }
+};
+
+router.post('/test', authorize, (req, res, next) => {
+  console.log(req.body);
+  res.send('ok');
+});
 
 // Route to receive the request token from twitter
 router.post('/auth/twitter/reverse', function(req, res) {

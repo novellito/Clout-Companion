@@ -2,29 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions/actionTypes';
 
+import axios from 'axios';
 import FacebookLogin from 'react-facebook-login';
 import Logout from './LogoutBtn';
 import TwitterLogin from 'react-twitter-auth';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
 
 class Login extends Component {
+  state = {
+    tempTok: null
+  };
   // call back function after fb button is clicked
   // Redirects user if they login
-  onFBLogin = res => {
+  onFBLogin = async res => {
     console.log(res);
     if (res.status === undefined && !res.name) {
       console.log('user not authenticated');
     } else {
       this.props.onLogin(res.userID, res.name);
 
-      fetch('http://localhost:3000/api/login/facebook', {
-        body: JSON.stringify({ username: res.name, id: res.userID }),
-        headers: new Headers({ 'Content-Type': 'application/json' }),
-        method: 'POST'
-      }).then(res => {
-        // add redirection to dashboard
-        console.log(res);
-      });
+      const headers = {
+        'Content-Type': 'application/json'
+      };
+      try {
+        let response = await axios.post(
+          'http://localhost:3000/api/login/facebook',
+          JSON.stringify({ username: res.name, id: res.userID }),
+          { headers }
+        );
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -32,8 +41,10 @@ class Login extends Component {
   // Redirects user if they login
   onTwitSuccess = async res => {
     const token = res.headers.get('x-auth-token');
+    console.log(token);
+    this.setState({ tempTok: token });
     const user = await res.json();
-
+    console.log(res);
     // user has declined authorization
     if (user.status) {
       console.log('user not authenticated');
@@ -49,6 +60,25 @@ class Login extends Component {
     console.log('user not authenticated');
   };
 
+  test = async () => {
+    const headers = {
+      Authorization: `Bearer ${this.state.tempTok}`,
+      'Content-Type': 'application/json'
+    };
+    try {
+      let response = await axios.post(
+        'http://localhost:5000/api/login/test',
+        { message: 'hello' },
+        { headers }
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+
+    // return data;
+    // console.log(data);
+  };
   render() {
     let fbContent;
     if (this.props.isLog) {
@@ -100,6 +130,8 @@ class Login extends Component {
         <AppNavbar />
         {content}
         {fbContent}
+
+        <button onClick={this.test}>test me</button>
       </div>
     );
   }
