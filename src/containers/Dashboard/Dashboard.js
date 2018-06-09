@@ -6,8 +6,8 @@ import axios from 'axios';
 
 class Dashboard extends Component {
   componentDidMount() {
-    if (!this.props.isLog) {
-      // if (!this.props.isLog && localStorage.length !== 0) {
+    // if (!this.props.isLog) {
+    if (!this.props.isLog && localStorage.length === 0) {
       this.props.history.replace('/');
     }
   }
