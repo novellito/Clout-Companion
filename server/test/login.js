@@ -39,4 +39,17 @@ describe('Login Suite', function() {
       done();
     });
   });
+  it('Should verify a fb user', () => {
+    return chai
+      .request(app)
+      .post('/api/login/facebook')
+      .send({
+        fb: true,
+        username: 'John',
+        id: 1234
+      })
+      .then(res => {
+        expect(res.statusCode).to.equal(200);
+      });
+  });
 });

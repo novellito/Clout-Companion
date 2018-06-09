@@ -126,11 +126,10 @@ exports.postPasportAuth = (req, res, next) => {
 // handle fb auth & set a token in the header
 exports.fbLogin = (req, res) => {
   res.setHeader('x-auth-token', req.token);
-  console.log(req.body);
   UserModel.upsertNewUser(req.body, (err, user) => {
     console.log(`User ${user.username} has been verified!`);
     res.status(200).send({
-      uid: user.username,
+      uname: user.username,
       msg: `User ${user.username} has been verified!`
     });
   });
