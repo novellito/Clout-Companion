@@ -27,16 +27,11 @@ const sendToken = (req, res) => {
 
 // Authorization middleware for managing requests
 const authorize = (req, res, next) => {
-  console.log(req.headers.authorization);
-  console.log(req.body);
-  console.log(req.headers.authorization.split(' ')[1]);
   try {
     const token = req.headers.authorization.split(' ')[1];
     jwt.verify(token, process.env.jwtSecret);
     next();
   } catch (err) {
-    console.log(err.message);
-    // User made a request in the app but their token has expired so send a new token
     if (err.message === 'jwt expired') {
       res.status(401).json({ message: 'Token has expired!' });
     } else {

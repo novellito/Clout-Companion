@@ -4,7 +4,6 @@ import * as actionTypes from '../../store/actions/actionTypes';
 
 import axios from 'axios';
 import FacebookLogin from 'react-facebook-login';
-import Logout from './LogoutBtn';
 import TwitterLogin from 'react-twitter-auth';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
 
@@ -12,6 +11,9 @@ class Login extends Component {
   state = {
     tempTok: null
   };
+  componentDidMount() {
+    localStorage.clear();
+  }
   // call back function after fb button is clicked
   // Redirects user if they login
   onFBLogin = async res => {
@@ -41,15 +43,17 @@ class Login extends Component {
   // Redirects user if they login
   onTwitSuccess = async res => {
     const token = res.headers.get('x-auth-token');
-    console.log(token);
-    this.setState({ tempTok: token });
     const user = await res.json();
     console.log(res);
     // user has declined authorization
     if (user.status) {
       console.log('user not authenticated');
     } else {
+      localStorage.setItem('jwtToken', token);
+      localStorage.setItem('uid', user.userId);
+      console.log(localStorage);
       this.props.onLogin(user.userId, user.username);
+      this.props.history.push('/dashboard');
       // redirect user
     }
     console.log(user);

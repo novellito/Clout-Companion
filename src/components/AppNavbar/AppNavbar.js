@@ -6,7 +6,12 @@ import './AppNavbar.css';
 const AppNavbar = () => {
   const Img = <img className="cc-logo" src={Logo} />;
   return (
-    <Navbar brand={Img} className="navbar" right>
+    <Navbar
+      brand={Img}
+      className="navbar"
+      alt="clout companion logo (link to home page)"
+      right
+    >
       <li>
         <NavLink exact activeClassName="nav-active" to="/">
           Calculator
@@ -21,6 +26,12 @@ const AppNavbar = () => {
         <NavLink activeClassName="nav-active" to="/login">
           Login
         </NavLink>
+        {/* <NavLink
+          activeClassName="nav-active"
+          to={localStorage.length > 0 ? '/dashboard' : '/login'}
+        >
+          {localStorage.length > 0 ? 'Dashboard' : 'Login'}
+        </NavLink> */}
       </li>
     </Navbar>
   );
