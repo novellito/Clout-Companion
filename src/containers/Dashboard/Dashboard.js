@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../store/actions/actionTypes';
+import * as actionCreators from '../../store/actions/actionCreators';
 import AppNavbar from '../../components/AppNavbar/AppNavbar'
 
 import axios from 'axios';
@@ -60,8 +60,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    onLogout: () => dispatch({ type: actionTypes.USER_LOGOUT }),
-    onRelog: () => dispatch({ type: actionTypes.USER_RELOG })
+    onLogout: () => dispatch(actionCreators.logout()),
+    onRelog: () => dispatch(actionCreators.relog())
   };
 };
 export default connect(

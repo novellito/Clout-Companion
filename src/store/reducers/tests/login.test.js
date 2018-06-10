@@ -11,11 +11,12 @@ describe('Login Reducer', () => {
             userId: '1234',
             user: 'test user'
         }
-        const action = {
+        const expectedAction = {
             type: actionTypes.USER_LOGIN,
-            user
+            userData: { userId: '1234', user: 'test user' }
         }
-        // expectio(actionTypes.USER_LOGIN)
+        console.log(dispatch({ type: actionTypes.USER_LOGIN }));
+        // expect(actionTypes.USER_LOGIN).toEqual(expectedAction)
     })
 
 })

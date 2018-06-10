@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../store/actions/actionTypes';
+import * as actionCreators from '../../store/actions/actionCreators';
 import AppNavbar from '../../components/AppNavbar/AppNavbar'
 import axios from 'axios';
 import { Col, Row } from 'react-materialize';
@@ -142,8 +142,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onLogin: (userId, user) =>
-      dispatch({ type: actionTypes.USER_LOGIN, userData: { userId, user } }),
-    onLogout: () => dispatch({ type: actionTypes.USER_LOGOUT })
+      dispatch(actionCreators.login(userId, user))
   };
 };
 

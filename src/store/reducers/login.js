@@ -13,8 +13,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        userId: action.userData.userId,
-        user: action.userData.user,
+        userId: action.userId,
+        user: action.user,
         needToRelog: false
       };
     case actionTypes.USER_LOGOUT:
