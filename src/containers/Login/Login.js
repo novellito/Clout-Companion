@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions/actionTypes';
 
 import axios from 'axios';
+import { Card, Col, Row } from 'react-materialize';
 import FacebookLogin from 'react-facebook-login';
 import TwitterLogin from 'react-twitter-auth';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
+import './Login.css';
 
 class Login extends Component {
   componentDidMount() {
@@ -44,15 +46,15 @@ class Login extends Component {
   // Redirects user if they login
   onTwitSuccess = async res => {
     const token = res.headers.get('x-auth-token');
-    const user = await res.json();
+    const { status, userId, username } = await res.json();
     // user has declined authorization
-    if (user.status) {
+    if (status) {
       console.log('user not authenticated');
     } else {
       localStorage.setItem('jwtToken', token);
-      localStorage.setItem('uid', user.userId);
+      localStorage.setItem('uid', userId);
       console.log(localStorage);
-      this.props.onLogin(user.userId, user.username);
+      this.props.onLogin(userId, username);
       this.props.history.push('/dashboard');
     }
   };
@@ -77,63 +79,61 @@ class Login extends Component {
     } catch (err) {
       console.log(err);
     }
-
-    // return data;
-    // console.log(data);
   };
   render() {
     let fbContent;
-    if (this.props.isLog) {
-      fbContent = (
-        <div
-          style={{
-            width: '400px',
-            margin: 'auto',
-            background: '#f4f4f4',
-            padding: '20px'
-          }}
-        >
-          <h2>Welcome {this.props.uname}</h2>
-        </div>
-      );
-    } else {
-      fbContent = (
-        <FacebookLogin
-          appId="141550886485387"
-          autoLoad={false}
-          fields="name"
-          callback={this.onFBLogin}
-        />
-      );
-    }
-
-    let content = !!this.props.isLog ? (
-      <div>
-        <p>Authenticated</p>
-        <div>{this.props.uname}</div>
-        <div>{this.props.uid}</div>
-        <div>
-          <button onClick={() => this.props.onLogout()} className="button">
-            Log out
-          </button>
-        </div>
-      </div>
-    ) : (
-      <TwitterLogin
-        loginUrl="http://localhost:5000/api/login/auth/twitter"
-        onFailure={this.onTwitFail}
-        onSuccess={this.onTwitSuccess}
-        requestTokenUrl="http://localhost:5000/api/login/auth/twitter/reverse"
-      />
+    const twitStyle = {
+      backgroundColor: 'white',
+      padding: '20px',
+      border: '4px solid rgb(87,172,238)',
+      color: '#00ACED',
+      borderRadius: '0 0 2px 2px'
+    };
+    let icon = (
+      <Fragment>
+        <i className="fa fa-twitter" />Login with Twitter
+      </Fragment>
     );
-
     return (
       <div>
         <AppNavbar />
-        {content}
-        {fbContent}
-
-        <button onClick={this.test}>test me</button>
+        <Row>
+          <Col m={6} l={4} s={12} offset="m3 l4">
+         
+            <div class="card log-card">
+              <div class="card-content ">
+                <p className="log-3">Login</p>
+                <div className="btn-container">
+                  <div>
+                    <TwitterLogin
+                      loginUrl="http://localhost:5000/api/login/auth/twitter"
+                      onFailure={this.onTwitFail}
+                      onSuccess={this.onTwitSuccess}
+                      requestTokenUrl="http://localhost:5000/api/login/auth/twitter/reverse"
+                      className="twit-btn"
+                      // tag="a"
+                      showIcon={false}
+                      children={icon}
+                      // style={twitStyle}
+                      text="Login with Twitter"
+                    />
+                  </div>
+                  <div>
+                    <FacebookLogin
+                      appId="141550886485387"
+                      autoLoad={false}
+                      fields="name"
+                      callback={this.onFBLogin}
+                      icon="fa-facebook"
+                      cssClass="fb-btn"
+                      textButton="Login with Facebook"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </div>
     );
   }
