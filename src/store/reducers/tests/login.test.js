@@ -1,22 +1,30 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import * as actionTypes from "../login";
+import * as actionCreators from "../../actions/actionCreators";
+import * as actionTypes from "../../actions/actionTypes";
 
 configure({ adapter: new Adapter() })
 
 describe('Login Reducer', () => {
 
     it('should set the users login information', () => {
-        const user = {
-            userId: '1234',
-            user: 'test user'
-        }
+
+        const userId = '1234'
+        const user = 'test user'
+
         const expectedAction = {
             type: actionTypes.USER_LOGIN,
-            userData: { userId: '1234', user: 'test user' }
+            userId: '1234', user: 'test user'
         }
-        console.log(dispatch({ type: actionTypes.USER_LOGIN }));
-        // expect(actionTypes.USER_LOGIN).toEqual(expectedAction)
+        expect(actionCreators.login(userId, user)).toEqual(expectedAction)
+    })
+
+    it('should reset the users login information', () => {
+        const expectedAction = {
+            type: actionTypes.USER_LOGOUT,
+        }
+
+        expect(actionCreators.logout()).toEqual(expectedAction)
     })
 
 })

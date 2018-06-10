@@ -3,7 +3,8 @@ import { Navbar, NavItem } from 'react-materialize';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/ccLogo.png';
 import './AppNavbar.css';
-const AppNavbar = (props) => {
+
+export const AppNavbar = (props) => {
   const Img = <img className="cc-logo" alt="clout companion logo" src={Logo} />;
 
   const logout = () => {

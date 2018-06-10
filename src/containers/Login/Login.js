@@ -14,6 +14,8 @@ export class Login extends Component {
     // Redirect the user to the dashboard if they have a valid token
     if (localStorage.length > 0) {
       this.props.history.push('/dashboard');
+    } else {
+      this.props.onLogout()
     }
   }
 
@@ -142,7 +144,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onLogin: (userId, user) =>
-      dispatch(actionCreators.login(userId, user))
+      dispatch(actionCreators.login(userId, user)),
+    onLogout: () => dispatch(actionCreators.logout())
   };
 };
 

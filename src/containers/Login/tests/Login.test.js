@@ -13,7 +13,7 @@ describe('<Login/>', () => {
 
     let wrapper;
     beforeEach(() => {
-        wrapper = shallow(<Login />)
+        wrapper = shallow(<Login onLogout={jest.fn()} />)
         localStorage.clear()
     })
     it('Should render the fb login component ', () => {
