@@ -8,20 +8,18 @@ import FacebookLogin from 'react-facebook-login';
 import TwitterLogin from 'react-twitter-auth';
 import './Login.css';
 
-class Login extends Component {
-  // Redirect the user to the dashboard if they have a valid token
-  componentDidMount() {
+export class Login extends Component {
 
+  componentDidMount() {
+    // Redirect the user to the dashboard if they have a valid token
     if (localStorage.length > 0) {
       this.props.history.push('/dashboard');
     }
-
-
   }
+
   // call back function after fb button is clicked
   // Redirects user if they login
   onFBLogin = async res => {
-    console.log(res);
     if (res.status === undefined && !res.name) {
       console.log('user not authenticated');
     } else {
@@ -39,8 +37,6 @@ class Login extends Component {
         localStorage.setItem('jwt', axiosPost.headers['x-auth-token']);
         localStorage.setItem('uid', axiosPost.data.uid);
         this.props.history.push('/dashboard');
-        console.log(localStorage);
-        console.log(axiosPost);
       } catch (err) {
         console.log(err);
       }
