@@ -13,7 +13,7 @@ exports.generateToken = (req, res, next) => {
       },
       process.env.jwtSecret,
       {
-        expiresIn: 5 //60 * 120
+        expiresIn: '30d'
       }
     );
   } else {
@@ -24,7 +24,7 @@ exports.generateToken = (req, res, next) => {
       },
       process.env.jwtSecret,
       {
-        expiresIn: 100000
+        expiresIn: '30d'
       }
     );
   }
