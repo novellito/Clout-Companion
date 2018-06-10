@@ -5,13 +5,11 @@ UI:
     ☐ App.js
 
   Components:
-    ☐ Navbar
-      ☐ update navbar to suit material inspo
+    ✔ Navbar @done(18-06-10 14:07)
     ☐ Landing Page
-    ☐ Calculators
+    ✔ Calculators @done(18-06-10 14:07)
         ✔ Test Calculator Components @done(18-05-16 23:29)
-        ☐ Add different views for various devices
-    ☐ Useful Resources 
+    ✔ Useful Resources @done(18-06-10 14:07)
     ☐ Contact links / Donate
     ☐ Items (either bought or sold)
         ☐ Item
@@ -25,21 +23,20 @@ Backend:
   use format /api/:something
   Endpoints:
     ☐  Login
-        ☐ Facebook
-        ☐ Twitter
+        ✔ Facebook @done(18-06-10 14:06)
+        ✔ Twitter @done(18-06-10 14:06)
     ☐ User info
     ☐ Items info
 
   Login:
-    https://medium.com/@alexanderleon/implement-social-authentication-with-react-restful-api-9b44f4714fa
-      ☐ Facebook Login
-      ☐ Twitter Login
+      ✔ Facebook Login @done(18-06-10 14:07)
+      ✔ Twitter Login @done(18-06-10 14:07)
   
   Features:
     ✔ Paypal fees calculator @done(18-05-15 22:40)
     ✔ Grailed fees calculator @done(18-05-15 22:40)
     ✔ Stockx fees calculator @done(18-05-15 22:40)
-    ☐ Useful resources & guides section
+    ✔ Useful resources & guides section @done(18-06-10 14:07)
     ☐ Manage Profits & Inventory 
         ☐ Look for react components (npm) that displays data in charts (look at nivo)
         ☐ Download list as a csv
@@ -70,8 +67,8 @@ Resources Page:
     ✔ maybe have a table of the bots @done(18-05-31 12:16)
 
   Proxies & Servers:
-    ☐ Description
-      ☐ List some popular ones (with their twitter links)
+    ✔ Description @done(18-06-10 14:07)
+      ✔ List some popular ones (with their twitter links) @done(18-06-10 14:07)
   
   Slang:
     ✔ common terms @done(18-05-31 12:16)
