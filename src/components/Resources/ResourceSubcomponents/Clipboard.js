@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 class Clipboard extends React.Component {

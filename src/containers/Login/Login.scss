@@ -1,0 +1,65 @@
+.btn-container {
+  margin: 0 auto;
+  width: 250px;
+}
+
+.log-card {
+  margin-top:10%;
+  background-color: #424242;
+  height:400px;
+  
+  .card-content {
+    color: white;
+    text-align: center;
+    vertical-align:middle;
+    p {
+      font-size: 2.56rem;
+      line-height: 110%;
+      margin: 1.78rem 0 1.424rem 0;
+    }
+  }
+}
+
+.fb-btn {
+  box-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
+  font-size: 1.2em;
+  background-color: #4c69ba;
+  border: 1px solid #4c69ba;
+  padding: 20px;
+  width: 100%;
+
+  &:hover {
+    background-color:#7c92d1;
+  border: 1px solid #7c92d1;
+  transition:.8s;
+
+  }
+  .fa-facebook {
+    margin-right: 12px;
+    font-size:1.8em;
+  }
+}
+
+.twit-btn {
+  background-color: #00aced;
+  padding: 20px;
+  color: white;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  width: 100%;
+  border: 1px solid #00aced;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
+
+  &:hover {
+    background-color:#68d0f8;
+  border: 1px solid #68d0f8;
+  transition:.8s;
+
+
+  }
+  .fa-twitter {
+    color: white;
+    margin-right: 12px;
+    font-size:1.8em;
+  }
+}

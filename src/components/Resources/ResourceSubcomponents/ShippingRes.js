@@ -24,10 +24,10 @@ const ShippingRes = () => {
           width="460"
           height="315"
           src="https://www.youtube.com/embed/V8yZWXY-irc?showinfo=0"
-          frameborder="0"
+          frameBorder="0"
           title="How to double box"
           allow="autoplay; encrypted-media"
-          allowfullscreen
+          allowFullScreen
         />
       </div>
       <h1 className="section-title">Paypal Invoice Template</h1>
