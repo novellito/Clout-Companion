@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/ccLogo.png';
 import './AppNavbar.css';
 const AppNavbar = () => {
-  const Img = <img className="cc-logo" src={Logo} />;
+  const Img = <img className="cc-logo" alt="clout companion logo" src={Logo} />;
   return (
     <Navbar
       brand={Img}

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions/actionTypes';
 
 import axios from 'axios';
-import { Card, Col, Row } from 'react-materialize';
+import { Col, Row } from 'react-materialize';
 import FacebookLogin from 'react-facebook-login';
 import TwitterLogin from 'react-twitter-auth';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
@@ -81,15 +81,8 @@ class Login extends Component {
     }
   };
   render() {
-    let fbContent;
-    const twitStyle = {
-      backgroundColor: 'white',
-      padding: '20px',
-      border: '4px solid rgb(87,172,238)',
-      color: '#00ACED',
-      borderRadius: '0 0 2px 2px'
-    };
-    let icon = (
+   
+    const icon = (
       <Fragment>
         <i className="fa fa-twitter" />Login with Twitter
       </Fragment>
@@ -100,8 +93,8 @@ class Login extends Component {
         <Row>
           <Col m={6} l={4} s={12} offset="m3 l4">
          
-            <div class="card log-card">
-              <div class="card-content ">
+            <div className="card log-card">
+              <div className="card-content ">
                 <p className="log-3">Login</p>
                 <div className="btn-container">
                   <div>
@@ -111,10 +104,8 @@ class Login extends Component {
                       onSuccess={this.onTwitSuccess}
                       requestTokenUrl="http://localhost:5000/api/login/auth/twitter/reverse"
                       className="twit-btn"
-                      // tag="a"
                       showIcon={false}
                       children={icon}
-                      // style={twitStyle}
                       text="Login with Twitter"
                     />
                   </div>

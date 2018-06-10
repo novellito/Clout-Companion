@@ -23,8 +23,9 @@ const reducer = (state = initialState, action) => {
         userId: null,
         user: null
       };
+      default:
+        return state;
   }
-  return state;
 };
 
 export default reducer;

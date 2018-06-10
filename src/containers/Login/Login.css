@@ -22,18 +22,28 @@
   border: 1px solid #4c69ba;
   padding: 20px;
   width: 100%; }
+  .fb-btn:hover {
+    background-color: #7c92d1;
+    border: 1px solid #7c92d1;
+    transition: .8s; }
   .fb-btn .fa-facebook {
-    margin-right: 10px; }
+    margin-right: 12px;
+    font-size: 1.8em; }
 
 .twit-btn {
-  background-color: #fff;
+  background-color: #00aced;
   padding: 20px;
-  color: #00aced;
+  color: white;
   font-size: 1.2em;
   margin-bottom: 15px;
   width: 100%;
-  border: 1px solid white;
+  border: 1px solid #00aced;
   box-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px; }
+  .twit-btn:hover {
+    background-color: #68d0f8;
+    border: 1px solid #68d0f8;
+    transition: .8s; }
   .twit-btn .fa-twitter {
-    color: #00aced;
-    margin-right: 10px; }
+    color: white;
+    margin-right: 12px;
+    font-size: 1.8em; }
