@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Calculator from '../containers/Calculator/Calculator';
-import Resources from '../components/Resources/Resources';
+import Resources from '../containers/Resources/Resources';
 // import Landing from '../components/Landing/Landing';
 import Dashboard from '../containers/Dashboard/Dashboard';
 import Login from '../containers/Login/Login';

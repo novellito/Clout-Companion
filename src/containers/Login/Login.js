@@ -1,17 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions/actionTypes';
-
+import AppNavbar from '../../components/AppNavbar/AppNavbar'
 import axios from 'axios';
 import { Col, Row } from 'react-materialize';
 import FacebookLogin from 'react-facebook-login';
 import TwitterLogin from 'react-twitter-auth';
-import AppNavbar from '../../components/AppNavbar/AppNavbar';
 import './Login.css';
 
 class Login extends Component {
+  // Redirect the user to the dashboard if they have a valid token
   componentDidMount() {
-    localStorage.clear();
+
+    if (localStorage.length > 0) {
+      this.props.history.push('/dashboard');
+    }
+
+
   }
   // call back function after fb button is clicked
   // Redirects user if they login
@@ -51,9 +56,8 @@ class Login extends Component {
     if (status) {
       console.log('user not authenticated');
     } else {
-      localStorage.setItem('jwtToken', token);
+      localStorage.setItem('jwt', token);
       localStorage.setItem('uid', userId);
-      console.log(localStorage);
       this.props.onLogin(userId, username);
       this.props.history.push('/dashboard');
     }
@@ -71,8 +75,7 @@ class Login extends Component {
     };
     try {
       let response = await axios.post(
-        'http://localhost:5000/api/login/test',
-        { message: 'hello' },
+        'http://localhost:5000/api/login/authorize',
         { headers }
       );
       console.log(response);
@@ -81,7 +84,7 @@ class Login extends Component {
     }
   };
   render() {
-   
+
     const icon = (
       <Fragment>
         <i className="fa fa-twitter" />Login with Twitter
@@ -92,10 +95,11 @@ class Login extends Component {
         <AppNavbar />
         <Row>
           <Col m={6} l={4} s={12} offset="m3 l4">
-         
+
             <div className="card log-card">
               <div className="card-content ">
                 <p className="log-3">Login</p>
+                {this.props.toRelog ? "Session expired please login again" : ''}
                 <div className="btn-container">
                   <div>
                     <TwitterLogin
@@ -134,7 +138,8 @@ const mapStateToProps = state => {
   return {
     isLog: state.login.isLoggedIn,
     uid: state.login.userId,
-    uname: state.login.user
+    uname: state.login.user,
+    toRelog: state.login.needToRelog
   };
 };
 

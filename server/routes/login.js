@@ -3,7 +3,7 @@ const router = express.Router();
 const controller = require('../controllers/login');
 const passport = require('passport');
 
-router.post('/test', controller.authorize, controller.test);
+router.post('/authorize', controller.authorize, controller.authRes);
 
 // Route to receive the request token from twitter
 router.post('/auth/twitter/reverse', controller.twitRev);

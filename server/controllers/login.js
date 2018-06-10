@@ -8,7 +8,8 @@ exports.generateToken = (req, res, next) => {
   if (req.body.fb) {
     req.token = jwt.sign(
       {
-        id: req.body.id
+        id: req.body.id,
+        username: req.body.username
       },
       process.env.jwtSecret,
       {
@@ -18,11 +19,12 @@ exports.generateToken = (req, res, next) => {
   } else {
     req.token = jwt.sign(
       {
-        id: req.auth.id
+        id: req.auth.id,
+        username: req.user.username
       },
       process.env.jwtSecret,
       {
-        expiresIn: 5 //60 * 120
+        expiresIn: 100000
       }
     );
   }
@@ -42,6 +44,7 @@ exports.authorize = (req, res, next) => {
     jwt.verify(token, process.env.jwtSecret);
     next();
   } catch (err) {
+    console.log(err.message);
     if (err.message === 'jwt expired') {
       res.status(401).json({ message: 'Token has expired!' });
     } else {
@@ -50,9 +53,9 @@ exports.authorize = (req, res, next) => {
   }
 };
 
-exports.test = (req, res, next) => {
-  console.log(req.body);
-  res.send('ok');
+// Let client know that the user's token is still valid
+exports.authRes = (req, res) => {
+  res.status(200).json({ loggedIn: true });
 };
 
 // function to receive request token from twitter
@@ -130,6 +133,7 @@ exports.fbLogin = (req, res) => {
     console.log(`User ${user.username} has been verified!`);
     res.status(200).send({
       uname: user.username,
+      uid: user.userId,
       msg: `User ${user.username} has been verified!`
     });
   });

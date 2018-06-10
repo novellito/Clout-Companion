@@ -168,7 +168,7 @@ class Calculator extends Component {
   render() {
     return (
       <div>
-        <AppNavbar />
+        <AppNavbar history={this.props.history} />
         <RowContainer>
           <h1 className="comp-title">Fee Calculator</h1>
           <Collapsible>

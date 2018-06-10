@@ -1,10 +1,15 @@
 import React from 'react';
-import { Navbar } from 'react-materialize';
+import { Navbar, NavItem } from 'react-materialize';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/ccLogo.png';
 import './AppNavbar.css';
-const AppNavbar = () => {
+const AppNavbar = (props) => {
   const Img = <img className="cc-logo" alt="clout companion logo" src={Logo} />;
+
+  const logout = () => {
+    localStorage.clear();
+    props.history.push('/login')
+  }
   return (
     <Navbar
       brand={Img}
@@ -23,9 +28,6 @@ const AppNavbar = () => {
         </NavLink>
       </li>
       <li>
-        {/* <NavLink activeClassName="nav-active" to="/login">
-          Login
-        </NavLink> */}
         <NavLink
           activeClassName="nav-active"
           to={localStorage.length > 0 ? '/dashboard' : '/login'}
@@ -33,6 +35,8 @@ const AppNavbar = () => {
           {localStorage.length > 0 ? 'Dashboard' : 'Login'}
         </NavLink>
       </li>
+      {localStorage.length > 0 ? <NavItem onClick={() => logout()}>Logout</NavItem> : ''}
+      {/* <NavItem onClick={() => logout()}>Logout</NavItem> */}
     </Navbar>
   );
 };
