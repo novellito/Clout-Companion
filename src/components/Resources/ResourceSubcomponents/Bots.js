@@ -8,7 +8,7 @@ const Bots = () => {
         There are various bots out there on the market. The following table
         shows a few popular ones.
       </p>
-      <Table responsive="true">
+      <Table responsive={true}>
         <thead>
           <tr>
             <th data-field="bot">Bot</th>
@@ -28,7 +28,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -37,7 +37,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -50,7 +50,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -59,7 +59,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -72,7 +72,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -81,7 +81,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -94,7 +94,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -103,7 +103,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -116,7 +116,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -125,7 +125,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -138,7 +138,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -147,7 +147,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -160,7 +160,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -169,7 +169,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -182,7 +182,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -191,7 +191,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -204,7 +204,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -213,7 +213,7 @@ const Bots = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>

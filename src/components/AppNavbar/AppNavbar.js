@@ -23,15 +23,15 @@ const AppNavbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="nav-active" to="/login">
+        {/* <NavLink activeClassName="nav-active" to="/login">
           Login
-        </NavLink>
-        {/* <NavLink
+        </NavLink> */}
+        <NavLink
           activeClassName="nav-active"
           to={localStorage.length > 0 ? '/dashboard' : '/login'}
         >
           {localStorage.length > 0 ? 'Dashboard' : 'Login'}
-        </NavLink> */}
+        </NavLink>
       </li>
     </Navbar>
   );

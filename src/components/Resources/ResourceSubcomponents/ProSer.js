@@ -30,7 +30,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -39,7 +39,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -51,7 +51,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -60,7 +60,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -72,7 +72,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -81,7 +81,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -93,7 +93,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -102,7 +102,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -114,7 +114,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -123,7 +123,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -155,7 +155,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -164,7 +164,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
@@ -176,7 +176,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-twitter" />
+                <i className="fa fa-2x fa-twitter" />
               </a>
             </td>
             <td>
@@ -185,7 +185,7 @@ const ProSer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i class="fa fa-2x fa-globe" />
+                <i className="fa fa-2x fa-globe" />
               </a>
             </td>
           </tr>
