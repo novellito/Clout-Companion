@@ -1,25 +1,50 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-materialize';
+import { Modal, Input, Row } from 'react-materialize';
 import './Dashboard.css';
 
 export default class ModalContainer extends Component {
+  state = {
+    temp: ''
+  };
+  validateName = e => {
+    this.setState({ temp: e.target.value });
+  };
+
+  validatePrice = e => {
+    console.log(e.target);
+    this.setState({ temp: e.target.value });
+    console.log('validate price');
+  };
   render() {
     return (
       <Modal
+        id="Dash-Modal"
+        open={true}
         header="Add a New Item"
         trigger={<i className="fa fa-2x fa-plus-circle" />}
       >
-        <i class="fas fa-2x fa-shoe-prints" />
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
-        </p>
+        <Row>
+          <div className="categories">
+            <p>Category:</p>
+            <i className="fas fa-2x fa-shoe-prints" />
+            <i className="fas fa-2x fa-tshirt" />
+            <i className="fas fa-2x fa-glasses" />
+            <i className="fas fa-ellipsis-h" />
+          </div>
+          <div className="item-info">
+            <Input
+              s={6}
+              label="Name"
+              onChange={e => this.validateName(e)}
+              value={this.state.temp}
+            />
+            <Input
+              s={6}
+              label="Bought At"
+              onChange={e => this.validatePrice(e)}
+            />
+          </div>
+        </Row>
       </Modal>
     );
   }

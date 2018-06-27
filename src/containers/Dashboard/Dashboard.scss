@@ -1,6 +1,12 @@
 .dash {
   margin-bottom: 0;
 }
+
+.categories {
+  i {
+    margin: 0 10px;
+  }
+}
 .wrapper {
   padding: 20px;
   .dash-card {
@@ -15,7 +21,28 @@
     }
   }
 }
+
 @media (min-width: 1091px) {
+  #Dash-Modal {
+    background-color: #424242;
+    border-bottom: 1px solid #303030;
+    .modal-content {
+      h4,
+      p {
+        color: white;
+      }
+    }
+    .modal-footer {
+      background-color: inherit;
+      border-bottom: 1px solid inherit;
+      button {
+        color: white;
+        &:hover {
+          background-color: #ff3547;
+        }
+      }
+    }
+  }
   .wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;

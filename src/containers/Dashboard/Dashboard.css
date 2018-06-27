@@ -1,6 +1,9 @@
 .dash {
   margin-bottom: 0; }
 
+.categories i {
+  margin: 0 10px; }
+
 .wrapper {
   padding: 20px; }
   .wrapper .dash-card {
@@ -13,6 +16,19 @@
       float: right; }
 
 @media (min-width: 1091px) {
+  #Dash-Modal {
+    background-color: #424242;
+    border-bottom: 1px solid #303030; }
+    #Dash-Modal .modal-content h4,
+    #Dash-Modal .modal-content p {
+      color: white; }
+    #Dash-Modal .modal-footer {
+      background-color: inherit;
+      border-bottom: 1px solid inherit; }
+      #Dash-Modal .modal-footer button {
+        color: white; }
+        #Dash-Modal .modal-footer button:hover {
+          background-color: #ff3547; }
   .wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
