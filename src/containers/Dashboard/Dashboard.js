@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/actionCreators';
 import AppNavbar from '../../components/AppNavbar/AppNavbar'
+import './Dashboard.css';
 
 import axios from 'axios';
 
@@ -47,6 +48,37 @@ export class Dashboard extends Component {
         <button onClick={this.relog} className="button">
           Log out
         </button>
+        <div className="">
+          <div className="wrapper">
+            <div className="box graph">
+              <div className="card blue-grey darken-1">
+                <div className="card-content white-text">
+                  <span className="card-title">Graph</span>
+                  <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+                </div>
+              </div>
+            </div>
+            <div className="box item-list">
+              <div className="card blue-grey darken-1">
+                <div className="card-content white-text">
+                  <span className="card-title"> Items List</span>
+                  <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+                </div>
+              </div>
+            </div>
+            <div className="box notes">
+              <div className="card  blue-grey darken-1">
+                <div className="card-content white-text">
+                  <span className="card-title">Notes</span>
+                  <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
