@@ -1,5 +1,11 @@
+.dash {
+  margin-bottom: 0; }
+
 .wrapper {
   padding: 20px; }
+  .wrapper .dash-card {
+    background-color: #424242;
+    border-bottom: 1px solid #303030; }
 
 @media (min-width: 1091px) {
   .wrapper {
