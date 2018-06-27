@@ -65,6 +65,7 @@ export class Dashboard extends Component {
               <div className="card-action item-opts">
                 <i className="fa fa-2x fa-download" />
                 <i className="fa fa-2x fa-edit" />
+
                 <ModalContainer />
               </div>
             </div>

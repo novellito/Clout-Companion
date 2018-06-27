@@ -9,6 +9,8 @@ export default class ModalContainer extends Component {
         header="Add a New Item"
         trigger={<i className="fa fa-2x fa-plus-circle" />}
       >
+        <i class="fas fa-2x fa-shoe-prints" />
+
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 
 import './index.css';
-import '../node_modules/font-awesome/css/font-awesome.min.css';
+import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 const rootReducer = combineReducers({
   login: loginReducer
