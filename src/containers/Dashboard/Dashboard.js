@@ -41,7 +41,7 @@ export class Dashboard extends Component {
         <AppNavbar history={this.props.history} />
         <h1 className="comp-title dash">Dashboard</h1>
         <div className="wrapper">
-          <div className="box graph">
+          <div className="box chart">
             <div className="card dash-card">
               <div className="card-content white-text">
                 <span className="card-title">Graph</span>
@@ -55,13 +55,18 @@ export class Dashboard extends Component {
           </div>
           <div className="box item-list">
             <div className="card dash-card">
-              <div className="card-content white-text">
-                <span className="card-title"> Items List</span>
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively.
-                </p>
+              <div className="card-content items white-text">
+                <div className="card-title">My Items</div>
+                <div className="card-inner">
+                  helo world helo world helo world helo world helo world helo
+                  world helo world helo world helo world helo world helo world
+                  helo world helo world helo world helo world helo world helo
+                </div>
+              </div>
+              <div className="card-action item-opts">
+                <i className="fa fa-2x fa-download" />
+                <i className="fa fa-2x fa-edit" />
+                <i className="fa fa-2x fa-plus-circle" />
               </div>
             </div>
           </div>
