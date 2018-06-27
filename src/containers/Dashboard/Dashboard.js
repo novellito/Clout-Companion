@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/actionCreators';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
 import './Dashboard.css';
-
 import axios from 'axios';
-
+import ModalContainer from './ModalContainer';
 export class Dashboard extends Component {
   componentDidMount() {
     if (localStorage.length === 0) {
@@ -66,7 +65,7 @@ export class Dashboard extends Component {
               <div className="card-action item-opts">
                 <i className="fa fa-2x fa-download" />
                 <i className="fa fa-2x fa-edit" />
-                <i className="fa fa-2x fa-plus-circle" />
+                <ModalContainer />
               </div>
             </div>
           </div>
