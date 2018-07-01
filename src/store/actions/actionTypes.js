@@ -1,3 +1,5 @@
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_RELOG = 'USER_RELOG';
+export const VALIDATE_MODAL = 'VALIDATE_MODAL';
+export const INVALIDATE_MODAL = 'INVALIDATE_MODAL';

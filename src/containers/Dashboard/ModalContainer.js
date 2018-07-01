@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../store/actions/actionCreators';
 import { Modal, Input, Row } from 'react-materialize';
 import './Dashboard.css';
 
-export default class ModalContainer extends Component {
-  state = {
-    temp: ''
-  };
-  validateName = e => {
-    this.setState({ temp: e.target.value });
+export class ModalContainer extends Component {
+  validate = e => {
+    switch (e.target.name) {
+      case 'name':
+        e.target.value === ''
+          ? this.props.onInValidateField('name')
+          : this.props.onValidateField({ option: 'name', val: e.target.value });
+        break;
+      case 'boughtAt':
+        e.target.value === ''
+          ? this.props.onInValidateField('buy')
+          : this.props.onValidateField({ option: 'buy', val: e.target.value });
+        break;
+      default:
+        e.target.value === ''
+          ? this.props.onInValidateField('sell')
+          : this.props.onValidateField({ option: 'sell', val: e.target.value });
+        break;
+    }
   };
 
-  validatePrice = e => {
-    console.log(e.target);
-    this.setState({ temp: e.target.value });
-    console.log('validate price');
-  };
   render() {
     return (
       <Modal
@@ -34,14 +44,27 @@ export default class ModalContainer extends Component {
           <div className="item-info">
             <Input
               s={6}
+              maxLength="30"
+              type="text"
               label="Name"
-              onChange={e => this.validateName(e)}
-              value={this.state.temp}
+              name="name"
+              onChange={e => this.validate(e)}
             />
             <Input
               s={6}
-              label="Bought At"
-              onChange={e => this.validatePrice(e)}
+              type="number"
+              min="0"
+              name="boughtAt"
+              label="Bought At ($)"
+              onChange={e => this.validate(e)}
+            />
+            <Input
+              s={6}
+              type="number"
+              min="0"
+              name="soldAt"
+              label="Sold At ($)"
+              onChange={e => this.validate(e)}
             />
           </div>
         </Row>
@@ -49,3 +72,21 @@ export default class ModalContainer extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    isLog: state.modal.isLoggedIn
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onValidateField: input => dispatch(actionCreators.validateModal(input)),
+    onInValidateField: input => dispatch(actionCreators.invalidateModal(input))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ModalContainer);

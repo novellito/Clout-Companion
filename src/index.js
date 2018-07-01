@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 import loginReducer from './store/reducers/login';
+import modalReducer from './store/reducers/modal';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -12,7 +13,8 @@ import './index.css';
 import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 const rootReducer = combineReducers({
-  login: loginReducer
+  login: loginReducer,
+  modal: modalReducer
 });
 
 const logger = store => {

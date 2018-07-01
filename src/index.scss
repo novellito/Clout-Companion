@@ -26,12 +26,21 @@ body {
 
 input[type='text']:not(.browser-default):focus:not([readonly]),
 input[type='text'].valid:not(.browser-default),
-input[type='text'].valid:not(.browser-default):focus {
+input[type='text'].valid:not(.browser-default):focus,
+input[type='number']:not(.browser-default):focus:not([readonly]),
+input[type='number'].valid:not(.browser-default),
+input[type='number'].valid:not(.browser-default):focus {
   border-bottom: 1px solid $primary-color;
   box-shadow: 0 1px 0 0 $primary-color;
   color: white;
 }
-input[type='text']:focus:not(.browser-default):focus + label {
+
+input[type='text']:not(.browser-default),
+input[type='number']:not(.browser-default) {
+  color: white;
+}
+input[type='text']:focus:not(.browser-default):focus + label,
+input[type='number']:focus:not(.browser-default):focus + label {
   color: $primary-color;
 }
 
@@ -45,4 +54,9 @@ input[type='text']:not(.browser-default):disabled {
 .comp-title {
   color: white;
   text-align: center;
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
