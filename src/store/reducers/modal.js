@@ -5,7 +5,9 @@ const initialState = {
   validBuy: false,
   validSell: false,
   buyPrice: '',
-  sellPrice: ''
+  sellPrice: '',
+  buyDate: '',
+  sellDate: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -59,6 +61,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         sellPrice: action.value
+      };
+
+    case actionTypes.SET_BUYDATE:
+      return {
+        ...state,
+        buyDate: action.value
+      };
+
+    case actionTypes.SET_SELLDATE:
+      return {
+        ...state,
+        sellDate: action.value
       };
 
     default:

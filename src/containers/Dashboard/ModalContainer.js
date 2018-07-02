@@ -5,6 +5,14 @@ import { Modal, Input, Row } from 'react-materialize';
 import './Dashboard.css';
 
 export class ModalContainer extends Component {
+
+  //   componentDidMount () {
+  //   $('.datepicker').pickadate({
+  //     selectMonths: true, // Creates a dropdown to control month
+  //     selectYears: 15, // Creates a dropdown of 15 years to control year
+  //     onSet: this.handleDateChange // returns { select: dateInMilliseconds }
+  //   });
+  // }
   validate = e => {
     switch (e.target.name) {
       case 'name':
@@ -37,6 +45,10 @@ export class ModalContainer extends Component {
         }
         break;
     }
+  };
+
+  test = e => {
+    console.log('test');
   };
 
   render() {
@@ -83,19 +95,23 @@ export class ModalContainer extends Component {
               onChange={e => this.props.onUpdateSellPrice(e.target.value)}
               onBlur={e => this.validate(e)}
             />
+        
             <Input
               s={6}
+              showClearBtn={false}
               type="date"
               name="buyDate"
               label="Buy Date"
-              onChange={e => this.validate(e)}
+              options={{selectMonths:true,selectYears:true, min: new Date(2015,3,20),max: new Date(2018,8,14)}}
+              onChange={(e, value) => this.props.onSetCalendarBuyDate(value)}
             />
             <Input
               s={6}
               type="date"
               name="sellDate"
               label="Sell Date"
-              onChange={e => this.validate(e)}
+              options={{selectMonths:true,selectYears:true, min: new Date(2015,3,20),max: new Date(2018,8,14)}}
+              onChange={(e, value) => this.props.onSetCalendarSellDate(value)}
             />
           </div>
         </Row>
@@ -116,7 +132,11 @@ const mapDispatchToProps = dispatch => {
     onValidateField: input => dispatch(actionCreators.validateModal(input)),
     onInValidateField: input => dispatch(actionCreators.invalidateModal(input)),
     onUpdateBuyPrice: input => dispatch(actionCreators.updateBuyPrice(input)),
-    onUpdateSellPrice: input => dispatch(actionCreators.updateSellPrice(input))
+    onUpdateSellPrice: input => dispatch(actionCreators.updateSellPrice(input)),
+    onSetCalendarBuyDate: input =>
+      dispatch(actionCreators.setCalendarBuyDate(input)),
+    onSetCalendarSellDate: input =>
+      dispatch(actionCreators.setCalendarSellDate(input))
   };
 };
 
