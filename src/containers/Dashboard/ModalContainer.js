@@ -5,14 +5,6 @@ import { Modal, Input, Row } from 'react-materialize';
 import './Dashboard.css';
 
 export class ModalContainer extends Component {
-
-  //   componentDidMount () {
-  //   $('.datepicker').pickadate({
-  //     selectMonths: true, // Creates a dropdown to control month
-  //     selectYears: 15, // Creates a dropdown of 15 years to control year
-  //     onSet: this.handleDateChange // returns { select: dateInMilliseconds }
-  //   });
-  // }
   validate = e => {
     switch (e.target.name) {
       case 'name':
@@ -45,10 +37,6 @@ export class ModalContainer extends Component {
         }
         break;
     }
-  };
-
-  test = e => {
-    console.log('test');
   };
 
   render() {
@@ -95,23 +83,40 @@ export class ModalContainer extends Component {
               onChange={e => this.props.onUpdateSellPrice(e.target.value)}
               onBlur={e => this.validate(e)}
             />
-        
+
             <Input
               s={6}
-              showClearBtn={false}
               type="date"
               name="buyDate"
               label="Buy Date"
-              options={{selectMonths:true,selectYears:true, min: new Date(2015,3,20),max: new Date(2018,8,14)}}
-              onChange={(e, value) => this.props.onSetCalendarBuyDate(value)}
+              options={{
+                selectMonths: true,
+                selectYears: true,
+                format: 'mm/dd/yyyy',
+                max: new Date()
+              }}
+              onChange={(e, value) =>
+                this.props.onSetCalendarBuyDate(value.split('/'))
+              }
             />
             <Input
               s={6}
               type="date"
               name="sellDate"
               label="Sell Date"
-              options={{selectMonths:true,selectYears:true, min: new Date(2015,3,20),max: new Date(2018,8,14)}}
-              onChange={(e, value) => this.props.onSetCalendarSellDate(value)}
+              options={{
+                selectMonths: true,
+                selectYears: true,
+                format: 'mm/dd/yyyy',
+                min: new Date(
+                  this.props.sellDate[0],
+                  this.props.sellDate[1],
+                  this.props.sellDate[2]
+                )
+              }}
+              onChange={(e, value) =>
+                this.props.onSetCalendarSellDate(value.split('/'))
+              }
             />
           </div>
         </Row>
@@ -123,7 +128,8 @@ export class ModalContainer extends Component {
 const mapStateToProps = state => {
   return {
     buyPrice: state.modal.buyPrice,
-    sellPrice: state.modal.sellPrice
+    sellPrice: state.modal.sellPrice,
+    sellDate: state.modal.sellDate
   };
 };
 
