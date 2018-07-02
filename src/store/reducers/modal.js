@@ -3,7 +3,9 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   validName: false,
   validBuy: false,
-  validSell: false
+  validSell: false,
+  buyPrice: '',
+  sellPrice: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,12 +19,14 @@ const reducer = (state = initialState, action) => {
       } else if (action.input.option === 'buy') {
         return {
           ...state,
-          validBuy: true
+          validBuy: true,
+          buyPrice: action.input.val
         };
       } else {
         return {
           ...state,
-          validSell: true
+          validSell: true,
+          sellPrice: action.input.val
         };
       }
 
@@ -35,7 +39,8 @@ const reducer = (state = initialState, action) => {
       } else if (action.value === 'buy') {
         return {
           ...state,
-          validBuy: false
+          validBuy: false,
+          buyPrice: ''
         };
       } else {
         return {
@@ -43,6 +48,18 @@ const reducer = (state = initialState, action) => {
           validSell: false
         };
       }
+
+    case actionTypes.UPDATE_BUYPRICE:
+      return {
+        ...state,
+        buyPrice: action.value
+      };
+
+    case actionTypes.UPDATE_SELLPRICE:
+      return {
+        ...state,
+        sellPrice: action.value
+      };
 
     default:
       return state;

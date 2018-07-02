@@ -25,9 +25,23 @@ export const validateModal = input => {
     input
   };
 };
+
 export const invalidateModal = value => {
   return {
     type: actionTypes.INVALIDATE_MODAL,
+    value
+  };
+};
+
+export const updateBuyPrice = value => {
+  return {
+    type: actionTypes.UPDATE_BUYPRICE,
+    value
+  };
+};
+export const updateSellPrice = value => {
+  return {
+    type: actionTypes.UPDATE_SELLPRICE,
     value
   };
 };

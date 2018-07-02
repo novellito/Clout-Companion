@@ -13,14 +13,28 @@ export class ModalContainer extends Component {
           : this.props.onValidateField({ option: 'name', val: e.target.value });
         break;
       case 'boughtAt':
-        e.target.value === ''
-          ? this.props.onInValidateField('buy')
-          : this.props.onValidateField({ option: 'buy', val: e.target.value });
+        if (e.target.value === '') {
+          this.props.onInValidateField('buy');
+        } else {
+          let num = parseFloat(e.target.value);
+          let cleanNum = num.toFixed(2);
+          this.props.onValidateField({
+            option: 'buy',
+            val: cleanNum
+          });
+        }
         break;
       default:
-        e.target.value === ''
-          ? this.props.onInValidateField('sell')
-          : this.props.onValidateField({ option: 'sell', val: e.target.value });
+        if (e.target.value === '') {
+          this.props.onInValidateField('sell');
+        } else {
+          let num = parseFloat(e.target.value);
+          let cleanNum = num.toFixed(2);
+          this.props.onValidateField({
+            option: 'sell',
+            val: cleanNum
+          });
+        }
         break;
     }
   };
@@ -53,17 +67,34 @@ export class ModalContainer extends Component {
             <Input
               s={6}
               type="number"
-              min="0"
               name="boughtAt"
+              step="0.01"
               label="Bought At ($)"
-              onChange={e => this.validate(e)}
+              value={this.props.buyPrice}
+              onChange={e => this.props.onUpdateBuyPrice(e.target.value)}
+              onBlur={e => this.validate(e)}
             />
             <Input
               s={6}
               type="number"
-              min="0"
               name="soldAt"
               label="Sold At ($)"
+              value={this.props.sellPrice}
+              onChange={e => this.props.onUpdateSellPrice(e.target.value)}
+              onBlur={e => this.validate(e)}
+            />
+            <Input
+              s={6}
+              type="date"
+              name="buyDate"
+              label="Buy Date"
+              onChange={e => this.validate(e)}
+            />
+            <Input
+              s={6}
+              type="date"
+              name="sellDate"
+              label="Sell Date"
               onChange={e => this.validate(e)}
             />
           </div>
@@ -75,14 +106,17 @@ export class ModalContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLog: state.modal.isLoggedIn
+    buyPrice: state.modal.buyPrice,
+    sellPrice: state.modal.sellPrice
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onValidateField: input => dispatch(actionCreators.validateModal(input)),
-    onInValidateField: input => dispatch(actionCreators.invalidateModal(input))
+    onInValidateField: input => dispatch(actionCreators.invalidateModal(input)),
+    onUpdateBuyPrice: input => dispatch(actionCreators.updateBuyPrice(input)),
+    onUpdateSellPrice: input => dispatch(actionCreators.updateSellPrice(input))
   };
 };
 
