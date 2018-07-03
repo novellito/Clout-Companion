@@ -46,15 +46,24 @@ export const updateSellPrice = value => {
     value
   };
 };
+
 export const setCalendarBuyDate = value => {
   return {
     type: actionTypes.SET_BUYDATE,
     value
   };
 };
+
 export const setCalendarSellDate = value => {
   return {
     type: actionTypes.SET_SELLDATE,
+    value
+  };
+};
+
+export const setCategory = value => {
+  return {
+    type: actionTypes.SET_CATEGORY,
     value
   };
 };

@@ -7,3 +7,4 @@ export const UPDATE_BUYPRICE = 'UPDATE_BUYPRICE';
 export const UPDATE_SELLPRICE = 'SELLPRICE';
 export const SET_BUYDATE = 'SET_BUYDATE';
 export const SET_SELLDATE = 'SET_SELLDATE';
+export const SET_CATEGORY = 'SET_CATEGORY';

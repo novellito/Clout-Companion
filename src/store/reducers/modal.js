@@ -7,7 +7,8 @@ const initialState = {
   buyPrice: '',
   sellPrice: '',
   buyDate: '',
-  sellDate: ''
+  sellDate: '',
+  category: 'shoes'
 };
 
 const reducer = (state = initialState, action) => {
@@ -73,6 +74,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         sellDate: action.value
+      };
+
+    case actionTypes.SET_CATEGORY:
+      return {
+        ...state,
+        category: action.value
       };
 
     default:

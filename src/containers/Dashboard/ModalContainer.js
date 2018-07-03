@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/actionCreators';
-import { Modal, Input, Row } from 'react-materialize';
+import { Modal, Input, Row, Button } from 'react-materialize';
 import './Dashboard.css';
 
 export class ModalContainer extends Component {
@@ -53,26 +53,39 @@ export class ModalContainer extends Component {
       >
         <Row>
           <div className="categories">
-            <p>Category:</p>
+            <p>Category: {this.props.category}</p>
             <i
-              onClick={e => this.selectCategory(e)}
+              style={{
+                color: this.props.category === 'shoes' ? '#ff3547b3' : 'white'
+              }}
+              onClick={e => this.props.onSetCategory(e.target.id)}
               id="shoes"
-              className="fas shoes fa-2x fa-shoe-prints"
+              className="fas shoes fa-3x fa-shoe-prints"
             />
             <i
-              onClick={e => this.selectCategory(e)}
+              style={{
+                color: this.props.category === 'clothes' ? '#ff3547b3' : 'white'
+              }}
+              onClick={e => this.props.onSetCategory(e.target.id)}
               id="clothes"
-              className="fas fa-2x fa-tshirt"
+              className="fas fa-3x fa-tshirt"
             />
             <i
-              onClick={e => this.selectCategory(e)}
+              style={{
+                color:
+                  this.props.category === 'accessories' ? '#ff3547b3' : 'white'
+              }}
+              onClick={e => this.props.onSetCategory(e.target.id)}
               id="accessories"
-              className="fas fa-2x fa-glasses"
+              className="fas fa-3x fa-glasses"
             />
             <i
-              onClick={e => this.selectCategory(e)}
+              style={{
+                color: this.props.category === 'other' ? '#ff3547b3' : 'white'
+              }}
+              onClick={e => this.props.onSetCategory(e.target.id)}
               id="other"
-              className="fas fa-ellipsis-h"
+              className="fas fa-3x fa-ellipsis-h"
             />
           </div>
           <div className="item-info">
@@ -138,6 +151,9 @@ export class ModalContainer extends Component {
                 this.props.onSetCalendarSellDate(value.split('/'))
               }
             />
+            <Button className="item-submit-btn btn-primary" waves="light">
+              Add Item
+            </Button>
           </div>
         </Row>
       </Modal>
@@ -149,7 +165,8 @@ const mapStateToProps = state => {
   return {
     buyPrice: state.modal.buyPrice,
     sellPrice: state.modal.sellPrice,
-    sellDate: state.modal.sellDate
+    sellDate: state.modal.sellDate,
+    category: state.modal.category
   };
 };
 
@@ -162,7 +179,8 @@ const mapDispatchToProps = dispatch => {
     onSetCalendarBuyDate: input =>
       dispatch(actionCreators.setCalendarBuyDate(input)),
     onSetCalendarSellDate: input =>
-      dispatch(actionCreators.setCalendarSellDate(input))
+      dispatch(actionCreators.setCalendarSellDate(input)),
+    onSetCategory: input => dispatch(actionCreators.setCategory(input))
   };
 };
 
