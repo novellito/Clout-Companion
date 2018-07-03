@@ -39,6 +39,10 @@ export class ModalContainer extends Component {
     }
   };
 
+  selectCategory = e => {
+    console.log(e.target.id);
+  };
+
   render() {
     return (
       <Modal
@@ -50,10 +54,26 @@ export class ModalContainer extends Component {
         <Row>
           <div className="categories">
             <p>Category:</p>
-            <i className="fas fa-2x fa-shoe-prints" />
-            <i className="fas fa-2x fa-tshirt" />
-            <i className="fas fa-2x fa-glasses" />
-            <i className="fas fa-ellipsis-h" />
+            <i
+              onClick={e => this.selectCategory(e)}
+              id="shoes"
+              className="fas shoes fa-2x fa-shoe-prints"
+            />
+            <i
+              onClick={e => this.selectCategory(e)}
+              id="clothes"
+              className="fas fa-2x fa-tshirt"
+            />
+            <i
+              onClick={e => this.selectCategory(e)}
+              id="accessories"
+              className="fas fa-2x fa-glasses"
+            />
+            <i
+              onClick={e => this.selectCategory(e)}
+              id="other"
+              className="fas fa-ellipsis-h"
+            />
           </div>
           <div className="item-info">
             <Input

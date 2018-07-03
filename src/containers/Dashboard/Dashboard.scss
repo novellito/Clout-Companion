@@ -2,6 +2,20 @@
   margin-bottom: 0;
 }
 
+.picker__nav--prev:hover,
+.picker__nav--next:hover {
+  background: #ff3547b3;
+}
+.picker__date-display {
+  background-color: #ff3547;
+}
+.picker__day.picker__day--today {
+  color: #ff3547;
+}
+.picker__close,
+.picker__today {
+  color: black;
+}
 .categories {
   i {
     margin: 0 10px;
