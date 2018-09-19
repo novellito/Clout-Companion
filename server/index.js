@@ -6,6 +6,7 @@ const items = require('./routes/items');
 const login = require('./routes/login');
 const ItemsModel = require('./models/item');
 
+require('dotenv').config();
 require('./config/passport')();
 const app = express();
 const port = 5000;
