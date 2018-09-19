@@ -39,6 +39,10 @@ export class ModalContainer extends Component {
     }
   };
 
+  preventE = e => {
+    if (e.key === 'e') e.preventDefault();
+  };
+
   selectCategory = e => {
     console.log(e.target.id);
   };
@@ -103,6 +107,7 @@ export class ModalContainer extends Component {
               name="boughtAt"
               step="0.01"
               label="Bought At ($)"
+              onKeyPress={this.preventE}
               value={this.props.buyPrice}
               onChange={e => this.props.onUpdateBuyPrice(e.target.value)}
               onBlur={e => this.validate(e)}
@@ -112,6 +117,7 @@ export class ModalContainer extends Component {
               type="number"
               name="soldAt"
               label="Sold At ($)"
+              onKeyPress={this.preventE}
               value={this.props.sellPrice}
               onChange={e => this.props.onUpdateSellPrice(e.target.value)}
               onBlur={e => this.validate(e)}
@@ -151,7 +157,19 @@ export class ModalContainer extends Component {
                 this.props.onSetCalendarSellDate(value.split('/'))
               }
             />
-            <Button className="item-submit-btn btn-primary" waves="light">
+            <Button
+              disabled={
+                !(
+                  this.props.validBuy &&
+                  this.props.validSell &&
+                  this.props.validName &&
+                  this.props.buyDate &&
+                  this.props.sellDate
+                )
+              }
+              className="item-submit-btn btn-primary"
+              waves="light"
+            >
               Add Item
             </Button>
           </div>
@@ -166,7 +184,12 @@ const mapStateToProps = state => {
     buyPrice: state.modal.buyPrice,
     sellPrice: state.modal.sellPrice,
     sellDate: state.modal.sellDate,
-    category: state.modal.category
+    category: state.modal.category,
+    validBuy: state.modal.validBuy,
+    validSell: state.modal.validSell,
+    validName: state.modal.validName,
+    buyDate: state.modal.buyDate,
+    sellDate: state.modal.sellDate
   };
 };
 
