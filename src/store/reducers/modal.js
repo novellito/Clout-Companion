@@ -81,6 +81,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         category: action.value
       };
+    case actionTypes.RESET_MODAL:
+      return {
+        ...state,
+        validName: false,
+        validBuy: false,
+        validSell: false,
+        buyPrice: '',
+        sellPrice: '',
+        buyDate: '',
+        sellDate: ''
+      };
 
     default:
       return state;

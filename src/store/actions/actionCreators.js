@@ -67,3 +67,8 @@ export const setCategory = value => {
     value
   };
 };
+export const resetModal = () => {
+  return {
+    type: actionTypes.RESET_MODAL
+  };
+};

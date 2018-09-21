@@ -47,11 +47,18 @@ export class ModalContainer extends Component {
     console.log(e.target.id);
   };
 
+  test = () => {
+    console.log('hellothere');
+  };
+
   render() {
     return (
       <Modal
         id="Dash-Modal"
-        open={true}
+        // open={true}
+        modalOptions={{
+          complete: () => this.props.onResetModal()
+        }}
         header="Add a New Item"
         trigger={<i className="fa fa-2x fa-plus-circle" />}
       >
@@ -188,8 +195,7 @@ const mapStateToProps = state => {
     validBuy: state.modal.validBuy,
     validSell: state.modal.validSell,
     validName: state.modal.validName,
-    buyDate: state.modal.buyDate,
-    sellDate: state.modal.sellDate
+    buyDate: state.modal.buyDate
   };
 };
 
@@ -203,7 +209,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(actionCreators.setCalendarBuyDate(input)),
     onSetCalendarSellDate: input =>
       dispatch(actionCreators.setCalendarSellDate(input)),
-    onSetCategory: input => dispatch(actionCreators.setCategory(input))
+    onSetCategory: input => dispatch(actionCreators.setCategory(input)),
+    onResetModal: () => dispatch(actionCreators.resetModal())
   };
 };
 

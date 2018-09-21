@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/actionCreators';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
+import { Table } from 'react-materialize';
 import './Dashboard.css';
 import axios from 'axios';
 import ModalContainer from './ModalContainer';
@@ -57,9 +58,33 @@ export class Dashboard extends Component {
               <div className="card-content items white-text">
                 <div className="card-title">My Items</div>
                 <div className="card-inner">
-                  helo world helo world helo world helo world helo world helo
-                  world helo world helo world helo world helo world helo world
-                  helo world helo world helo world helo world helo world helo
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th data-field="id">Item</th>
+                        <th data-field="buy-price">Buy Price</th>
+                        <th data-field="sell-price">Sell Price</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>Alvin</td>
+                        <td>Eclair</td>
+                        <td>$0.87</td>
+                      </tr>
+                      <tr>
+                        <td>Alan</td>
+                        <td>Jellybean</td>
+                        <td>$3.76</td>
+                      </tr>
+                      <tr>
+                        <td>Jonathan</td>
+                        <td>Lollipop</td>
+                        <td>$7.00</td>
+                      </tr>
+                    </tbody>
+                  </Table>
                 </div>
               </div>
               <div className="card-action item-opts">
@@ -92,6 +117,7 @@ const mapStateToProps = state => {
   return {
     isLog: state.login.isLoggedIn,
     uid: state.login.userId
+    //modal info here
   };
 };
 const mapDispatchToProps = dispatch => {

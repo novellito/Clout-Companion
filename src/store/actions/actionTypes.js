@@ -8,3 +8,4 @@ export const UPDATE_SELLPRICE = 'SELLPRICE';
 export const SET_BUYDATE = 'SET_BUYDATE';
 export const SET_SELLDATE = 'SET_SELLDATE';
 export const SET_CATEGORY = 'SET_CATEGORY';
+export const RESET_MODAL = 'RESET_MODAL';
