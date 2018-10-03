@@ -7,6 +7,14 @@ import './Dashboard.css';
 import axios from 'axios';
 import ModalContainer from './ModalContainer';
 export class Dashboard extends Component {
+  state = {
+    items: []
+  };
+
+  addItemToList = item => {
+    console.log('hello');
+  };
+
   componentDidMount() {
     if (localStorage.length === 0) {
       this.props.history.replace('/');
@@ -83,6 +91,41 @@ export class Dashboard extends Component {
                         <td>Lollipop</td>
                         <td>$7.00</td>
                       </tr>
+                      <tr>
+                        <td>Jonathan</td>
+                        <td>Lollipop</td>
+                        <td>$7.00</td>
+                      </tr>
+                      <tr>
+                        <td>Jonathan</td>
+                        <td>Lollipop</td>
+                        <td>$7.00</td>
+                      </tr>
+                      <tr>
+                        <td>Jonathan</td>
+                        <td>Lollipop</td>
+                        <td>$7.00</td>
+                      </tr>
+                      <tr>
+                        <td>Jonathan</td>
+                        <td>Lollipop</td>
+                        <td>$7.00</td>
+                      </tr>
+                      <tr>
+                        <td>Jonathan</td>
+                        <td>Lollipop</td>
+                        <td>$7.00</td>
+                      </tr>
+                      <tr>
+                        <td>Jonathan</td>
+                        <td>Lollipop</td>
+                        <td>$7.00</td>
+                      </tr>
+                      <tr>
+                        <td>Jonathan</td>
+                        <td>Lollipop</td>
+                        <td>$7.00</td>
+                      </tr>
                     </tbody>
                   </Table>
                 </div>
@@ -91,7 +134,7 @@ export class Dashboard extends Component {
                 <i className="fa fa-2x fa-download" />
                 <i className="fa fa-2x fa-edit" />
 
-                <ModalContainer />
+                <ModalContainer addToList={this.addItemToList} />
               </div>
             </div>
           </div>
