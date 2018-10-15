@@ -7,6 +7,10 @@ import './Dashboard.css';
 import axios from 'axios';
 import ModalContainer from './ModalContainer';
 export class Dashboard extends Component {
+  state = {
+    items: []
+  };
+
   componentDidMount() {
     if (localStorage.length === 0) {
       this.props.history.replace('/');
@@ -33,6 +37,10 @@ export class Dashboard extends Component {
         this.props.onRelog();
         this.props.history.replace('/login');
       });
+  };
+
+  addItem = () => {
+    console.log('adding');
   };
 
   render() {
@@ -68,6 +76,13 @@ export class Dashboard extends Component {
                     </thead>
 
                     <tbody>
+                      {/* {this.state.items.map(item=> {
+                          <tr>
+                          <td>{item.name}</td>
+                          <td>{item.buyPrice}</td>
+                          <td>{item.sellPrice}</td>
+                        </tr> 
+                      })} */}
                       <tr>
                         <td>Alvin</td>
                         <td>Eclair</td>
@@ -91,7 +106,7 @@ export class Dashboard extends Component {
                 <i className="fa fa-2x fa-download" />
                 <i className="fa fa-2x fa-edit" />
 
-                <ModalContainer />
+                <ModalContainer addItem={this.addItem} />
               </div>
             </div>
           </div>

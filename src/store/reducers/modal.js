@@ -4,6 +4,7 @@ const initialState = {
   validName: false,
   validBuy: false,
   validSell: false,
+  name: '',
   buyPrice: '',
   sellPrice: '',
   buyDate: '',
@@ -17,7 +18,8 @@ const reducer = (state = initialState, action) => {
       if (action.input.option === 'name') {
         return {
           ...state,
-          validName: true
+          validName: true,
+          name: action.input.val
         };
       } else if (action.input.option === 'buy') {
         return {
@@ -37,7 +39,8 @@ const reducer = (state = initialState, action) => {
       if (action.value === 'name') {
         return {
           ...state,
-          validName: false
+          validName: false,
+          name: ''
         };
       } else if (action.value === 'buy') {
         return {

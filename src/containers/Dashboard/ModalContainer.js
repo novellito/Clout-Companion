@@ -48,7 +48,7 @@ export class ModalContainer extends Component {
   };
 
   test = () => {
-    console.log('hellothere');
+    // this.props.addItem();
   };
 
   render() {
@@ -165,6 +165,7 @@ export class ModalContainer extends Component {
               }
             />
             <Button
+              onClick={this.props.addItem}
               disabled={
                 !(
                   this.props.validBuy &&
@@ -174,7 +175,7 @@ export class ModalContainer extends Component {
                   this.props.sellDate
                 )
               }
-              className="item-submit-btn btn-primary"
+              className="item-submit-btn btn-primary modal-close"
               waves="light"
             >
               Add Item
