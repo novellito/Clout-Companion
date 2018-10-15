@@ -47,14 +47,41 @@ export class ModalContainer extends Component {
     console.log(e.target.id);
   };
 
-  test = () => {
-    // this.props.addItem();
-  };
-
   render() {
     return (
       <Modal
         id="Dash-Modal"
+        actions={
+          <div>
+            <Button
+              modal="close"
+              waves="light"
+              onClick={() =>
+                this.props.addToList({
+                  buyPrice: this.props.buyPrice,
+                  sellPrice: this.props.sellPrice,
+                  sellDate: this.props.sellDate,
+                  buyDate: this.props.buyDate
+                })
+              }
+              disabled={
+                !(
+                  this.props.validBuy &&
+                  this.props.validSell &&
+                  this.props.validName &&
+                  this.props.buyDate &&
+                  this.props.sellDate
+                )
+              }
+              className="btn-primary"
+            >
+              Add Item
+            </Button>
+            <Button flat modal="close" waves="light">
+              dismiss
+            </Button>
+          </div>
+        }
         // open={true}
         modalOptions={{
           complete: () => this.props.onResetModal()
