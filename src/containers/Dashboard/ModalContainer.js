@@ -58,6 +58,7 @@ export class ModalContainer extends Component {
               waves="light"
               onClick={() =>
                 this.props.addToList({
+                  name: this.props.name,
                   buyPrice: this.props.buyPrice,
                   sellPrice: this.props.sellPrice,
                   sellDate: this.props.sellDate,
@@ -191,22 +192,6 @@ export class ModalContainer extends Component {
                 this.props.onSetCalendarSellDate(value.split('/'))
               }
             />
-            <Button
-              onClick={this.props.addItem}
-              disabled={
-                !(
-                  this.props.validBuy &&
-                  this.props.validSell &&
-                  this.props.validName &&
-                  this.props.buyDate &&
-                  this.props.sellDate
-                )
-              }
-              className="item-submit-btn btn-primary modal-close"
-              waves="light"
-            >
-              Add Item
-            </Button>
           </div>
         </Row>
       </Modal>
@@ -216,6 +201,7 @@ export class ModalContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    name: state.modal.name,
     buyPrice: state.modal.buyPrice,
     sellPrice: state.modal.sellPrice,
     sellDate: state.modal.sellDate,

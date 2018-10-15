@@ -12,6 +12,8 @@ export class Dashboard extends Component {
   };
 
   addItemToList = item => {
+    console.log(item);
+    this.setState({ items: [...this.state.items, item] });
     console.log('hello');
   };
 
@@ -41,10 +43,6 @@ export class Dashboard extends Component {
         this.props.onRelog();
         this.props.history.replace('/login');
       });
-  };
-
-  addItem = () => {
-    console.log('adding');
   };
 
   render() {
@@ -80,63 +78,13 @@ export class Dashboard extends Component {
                     </thead>
 
                     <tbody>
-                      {/* {this.state.items.map(item=> {
-                          <tr>
+                      {this.state.items.map((item, index) => (
+                        <tr key={index}>
                           <td>{item.name}</td>
                           <td>{item.buyPrice}</td>
                           <td>{item.sellPrice}</td>
-                        </tr> 
-                      })} */}
-                      <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>$0.87</td>
-                      </tr>
-                      <tr>
-                        <td>Alan</td>
-                        <td>Jellybean</td>
-                        <td>$3.76</td>
-                      </tr>
-                      <tr>
-                        <td>Jonathan</td>
-                        <td>Lollipop</td>
-                        <td>$7.00</td>
-                      </tr>
-                      <tr>
-                        <td>Jonathan</td>
-                        <td>Lollipop</td>
-                        <td>$7.00</td>
-                      </tr>
-                      <tr>
-                        <td>Jonathan</td>
-                        <td>Lollipop</td>
-                        <td>$7.00</td>
-                      </tr>
-                      <tr>
-                        <td>Jonathan</td>
-                        <td>Lollipop</td>
-                        <td>$7.00</td>
-                      </tr>
-                      <tr>
-                        <td>Jonathan</td>
-                        <td>Lollipop</td>
-                        <td>$7.00</td>
-                      </tr>
-                      <tr>
-                        <td>Jonathan</td>
-                        <td>Lollipop</td>
-                        <td>$7.00</td>
-                      </tr>
-                      <tr>
-                        <td>Jonathan</td>
-                        <td>Lollipop</td>
-                        <td>$7.00</td>
-                      </tr>
-                      <tr>
-                        <td>Jonathan</td>
-                        <td>Lollipop</td>
-                        <td>$7.00</td>
-                      </tr>
+                        </tr>
+                      ))}
                     </tbody>
                   </Table>
                 </div>
