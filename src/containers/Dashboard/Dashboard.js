@@ -12,9 +12,7 @@ export class Dashboard extends Component {
   };
 
   addItemToList = item => {
-    console.log(item);
     this.setState({ items: [...this.state.items, item] });
-    console.log('hello');
   };
 
   componentDidMount() {
@@ -90,10 +88,23 @@ export class Dashboard extends Component {
                 </div>
               </div>
               <div className="card-action item-opts">
+                <div className="net-profit h3">
+                  Net Profit:{' '}
+                  {this.state.items.length > 0 &&
+                    this.state.items
+                      .map(
+                        elem =>
+                          parseFloat(elem.sellPrice) - parseFloat(elem.buyPrice)
+                      )
+                      .reduce((acc, cv) => acc + cv)}
+                </div>
+                {/* <div className="item-opts"> */}
+                <ModalContainer addToList={this.addItemToList} />
                 <i className="fa fa-2x fa-download" />
                 <i className="fa fa-2x fa-edit" />
 
-                <ModalContainer addToList={this.addItemToList} />
+                {/* <div className="net-profit h3">$200</div> */}
+                {/* </div> */}
               </div>
             </div>
           </div>

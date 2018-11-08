@@ -50,6 +50,7 @@ Backend:
   Misc:
     ☐ Ensure overall responsiveness
     ☐ Add auth hoc
+    ☐ refactor modal reducers
   
 ----------------------------------------------------------
 remember to somehow say these are your opinions

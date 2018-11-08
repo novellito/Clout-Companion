@@ -5,6 +5,16 @@ import { Modal, Input, Row, Button } from 'react-materialize';
 import './Dashboard.css';
 
 export class ModalContainer extends Component {
+  componentDidMount() {
+    console.log('hello');
+  }
+
+  componentWillUnmount() {
+    console.log('unmount');
+    this.props.onResetModal();
+  }
+
+  // TODO: add character limit to name
   validate = e => {
     switch (e.target.name) {
       case 'name':
@@ -134,6 +144,7 @@ export class ModalContainer extends Component {
               type="text"
               label="Name"
               name="name"
+              value={this.props.name}
               onChange={e => this.validate(e)}
             />
             <Input
@@ -162,12 +173,18 @@ export class ModalContainer extends Component {
               s={6}
               type="date"
               name="buyDate"
+              date={new Date()}
               label="Buy Date"
               options={{
                 selectMonths: true,
                 selectYears: true,
+                defaultDate: null,
+                setDefaultDate: true,
                 format: 'mm/dd/yyyy',
                 max: new Date()
+                // onClose: () => {
+                //   this.set(select, ['']);
+                // }
               }}
               onChange={(e, value) =>
                 this.props.onSetCalendarBuyDate(value.split('/'))
@@ -181,6 +198,8 @@ export class ModalContainer extends Component {
               options={{
                 selectMonths: true,
                 selectYears: true,
+                defaultDate: null,
+                setDefaultDate: true,
                 format: 'mm/dd/yyyy',
                 min: new Date(
                   this.props.sellDate[0],

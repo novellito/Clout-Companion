@@ -93,7 +93,8 @@ const reducer = (state = initialState, action) => {
         buyPrice: '',
         sellPrice: '',
         buyDate: '',
-        sellDate: ''
+        sellDate: '',
+        name: ''
       };
 
     default:

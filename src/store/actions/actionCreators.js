@@ -48,6 +48,7 @@ export const updateSellPrice = value => {
 };
 
 export const setCalendarBuyDate = value => {
+  console.log(value);
   return {
     type: actionTypes.SET_BUYDATE,
     value

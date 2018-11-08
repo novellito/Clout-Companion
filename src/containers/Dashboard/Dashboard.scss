@@ -5,12 +5,14 @@
 #Dash-Modal {
   background-color: #424242;
   border-bottom: 1px solid #303030;
+  display: inline;
   .modal-content {
     h4,
     p {
       color: white;
     }
   }
+
   .modal-footer {
     background-color: inherit;
     border-bottom: 1px solid inherit;
@@ -51,14 +53,25 @@
     border-bottom: 1px solid #303030;
   }
   .item-opts {
-    margin: 30px 0;
+    display: flex;
+    :first-child {
+      // visibility: hidden;
+      margin: 0 auto;
+      // margin-right: auto;
+    }
+    .net-profit {
+      // position: absolute;
+    }
     i {
       margin: 0 10px;
       float: right;
+
+      &.fa-plus-circle {
+        margin-right: 5px;
+      }
     }
   }
 }
-
 @media (min-width: 1091px) {
   .wrapper {
     display: grid;
