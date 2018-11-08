@@ -19,6 +19,12 @@ export const relog = () => {
   };
 };
 
+export const updateForm = input => {
+  return {
+    type: actionTypes.UPDATE_FORM,
+    input
+  };
+};
 export const validateModal = input => {
   return {
     type: actionTypes.VALIDATE_MODAL,

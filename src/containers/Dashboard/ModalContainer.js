@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/actionCreators';
 import { Modal, Input, Row, Button } from 'react-materialize';
 import './Dashboard.css';
-
+import NumberFormat from 'react-number-format';
 export class ModalContainer extends Component {
   componentDidMount() {
     console.log('hello');
@@ -15,38 +15,44 @@ export class ModalContainer extends Component {
   }
 
   // TODO: add character limit to name
-  validate = e => {
-    switch (e.target.name) {
-      case 'name':
-        e.target.value === ''
-          ? this.props.onInValidateField('name')
-          : this.props.onValidateField({ option: 'name', val: e.target.value });
-        break;
-      case 'boughtAt':
-        if (e.target.value === '') {
-          this.props.onInValidateField('buy');
-        } else {
-          let num = parseFloat(e.target.value);
-          let cleanNum = num.toFixed(2);
-          this.props.onValidateField({
-            option: 'buy',
-            val: cleanNum
-          });
-        }
-        break;
-      default:
-        if (e.target.value === '') {
-          this.props.onInValidateField('sell');
-        } else {
-          let num = parseFloat(e.target.value);
-          let cleanNum = num.toFixed(2);
-          this.props.onValidateField({
-            option: 'sell',
-            val: cleanNum
-          });
-        }
-        break;
-    }
+  parseNum = e => {
+    console.log(e.key);
+    // switch (e.target.name) {
+    //   case 'name':
+    //     e.target.value === ''
+    //       ? this.props.onInValidateField('name')
+    //       : this.props.onValidateField({ option: 'name', val: e.target.value });
+    //     break;
+    //   case 'boughtAt':
+    //     if (e.target.value === '') {
+    //       this.props.onInValidateField('buy');
+    //     } else {
+    //       let num = parseFloat(e.target.value);
+    //       let cleanNum = num.toFixed(2);
+    //       this.props.onValidateField({
+    //         option: 'buy',
+    //         val: cleanNum
+    //       });
+    //     }
+    //     break;
+    //   default:
+    // if (e.target.value === '') {
+    // this.props.onInValidateField('sell');
+    // } else {
+    let num = parseFloat(e.target.value);
+    let num1 = new Intl.NumberFormat('de-DE', {
+      style: 'currency',
+      currency: 'EUR'
+    }).format(num);
+    console.log(num1);
+    let cleanNum = num.toFixed(2);
+    this.props.onUpdateForm({
+      option: e.target.name,
+      val: cleanNum
+    });
+    // }
+    // break;
+    // }
   };
 
   preventE = e => {
@@ -145,29 +151,63 @@ export class ModalContainer extends Component {
               label="Name"
               name="name"
               value={this.props.name}
-              onChange={e => this.validate(e)}
+              onChange={e => this.props.onUpdateForm({ option: 'name', e })}
             />
-            <Input
+            <NumberFormat
+              thousandSeparator={true}
+              decimalScale={2}
+              label="Bought At ($)"
+              customInput={Input}
+              onChange={e =>
+                this.props.onUpdateForm({
+                  option: 'buyPrice',
+                  e
+                })
+              }
+            />
+            <NumberFormat
+              thousandSeparator={true}
+              decimalScale={2}
+              label="Sold At ($)"
+              customInput={Input}
+              onChange={e =>
+                this.props.onUpdateForm({
+                  option: 'sellPrice',
+                  e
+                })
+              }
+            />
+            {/* <Input
               s={6}
               type="number"
-              name="boughtAt"
+              name="buyPrice"
               step="0.01"
               label="Bought At ($)"
-              onKeyPress={this.preventE}
+              // onKeyPress={this.preventE}
               value={this.props.buyPrice}
-              onChange={e => this.props.onUpdateBuyPrice(e.target.value)}
-              onBlur={e => this.validate(e)}
-            />
-            <Input
+              onChange={e =>
+                this.props.onUpdateForm({
+                  option: 'buyPrice',
+                  e
+                })
+              }
+              onBlur={e => this.parseNum(e)}
+            /> */}
+            {/* <Input
               s={6}
               type="number"
-              name="soldAt"
+              name="sellPrice"
               label="Sold At ($)"
-              onKeyPress={this.preventE}
+              // onKeyPress={this.preventE}
               value={this.props.sellPrice}
-              onChange={e => this.props.onUpdateSellPrice(e.target.value)}
-              onBlur={e => this.validate(e)}
-            />
+              onChange={e =>
+                this.props.onUpdateForm({
+                  option: 'sellPrice',
+                  e
+                })
+              }
+              // onBlur={e => this.parseNum(e)}
+            /> */}
 
             <Input
               s={6}
@@ -234,6 +274,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    onUpdateForm: input => dispatch(actionCreators.updateForm(input)),
     onValidateField: input => dispatch(actionCreators.validateModal(input)),
     onInValidateField: input => dispatch(actionCreators.invalidateModal(input)),
     onUpdateBuyPrice: input => dispatch(actionCreators.updateBuyPrice(input)),

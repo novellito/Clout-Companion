@@ -29,13 +29,17 @@ export class Dashboard extends Component {
 
   // function to check whether user's token is valid and redirect them to login page if it isn't
   relog = () => {
+    console.log('relog');
     const headers = {
       Authorization: `Bearer ${localStorage.getItem('jwt')}`,
       'Content-Type': 'application/json'
     };
     axios
       .post('http://localhost:5000/api/login/authorize', null, { headers })
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        this.setState({ items: [{ buyPrice: '50.00', sellPrice: '55.00' }] });
+      })
       .catch(err => {
         // The token is invalid - make the user login again
         this.props.onRelog();

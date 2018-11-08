@@ -14,6 +14,14 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.UPDATE_FORM:
+      console.log(action.input.e.target);
+      console.log(action.input.e.target.value);
+      return {
+        ...state,
+        [action.input.option]: action.input.e.target.value
+      };
+
     case actionTypes.VALIDATE_MODAL:
       if (action.input.option === 'name') {
         return {
