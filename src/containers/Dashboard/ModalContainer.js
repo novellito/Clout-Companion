@@ -158,11 +158,14 @@ export class ModalContainer extends Component {
               decimalScale={2}
               label="Bought At ($)"
               customInput={Input}
+              s={6}
               onChange={e =>
-                this.props.onUpdateForm({
-                  option: 'buyPrice',
-                  e
-                })
+                e.target.value !== ''
+                  ? this.props.onUpdateForm({
+                      option: 'buyPrice',
+                      e
+                    })
+                  : ''
               }
             />
             <NumberFormat
@@ -170,11 +173,14 @@ export class ModalContainer extends Component {
               decimalScale={2}
               label="Sold At ($)"
               customInput={Input}
+              s={6}
               onChange={e =>
-                this.props.onUpdateForm({
-                  option: 'sellPrice',
-                  e
-                })
+                e.target.value !== ''
+                  ? this.props.onUpdateForm({
+                      option: 'sellPrice',
+                      e
+                    })
+                  : ''
               }
             />
             {/* <Input
