@@ -82,13 +82,11 @@ export class ModalContainer extends Component {
                 })
               }
               disabled={
-                !(
-                  this.props.validBuy &&
-                  this.props.validSell &&
-                  this.props.validName &&
-                  this.props.buyDate &&
-                  this.props.sellDate
-                )
+                this.props.name === '' ||
+                this.props.buyPrice === '' ||
+                this.props.sellPrice === '' ||
+                this.props.buyDate === '' ||
+                this.props.sellDate === ''
               }
               className="btn-primary"
             >
@@ -151,7 +149,12 @@ export class ModalContainer extends Component {
               label="Name"
               name="name"
               value={this.props.name}
-              onChange={e => this.props.onUpdateForm({ option: 'name', e })}
+              onChange={e =>
+                this.props.onUpdateForm({
+                  option: 'name',
+                  value: e.target.value
+                })
+              }
             />
             <NumberFormat
               thousandSeparator={true}
@@ -159,62 +162,26 @@ export class ModalContainer extends Component {
               label="Bought At ($)"
               customInput={Input}
               s={6}
-              onChange={e =>
-                e.target.value !== ''
-                  ? this.props.onUpdateForm({
-                      option: 'buyPrice',
-                      e
-                    })
-                  : ''
-              }
-            />
-            <NumberFormat
-              thousandSeparator={true}
-              decimalScale={2}
-              label="Sold At ($)"
-              customInput={Input}
-              s={6}
-              onChange={e =>
-                e.target.value !== ''
-                  ? this.props.onUpdateForm({
-                      option: 'sellPrice',
-                      e
-                    })
-                  : ''
-              }
-            />
-            {/* <Input
-              s={6}
-              type="number"
-              name="buyPrice"
-              step="0.01"
-              label="Bought At ($)"
-              // onKeyPress={this.preventE}
-              value={this.props.buyPrice}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'buyPrice',
-                  e
+                  value: e.target.value
                 })
               }
-              onBlur={e => this.parseNum(e)}
-            /> */}
-            {/* <Input
-              s={6}
-              type="number"
-              name="sellPrice"
+            />
+            <NumberFormat
+              thousandSeparator={true}
+              decimalScale={2}
               label="Sold At ($)"
-              // onKeyPress={this.preventE}
-              value={this.props.sellPrice}
+              customInput={Input}
+              s={6}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'sellPrice',
-                  e
+                  value: e.target.value
                 })
               }
-              // onBlur={e => this.parseNum(e)}
-            /> */}
-
+            />
             <Input
               s={6}
               type="date"
@@ -233,7 +200,10 @@ export class ModalContainer extends Component {
                 // }
               }}
               onChange={(e, value) =>
-                this.props.onSetCalendarBuyDate(value.split('/'))
+                this.props.onUpdateForm({
+                  option: 'buyDate',
+                  value: e.target.value.split('/')
+                })
               }
             />
             <Input
@@ -254,7 +224,10 @@ export class ModalContainer extends Component {
                 )
               }}
               onChange={(e, value) =>
-                this.props.onSetCalendarSellDate(value.split('/'))
+                this.props.onUpdateForm({
+                  option: 'sellDate',
+                  value: e.target.value.split('/')
+                })
               }
             />
           </div>
@@ -274,6 +247,7 @@ const mapStateToProps = state => {
     validBuy: state.modal.validBuy,
     validSell: state.modal.validSell,
     validName: state.modal.validName,
+    validForm: state.modal.validForm,
     buyDate: state.modal.buyDate
   };
 };
