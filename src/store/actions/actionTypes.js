@@ -1,12 +1,6 @@
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_RELOG = 'USER_RELOG';
-export const VALIDATE_MODAL = 'VALIDATE_MODAL';
-export const INVALIDATE_MODAL = 'INVALIDATE_MODAL';
-export const UPDATE_BUYPRICE = 'UPDATE_BUYPRICE';
-export const UPDATE_SELLPRICE = 'SELLPRICE';
-export const SET_BUYDATE = 'SET_BUYDATE';
-export const SET_SELLDATE = 'SET_SELLDATE';
 export const SET_CATEGORY = 'SET_CATEGORY';
 export const RESET_MODAL = 'RESET_MODAL';
 export const UPDATE_FORM = 'UPDATE_FORM';

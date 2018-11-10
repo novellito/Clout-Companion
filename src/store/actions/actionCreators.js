@@ -25,48 +25,6 @@ export const updateForm = input => {
     input
   };
 };
-export const validateModal = input => {
-  return {
-    type: actionTypes.VALIDATE_MODAL,
-    input
-  };
-};
-
-export const invalidateModal = value => {
-  return {
-    type: actionTypes.INVALIDATE_MODAL,
-    value
-  };
-};
-
-export const updateBuyPrice = value => {
-  return {
-    type: actionTypes.UPDATE_BUYPRICE,
-    value
-  };
-};
-
-export const updateSellPrice = value => {
-  return {
-    type: actionTypes.UPDATE_SELLPRICE,
-    value
-  };
-};
-
-export const setCalendarBuyDate = value => {
-  console.log(value);
-  return {
-    type: actionTypes.SET_BUYDATE,
-    value
-  };
-};
-
-export const setCalendarSellDate = value => {
-  return {
-    type: actionTypes.SET_SELLDATE,
-    value
-  };
-};
 
 export const setCategory = value => {
   return {

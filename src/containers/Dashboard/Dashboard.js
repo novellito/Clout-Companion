@@ -38,7 +38,7 @@ export class Dashboard extends Component {
       .post('http://localhost:5000/api/login/authorize', null, { headers })
       .then(res => {
         console.log(res);
-        this.setState({ items: [{ buyPrice: '50.00', sellPrice: '55.00' }] });
+        // this.setState({ items: [{ buyPrice: '50.00', sellPrice: '55.00' }] });
       })
       .catch(err => {
         // The token is invalid - make the user login again
@@ -98,7 +98,8 @@ export class Dashboard extends Component {
                     this.state.items
                       .map(
                         elem =>
-                          parseFloat(elem.sellPrice) - parseFloat(elem.buyPrice)
+                          parseFloat(elem.sellPrice.replace(/,/g, '')) -
+                          parseFloat(elem.buyPrice.replace(/,/g, ''))
                       )
                       .reduce((acc, cv) => acc + cv)}
                 </div>

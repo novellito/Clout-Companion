@@ -17,28 +17,7 @@ export class ModalContainer extends Component {
   // TODO: add character limit to name
   parseNum = e => {
     console.log(e.key);
-    // switch (e.target.name) {
-    //   case 'name':
-    //     e.target.value === ''
-    //       ? this.props.onInValidateField('name')
-    //       : this.props.onValidateField({ option: 'name', val: e.target.value });
-    //     break;
-    //   case 'boughtAt':
-    //     if (e.target.value === '') {
-    //       this.props.onInValidateField('buy');
-    //     } else {
-    //       let num = parseFloat(e.target.value);
-    //       let cleanNum = num.toFixed(2);
-    //       this.props.onValidateField({
-    //         option: 'buy',
-    //         val: cleanNum
-    //       });
-    //     }
-    //     break;
-    //   default:
-    // if (e.target.value === '') {
-    // this.props.onInValidateField('sell');
-    // } else {
+
     let num = parseFloat(e.target.value);
     let num1 = new Intl.NumberFormat('de-DE', {
       style: 'currency',
@@ -242,27 +221,16 @@ const mapStateToProps = state => {
     name: state.modal.name,
     buyPrice: state.modal.buyPrice,
     sellPrice: state.modal.sellPrice,
+    buyDate: state.modal.buyDate,
     sellDate: state.modal.sellDate,
     category: state.modal.category,
-    validBuy: state.modal.validBuy,
-    validSell: state.modal.validSell,
-    validName: state.modal.validName,
-    validForm: state.modal.validForm,
-    buyDate: state.modal.buyDate
+    validForm: state.modal.validForm
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onUpdateForm: input => dispatch(actionCreators.updateForm(input)),
-    onValidateField: input => dispatch(actionCreators.validateModal(input)),
-    onInValidateField: input => dispatch(actionCreators.invalidateModal(input)),
-    onUpdateBuyPrice: input => dispatch(actionCreators.updateBuyPrice(input)),
-    onUpdateSellPrice: input => dispatch(actionCreators.updateSellPrice(input)),
-    onSetCalendarBuyDate: input =>
-      dispatch(actionCreators.setCalendarBuyDate(input)),
-    onSetCalendarSellDate: input =>
-      dispatch(actionCreators.setCalendarSellDate(input)),
     onSetCategory: input => dispatch(actionCreators.setCategory(input)),
     onResetModal: () => dispatch(actionCreators.resetModal())
   };
