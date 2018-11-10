@@ -16,6 +16,10 @@
       #Dash-Modal .modal-footer button:hover {
         background-color: #ff3547; }
 
+.picker__day--selected .picker__day--selected,
+.picker--focused .picker__day--selected {
+  background: #ff3547b3; }
+
 .picker__nav--prev:hover,
 .picker__nav--next:hover {
   background: #ff3547b3; }

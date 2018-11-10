@@ -14,34 +14,6 @@ export class ModalContainer extends Component {
     this.props.onResetModal();
   }
 
-  // TODO: add character limit to name
-  parseNum = e => {
-    console.log(e.key);
-
-    let num = parseFloat(e.target.value);
-    let num1 = new Intl.NumberFormat('de-DE', {
-      style: 'currency',
-      currency: 'EUR'
-    }).format(num);
-    console.log(num1);
-    let cleanNum = num.toFixed(2);
-    this.props.onUpdateForm({
-      option: e.target.name,
-      val: cleanNum
-    });
-    // }
-    // break;
-    // }
-  };
-
-  preventE = e => {
-    if (e.key === 'e') e.preventDefault();
-  };
-
-  selectCategory = e => {
-    console.log(e.target.id);
-  };
-
   render() {
     return (
       <Modal
@@ -178,7 +150,7 @@ export class ModalContainer extends Component {
                 //   this.set(select, ['']);
                 // }
               }}
-              onChange={(e, value) =>
+              onChange={e =>
                 this.props.onUpdateForm({
                   option: 'buyDate',
                   value: e.target.value.split('/')
@@ -202,7 +174,7 @@ export class ModalContainer extends Component {
                   this.props.sellDate[2]
                 )
               }}
-              onChange={(e, value) =>
+              onChange={e =>
                 this.props.onUpdateForm({
                   option: 'sellDate',
                   value: e.target.value.split('/')

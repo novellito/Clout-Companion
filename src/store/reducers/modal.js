@@ -13,20 +13,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.UPDATE_FORM:
-      if (
-        action.input.option === 'buyDate' ||
-        action.input.option === 'sellDate'
-      ) {
-        return {
-          ...state,
-          [action.input.option]: action.input.value
-        };
-      } else {
-        return {
-          ...state,
-          [action.input.option]: action.input.value
-        };
-      }
+      return {
+        ...state,
+        [action.input.option]: action.input.value
+      };
 
     case actionTypes.SET_CATEGORY:
       return {
