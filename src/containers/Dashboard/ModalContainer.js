@@ -195,8 +195,7 @@ const mapStateToProps = state => {
     sellPrice: state.modal.sellPrice,
     buyDate: state.modal.buyDate,
     sellDate: state.modal.sellDate,
-    category: state.modal.category,
-    validForm: state.modal.validForm
+    category: state.modal.category
   };
 };
 

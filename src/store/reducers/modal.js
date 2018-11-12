@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  validForm: false,
   name: '',
   buyPrice: '',
   sellPrice: '',
@@ -13,6 +12,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.UPDATE_FORM:
+      // console.log('wowser');
       return {
         ...state,
         [action.input.option]: action.input.value
@@ -26,7 +26,6 @@ const reducer = (state = initialState, action) => {
     case actionTypes.RESET_MODAL:
       return {
         ...state,
-        validForm: false,
         buyPrice: '',
         sellPrice: '',
         buyDate: '',
