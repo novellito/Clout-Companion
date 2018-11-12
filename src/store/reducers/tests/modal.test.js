@@ -1,6 +1,5 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import * as actionCreators from '../../actions/actionCreators';
 import * as actionTypes from '../../actions/actionTypes';
 import reducer from '../../reducers/modal';
 configure({ adapter: new Adapter() });
@@ -82,18 +81,41 @@ describe('Modal Reducer', () => {
         expectedUpdateFormAction('sellDate', ['11', '15', '2018'])
       ).sellDate
     ).toEqual(nextState.sellDate);
-
-    console.log(nextState);
   });
 
-  it('should set the category accordingly', () => {
-    const expectedUpdateFormAction = {
+  it('should update the category accordingly', () => {
+    const expectedUpdateCategoryAction = {
       type: actionTypes.SET_CATEGORY,
       value: 'clothes'
     };
 
-    expect(reducer(null, expectedUpdateFormAction).category).toEqual('clothes');
+    expect(reducer(null, expectedUpdateCategoryAction).category).toEqual(
+      'clothes'
+    );
   });
 
-  //   const expectedResetModalAction = {};
+  it('should set reset the modal state', () => {
+    const initialState = {
+      name: '',
+      buyPrice: '',
+      sellPrice: '',
+      buyDate: '',
+      sellDate: '',
+      category: 'shoes'
+    };
+
+    const currState = {
+      name: 'yeezy',
+      buyPrice: '220',
+      sellPrice: '300',
+      buyDate: ['11', '05', '2018'],
+      sellDate: ['11', '15', '2018'],
+      category: 'shoes'
+    };
+    const expectedResetModalAction = {
+      type: actionTypes.RESET_MODAL
+    };
+
+    expect(reducer(currState, expectedResetModalAction)).toEqual(initialState);
+  });
 });

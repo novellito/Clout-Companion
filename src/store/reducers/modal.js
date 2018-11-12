@@ -24,13 +24,16 @@ const reducer = (state = initialState, action) => {
         category: action.value
       };
     case actionTypes.RESET_MODAL:
+      console.log(state);
+
       return {
         ...state,
         buyPrice: '',
         sellPrice: '',
         buyDate: '',
         sellDate: '',
-        name: ''
+        name: '',
+        category: 'shoes'
       };
 
     default:
