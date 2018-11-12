@@ -6,7 +6,7 @@ import reducer from '../../reducers/modal';
 configure({ adapter: new Adapter() });
 
 describe('Modal Reducer', () => {
-  it('should set update the form accordingly', () => {
+  it('should update the form accordingly', () => {
     // next it - enable validform
     let initialState = {
       name: '',
@@ -86,29 +86,14 @@ describe('Modal Reducer', () => {
     console.log(nextState);
   });
 
-  // other its
-  //   const expectedSetCategoryAction = {};
+  it('should set the category accordingly', () => {
+    const expectedUpdateFormAction = {
+      type: actionTypes.SET_CATEGORY,
+      value: 'clothes'
+    };
+
+    expect(reducer(null, expectedUpdateFormAction).category).toEqual('clothes');
+  });
 
   //   const expectedResetModalAction = {};
-});
-
-describe('Modal Action Creators', () => {
-  it('', () => {
-    const testInput = {
-      option: 'name',
-      value: 'yeezy'
-    };
-
-    const expectedUpdateFormAction = {
-      type: actionTypes.UPDATE_FORM,
-      input: {
-        option: 'name',
-        value: 'yeezy'
-      }
-    };
-
-    expect(actionCreators.updateForm(testInput)).toEqual(
-      expectedUpdateFormAction
-    );
-  });
 });
