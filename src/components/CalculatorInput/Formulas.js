@@ -19,7 +19,9 @@ export const calculateGrailed = amount => {
   return {
     fees: ppFees,
     grailedFees,
-    receive: roundTo(amount - grailedFees - ppFees),
+    receive: roundTo(
+      parseFloat(amount) - parseFloat(grailedFees) - parseFloat(ppFees)
+    ),
     askFor: roundTo((parseFloat(amount) + PERCENTAGE) / 0.911)
   };
 };
@@ -30,7 +32,9 @@ export const calculateStockx = (amount, rate) => {
   return {
     transactionFee,
     payProcFee,
-    receive: roundTo(parseFloat(amount) - transactionFee - payProcFee),
+    receive: roundTo(
+      parseFloat(amount) - parseFloat(transactionFee) - parseFloat(payProcFee)
+    ),
     askFor: Math.floor(parseFloat(amount) / (1 - (0.03 + parseFloat(rate)))) + 1
   };
 };

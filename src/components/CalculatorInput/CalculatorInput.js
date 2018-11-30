@@ -2,20 +2,33 @@ import React from 'react';
 import { PaypalResult, GrailedResult, StockXResult } from './CalculationResult';
 import { Input } from 'react-materialize';
 import ShippingInput from './ShippingInput';
-
+import NumberFormat from 'react-number-format';
 // Component that handles the input field for the calculators
 const CalculatorInput = props => {
   return (
     <div>
       <div className="row calc-inputs">
-        <Input
+        <NumberFormat
+          onChange={e => props.setValue(e)}
+          thousandSeparator={true}
+          maxLength={15}
+          allowNegative={false}
+          decimalScale={2}
+          id="price"
+          type="text"
+          customInput={Input}
+          className="validate"
+          label="Enter Price ($)"
+          name={props.type}
+        />
+        {/* <Input
           onChange={e => props.setValue(e)}
           id="price"
           type="text"
           className="validate"
           label="Enter Price ($)"
           name={props.type}
-        />
+        /> */}
         {props.type === 'Stockx' ? (
           <Input
             onChange={e => props.stockxRate(e.target.value)}

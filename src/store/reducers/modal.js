@@ -12,7 +12,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.UPDATE_FORM:
-      // console.log('wowser');
       return {
         ...state,
         [action.input.option]: action.input.value
@@ -24,8 +23,6 @@ const reducer = (state = initialState, action) => {
         category: action.value
       };
     case actionTypes.RESET_MODAL:
-      console.log(state);
-
       return {
         ...state,
         buyPrice: '',
