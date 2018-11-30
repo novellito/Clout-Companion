@@ -27,8 +27,8 @@ export const calculateGrailed = amount => {
 };
 
 export const calculateStockx = (amount, rate) => {
-  const transactionFee = amount * rate;
-  const payProcFee = amount * 0.03;
+  const transactionFee = parseFloat(amount) * rate;
+  const payProcFee = parseFloat(amount) * 0.03;
   return {
     transactionFee,
     payProcFee,
