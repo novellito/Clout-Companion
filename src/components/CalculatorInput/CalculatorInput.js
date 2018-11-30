@@ -21,14 +21,6 @@ const CalculatorInput = props => {
           label="Enter Price ($)"
           name={props.type}
         />
-        {/* <Input
-          onChange={e => props.setValue(e)}
-          id="price"
-          type="text"
-          className="validate"
-          label="Enter Price ($)"
-          name={props.type}
-        /> */}
         {props.type === 'Stockx' ? (
           <Input
             onChange={e => props.stockxRate(e.target.value)}

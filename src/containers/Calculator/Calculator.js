@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
 import RowContainer from '../../hoc/rowContainer';
-import NumberFormat from 'react-number-format';
 import {
   calculatePaypal,
   calculateGrailed,
@@ -39,11 +38,8 @@ class Calculator extends Component {
     switch (name) {
       case 'Paypal':
         calculation = calculatePaypal(value);
-        console.log(value);
         break;
       case 'Grailed':
-        // console.log(value);
-
         calculation = calculateGrailed(value);
         break;
       default:
@@ -82,25 +78,7 @@ class Calculator extends Component {
         [name]: nextSibling
       }
     }); // Store reference for the shipping input field
-    // const parsedValue = e.target.value.replace(/^0+/, '').replace(/\s+/g, '');
-    const validate = this.verifyValueInput(value);
-    // if (validate === -1 && validate !== undefined) {
-    //   // invalid character input
-    //   this.setState({
-    //     [name + 'Result']: {
-    //       ...this.state[name + 'Result'],
-    //       status: -1
-    //     }
-    //   });
-    // } else if (validate === 0) {
-    //   // user entered a 0
-    //   this.setState({
-    //     [name + 'Result']: {
-    //       ...this.state[name + 'Result'],
-    //       status: 0
-    //     }
-    //   });
-    // } else {
+
     this.setState({
       [name + 'Result']: {
         ...this.state[name + 'Result'],
@@ -108,7 +86,6 @@ class Calculator extends Component {
       },
       [name + 'Shipping']: value
     });
-    // }
 
     if (value === '' || value === null) {
       // clear values
@@ -119,16 +96,6 @@ class Calculator extends Component {
         },
         [name + 'Shipping']: ''
       });
-    }
-  };
-
-  // verify that the input only contains numbers and 1 decimal
-  verifyValueInput = value => {
-    let regex = value.match(/^[0-9]\d*(\.{0,1})(\d{1,2})?$/);
-    if (regex === null) {
-      return -1;
-    } else if (parseFloat(regex[0]) <= 0) {
-      return 0;
     }
   };
 

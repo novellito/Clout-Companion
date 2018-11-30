@@ -2,10 +2,6 @@ import React from 'react';
 
 // Component to render the results of each calculator
 export const PaypalResult = props => {
-  let message = null;
-  if (props.result.status === -1) message = 'Please enter a valid number';
-  else if (props.result.status === 0)
-    message = 'Please enter a value greater than 0';
   return (
     <div>
       {message !== null ? (
@@ -37,10 +33,6 @@ export const PaypalResult = props => {
 };
 
 export const GrailedResult = props => {
-  let message = null;
-  if (props.result.status === -1) message = 'Please enter a valid number';
-  else if (props.result.status === 0)
-    message = 'Please enter a value greater than 0';
   return (
     <div>
       {message !== null ? (
@@ -57,15 +49,13 @@ export const GrailedResult = props => {
             You Receive: $<b>{props.result.receive}</b>
           </p>
           <p className="result">
-            Ask for: $<b>{props.result.askFor}</b> if you want ${
-              props.currValue
-            }
+            Ask for: $<b>{props.result.askFor}</b> if you want $
+            {props.currValue}
           </p>
           {props.shippingCost > 0 && props.checkBox ? (
             <p className="result">
-              Grand Total: $<b>
-                {(props.result.receive - props.shippingCost).toFixed(2)}
-              </b>
+              Grand Total: $
+              <b>{(props.result.receive - props.shippingCost).toFixed(2)}</b>
             </p>
           ) : (
             ''
@@ -76,10 +66,6 @@ export const GrailedResult = props => {
   );
 };
 export const StockXResult = props => {
-  let message = null;
-  if (props.result.status === -1) message = 'Please enter a valid number';
-  else if (props.result.status === 0)
-    message = 'Please enter a value greater than 0';
   return (
     <div>
       {message !== null ? (
@@ -96,9 +82,8 @@ export const StockXResult = props => {
             You Receive: $<b>{props.result.receive}</b>
           </p>
           <p className="result">
-            Ask for: <b>${props.result.askFor}</b> if you want ${
-              props.currValue
-            }
+            Ask for: <b>${props.result.askFor}</b> if you want $
+            {props.currValue}
           </p>
         </div>
       )}
