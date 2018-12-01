@@ -41,7 +41,8 @@ exports.sendToken = (req, res) => {
 exports.authorize = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
-    jwt.verify(token, process.env.jwtSecret);
+    const info = jwt.verify(token, process.env.jwtSecret);
+    res.body = info;
     next();
   } catch (err) {
     console.log(err.message);
@@ -55,7 +56,7 @@ exports.authorize = (req, res, next) => {
 
 // Let client know that the user's token is still valid
 exports.authRes = (req, res) => {
-  res.status(200).json({ loggedIn: true });
+  res.status(200).json({ loggedIn: true, username: res.body.username });
 };
 
 // function to receive request token from twitter

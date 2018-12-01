@@ -12,12 +12,36 @@ export class Login extends Component {
   componentDidMount() {
     // Redirect the user to the dashboard if they have a valid token
 
-    if (localStorage.length > 0) {
-      console.log(localStorage);
-      this.props.history.push('/dashboard');
-    } else {
-      this.props.onLogout();
-    }
+    // this.props.onLogout();
+    console.log('login.js islog ', this.props.isLog);
+    // if (this.props.isLog) {
+    //   // if (localStorage.length > 0) {
+    //   console.log(localStorage);
+    //   this.props.history.push('/dashboard');
+    // }
+    // if (localStorage.getItem('jwt')) {
+    //   const headers = {
+    //     Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    //     'Content-Type': 'application/json'
+    //   };
+
+    //   axios
+    //     .post('http://localhost:5000/api/login/authorize', null, {
+    //       headers
+    //     })
+    //     .then(res => {
+    //       console.log(res);
+    //       this.props.onLogin(localStorage.getItem('uid'), res.data.username);
+    //       this.props.history.push('/dashboard');
+
+    //       // this.setState({ items: [{ buyPrice: '50.00', sellPrice: '55.00' }] });
+    //     })
+    //     .catch(err => {
+    //       // The token is invalid - make the user login again
+    //       //   this.props.onRelog();
+    //       this.props.history.replace('/login');
+    //     });
+    // }
   }
 
   // call back function after fb button is clicked
@@ -83,6 +107,8 @@ export class Login extends Component {
     }
   };
   render() {
+    // localStorage.clear();
+
     const icon = (
       <Fragment>
         <i className="fa fa-twitter" />

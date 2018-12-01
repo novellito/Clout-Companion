@@ -1,8 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  isLoggedIn: localStorage.length > 0 ? true : false,
-  // isLoggedIn: false,
+  // isLoggedIn: localStorage.length > 0 ? true : false,
+  isLoggedIn: false,
   userId: null,
   user: null,
   needToRelog: false
@@ -19,6 +19,7 @@ const reducer = (state = initialState, action) => {
         needToRelog: false
       };
     case actionTypes.USER_LOGOUT:
+      localStorage.clear();
       return {
         ...state,
         isLoggedIn: false,

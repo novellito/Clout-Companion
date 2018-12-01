@@ -14,7 +14,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Calculator} />
           <Route exact path="/resources" component={Resources} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/login" component={authenticate(Login)} />
           <Route exact path="/dashboard" component={authenticate(Dashboard)} />
         </Switch>
       </div>
