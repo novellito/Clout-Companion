@@ -6,6 +6,7 @@ import { Table } from 'react-materialize';
 import './Dashboard.css';
 import axios from 'axios';
 import ModalContainer from './ModalContainer';
+
 export class Dashboard extends Component {
   state = {
     items: []
@@ -16,15 +17,16 @@ export class Dashboard extends Component {
   };
 
   componentDidMount() {
-    if (localStorage.length === 0) {
-      this.props.history.replace('/');
-    } else {
-      // user is accessing dashboard via the token in storage
-      // TODO: == get userinfo and store to redux state (later on)
-      if (!this.props.isLog) {
-        this.relog();
-      }
-    }
+    // if (localStorage.length === 0) {
+    //   this.props.history.replace('/');
+    // } else {
+    //   // user is accessing dashboard via the token in storage
+    //   // TODO: == get userinfo and store to redux state (later on)
+    //   if (!this.props.isLog) {
+    //     console.log('should have to login');
+    //     // this.relog();
+    //   }
+    // }
   }
 
   // function to check whether user's token is valid and redirect them to login page if it isn't
@@ -38,7 +40,7 @@ export class Dashboard extends Component {
       .post('http://localhost:5000/api/login/authorize', null, { headers })
       .then(res => {
         console.log(res);
-        // this.setState({ items: [{ buyPrice: '50.00', sellPrice: '55.00' }] });
+        this.setState({ items: [{ buyPrice: '50.00', sellPrice: '55.00' }] });
       })
       .catch(err => {
         // The token is invalid - make the user login again
@@ -74,17 +76,18 @@ export class Dashboard extends Component {
                     <thead>
                       <tr>
                         <th data-field="id">Item</th>
-                        <th data-field="buy-price">Buy Price</th>
-                        <th data-field="sell-price">Sell Price</th>
+                        <th data-field="buy-price">Buy Price ($)</th>
+                        <th data-field="sell-price">Sell Price ($)</th>
+                        <th data-field="item-profit">Item Profit ($)</th>
                       </tr>
                     </thead>
-
                     <tbody>
                       {this.state.items.map((item, index) => (
                         <tr key={index}>
                           <td>{item.name}</td>
                           <td>{item.buyPrice}</td>
                           <td>{item.sellPrice}</td>
+                          <td>{item.sellPrice - item.buyPrice}</td>
                         </tr>
                       ))}
                     </tbody>

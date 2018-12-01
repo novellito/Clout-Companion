@@ -5,6 +5,7 @@ import Resources from '../containers/Resources/Resources';
 // import Landing from '../components/Landing/Landing';
 import Dashboard from '../containers/Dashboard/Dashboard';
 import Login from '../containers/Login/Login';
+import authenticate from '../hoc/AuthComponent';
 
 class App extends Component {
   render() {
@@ -14,7 +15,7 @@ class App extends Component {
           <Route exact path="/" component={Calculator} />
           <Route exact path="/resources" component={Resources} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/dashboard" component={authenticate(Dashboard)} />
         </Switch>
       </div>
     );

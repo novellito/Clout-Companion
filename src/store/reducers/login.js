@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  isLoggedIn: false,
+  isLoggedIn: localStorage.length > 0 ? true : false,
+  // isLoggedIn: false,
   userId: null,
   user: null,
   needToRelog: false

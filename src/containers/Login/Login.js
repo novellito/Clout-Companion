@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/actionCreators';
-import AppNavbar from '../../components/AppNavbar/AppNavbar'
+import AppNavbar from '../../components/AppNavbar/AppNavbar';
 import axios from 'axios';
 import { Col, Row } from 'react-materialize';
 import FacebookLogin from 'react-facebook-login';
@@ -9,13 +9,14 @@ import TwitterLogin from 'react-twitter-auth';
 import './Login.css';
 
 export class Login extends Component {
-
   componentDidMount() {
     // Redirect the user to the dashboard if they have a valid token
+
     if (localStorage.length > 0) {
+      console.log(localStorage);
       this.props.history.push('/dashboard');
     } else {
-      this.props.onLogout()
+      this.props.onLogout();
     }
   }
 
@@ -82,10 +83,10 @@ export class Login extends Component {
     }
   };
   render() {
-
     const icon = (
       <Fragment>
-        <i className="fa fa-twitter" />Login with Twitter
+        <i className="fa fa-twitter" />
+        Login with Twitter
       </Fragment>
     );
     return (
@@ -93,11 +94,10 @@ export class Login extends Component {
         <AppNavbar />
         <Row>
           <Col m={6} l={4} s={12} offset="m3 l4">
-
             <div className="card log-card">
               <div className="card-content ">
                 <p className="log-3">Login</p>
-                {this.props.toRelog ? "Session expired please login again" : ''}
+                {this.props.toRelog ? 'Session expired please login again' : ''}
                 <div className="btn-container">
                   <div>
                     <TwitterLogin
@@ -143,8 +143,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: (userId, user) =>
-      dispatch(actionCreators.login(userId, user)),
+    onLogin: (userId, user) => dispatch(actionCreators.login(userId, user)),
     onLogout: () => dispatch(actionCreators.logout())
   };
 };
