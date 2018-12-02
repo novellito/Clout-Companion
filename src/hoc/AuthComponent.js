@@ -2,67 +2,63 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import * as actionCreators from '../store/actions/actionCreators';
+
 export default function(ChildComponent) {
   class Authenticate extends Component {
-    state = {
-      login: false
-    };
-
     componentDidMount() {
       this.checkLoginStatus();
     }
 
-    checkLoginStatus = () => {
-      let { isAuthenticated } = this.props;
-      // isAuthenticated if new login or if theres localstorage
-      //   isAuthenticated = localStorage.length > 0;
-
-      // this.props.onLogin()
-
-      console.log('is authenticated ', isAuthenticated);
-
+    // Check the login status of the user - there are 3 cases
+    // 1: The user visits /login for the first time/ has just logged out. In which case
+    // onLogout is triggered
+    // 2: The user is not authenticated so check if there is
+    // a valid jwt and do appropriate logic
+    checkLoginStatus = async () => {
+      const jwt = localStorage.getItem('jwt');
+      const { isAuthenticated, history } = this.props;
       if (
-        this.props.location.pathname === '/login' &&
-        localStorage.length === 0
+        localStorage.length === 0 &&
+        this.props.location.pathname === '/login'
       ) {
-        console.log('state login');
-        this.setState({ login: true });
+        console.log('logout');
+        this.props.onLogout();
       } else if (!isAuthenticated) {
-        console.log('not authenticated..checking jwt');
+        //   } else if (!isAuthenticated && localStorage.getItem('jwt')) {
+        console.log('check jwt');
+        if (!jwt) {
+          history.replace('/login');
+          return;
+        }
+        const headers = {
+          Authorization: `Bearer ${jwt}`,
+          'Content-Type': 'application/json'
+        };
 
-        if (localStorage.getItem('jwt')) {
-          const headers = {
-            Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-            'Content-Type': 'application/json'
-          };
-
-          axios
-            .post('http://localhost:5000/api/login/authorize', null, {
+        try {
+          const { data } = await axios.post(
+            'http://localhost:5000/api/login/authorize',
+            null,
+            {
               headers
-            })
-            .then(res => {
-              console.log(res);
-              this.props.onLogin(
-                localStorage.getItem('uid'),
-                res.data.username
-              );
-              this.props.history.push('/dashboard');
-            })
-            .catch(err => {
-              // The token is invalid - make the user login again
-              //   this.props.onRelog();
-              this.props.history.replace('/login');
-            });
-        } else {
-          this.props.history.replace('/login');
+            }
+          );
+          this.props.onLogin(localStorage.getItem('uid'), data.username);
+        } catch (err) {
+          // the token is invalid
+          history.replace('/login');
+          this.props.onLogout();
         }
       }
     };
 
     render() {
+      // render login only if there is no local localStorage
       return (
         <div>
-          {this.props.isAuthenticated || this.state.login ? (
+          {this.props.isAuthenticated ||
+          (this.props.location.pathname === '/login' &&
+            localStorage.length === 0) ? (
             <ChildComponent {...this.props} />
           ) : null}
         </div>
@@ -85,8 +81,3 @@ export default function(ChildComponent) {
     mapDispatchToProps
   )(Authenticate);
 }
-
-export const logouts = () => {
-  console.log('logging out');
-  //   this.props.onLogout();
-};

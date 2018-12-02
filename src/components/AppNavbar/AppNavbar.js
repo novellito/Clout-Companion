@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar, NavItem } from 'react-materialize';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/ccLogo.png';
-import { logouts } from '../../hoc/AuthComponent';
 import './AppNavbar.css';
 
 export const AppNavbar = props => {

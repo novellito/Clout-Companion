@@ -19,7 +19,6 @@ const reducer = (state = initialState, action) => {
         needToRelog: false
       };
     case actionTypes.USER_LOGOUT:
-      localStorage.clear();
       return {
         ...state,
         isLoggedIn: false,

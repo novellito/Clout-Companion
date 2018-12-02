@@ -10,7 +10,6 @@ export class ModalContainer extends Component {
   }
 
   componentWillUnmount() {
-    console.log('unmount');
     this.props.onResetModal();
   }
 

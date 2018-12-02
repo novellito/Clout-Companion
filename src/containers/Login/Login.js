@@ -10,38 +10,9 @@ import './Login.css';
 
 export class Login extends Component {
   componentDidMount() {
-    // Redirect the user to the dashboard if they have a valid token
-
-    // this.props.onLogout();
+    // Redirect the user to the dashboard if logged in
     console.log('login.js islog ', this.props.isLog);
-    // if (this.props.isLog) {
-    //   // if (localStorage.length > 0) {
-    //   console.log(localStorage);
-    //   this.props.history.push('/dashboard');
-    // }
-    // if (localStorage.getItem('jwt')) {
-    //   const headers = {
-    //     Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-    //     'Content-Type': 'application/json'
-    //   };
-
-    //   axios
-    //     .post('http://localhost:5000/api/login/authorize', null, {
-    //       headers
-    //     })
-    //     .then(res => {
-    //       console.log(res);
-    //       this.props.onLogin(localStorage.getItem('uid'), res.data.username);
-    //       this.props.history.push('/dashboard');
-
-    //       // this.setState({ items: [{ buyPrice: '50.00', sellPrice: '55.00' }] });
-    //     })
-    //     .catch(err => {
-    //       // The token is invalid - make the user login again
-    //       //   this.props.onRelog();
-    //       this.props.history.replace('/login');
-    //     });
-    // }
+    if (this.props.isLog) this.props.history.push('/dashboard');
   }
 
   // call back function after fb button is clicked
@@ -61,6 +32,7 @@ export class Login extends Component {
           JSON.stringify({ fb: true, username: res.name, id: res.userID }),
           { headers }
         );
+        console.log(axiosPost);
         localStorage.setItem('jwt', axiosPost.headers['x-auth-token']);
         localStorage.setItem('uid', axiosPost.data.uid);
         this.props.history.push('/dashboard');
@@ -82,7 +54,7 @@ export class Login extends Component {
       localStorage.setItem('jwt', token);
       localStorage.setItem('uid', userId);
       this.props.onLogin(userId, username);
-      this.props.history.push('/dashboard');
+      this.props.history.push('/dashboard'); // maybe move this to reducer
     }
   };
 
@@ -107,8 +79,6 @@ export class Login extends Component {
     }
   };
   render() {
-    // localStorage.clear();
-
     const icon = (
       <Fragment>
         <i className="fa fa-twitter" />
