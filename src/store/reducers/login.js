@@ -8,7 +8,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.USER_LOGIN:
+    case actionTypes.SET_USER:
       return {
         ...state,
         isLoggedIn: true,

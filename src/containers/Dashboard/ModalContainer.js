@@ -5,10 +5,6 @@ import { Modal, Input, Row, Button } from 'react-materialize';
 import './Dashboard.css';
 import NumberFormat from 'react-number-format';
 export class ModalContainer extends Component {
-  componentDidMount() {
-    console.log('hello');
-  }
-
   componentWillUnmount() {
     this.props.onResetModal();
   }

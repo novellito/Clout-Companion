@@ -11,11 +11,11 @@ describe('Login Reducer', () => {
     const user = 'test user';
 
     const expectedAction = {
-      type: actionTypes.USER_LOGIN,
+      type: actionTypes.SET_USER,
       userId: '1234',
       user: 'test user'
     };
-    expect(actionCreators.login(userId, user)).toEqual(expectedAction);
+    expect(actionCreators.setUser(userId, user)).toEqual(expectedAction);
   });
 
   it('should reset the users login information', () => {

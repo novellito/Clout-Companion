@@ -21,10 +21,8 @@ export default function(ChildComponent) {
         localStorage.length === 0 &&
         this.props.location.pathname === '/login'
       ) {
-        console.log('logout');
         this.props.onLogout();
       } else if (!isAuthenticated) {
-        //   } else if (!isAuthenticated && localStorage.getItem('jwt')) {
         console.log('check jwt');
         if (!jwt) {
           history.replace('/login');
@@ -43,7 +41,7 @@ export default function(ChildComponent) {
               headers
             }
           );
-          this.props.onLogin(localStorage.getItem('uid'), data.username);
+          this.props.setUser(localStorage.getItem('uid'), data.username);
         } catch (err) {
           // the token is invalid
           history.replace('/login');
@@ -72,7 +70,7 @@ export default function(ChildComponent) {
   };
 
   const mapDispatchToProps = dispatch => ({
-    onLogin: (userId, user) => dispatch(actionCreators.login(userId, user)),
+    setUser: (userId, user) => dispatch(actionCreators.setUser(userId, user)),
     onLogout: () => dispatch(actionCreators.logout())
   });
 

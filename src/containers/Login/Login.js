@@ -10,18 +10,16 @@ import './Login.css';
 
 export class Login extends Component {
   componentDidMount() {
-    // Redirect the user to the dashboard if logged in
-    console.log('login.js islog ', this.props.isLog);
     if (this.props.isLog) this.props.history.push('/dashboard');
   }
 
   // call back function after fb button is clicked
   // Redirects user if they login
   onFBLogin = async res => {
-    if (res.status === undefined && !res.name) {
+    if (res.status === undefined || !res.name) {
       console.log('user not authenticated');
     } else {
-      this.props.onLogin(res.userID, res.name);
+      this.props.setUser(res.userID, res.name);
 
       const headers = {
         'Content-Type': 'application/json'
@@ -53,7 +51,7 @@ export class Login extends Component {
     } else {
       localStorage.setItem('jwt', token);
       localStorage.setItem('uid', userId);
-      this.props.onLogin(userId, username);
+      this.props.setUser(userId, username);
       this.props.history.push('/dashboard'); // maybe move this to reducer
     }
   };
@@ -124,8 +122,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: (userId, user) => dispatch(actionCreators.login(userId, user)),
-    onLogout: () => dispatch(actionCreators.logout())
+    setUser: (userId, user) => dispatch(actionCreators.setUser(userId, user))
   };
 };
 

@@ -42,7 +42,6 @@ exports.authorize = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
     const info = jwt.verify(token, process.env.jwtSecret);
-    // console.log(info);
     res.body = info;
     next();
   } catch (err) {
