@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../../store/actions/actionCreators';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
 import { Table } from 'react-materialize';
 import './Dashboard.css';
-import axios from 'axios';
 import ModalContainer from './ModalContainer';
 
 export class Dashboard extends Component {
@@ -14,39 +12,6 @@ export class Dashboard extends Component {
 
   addItemToList = item => {
     this.setState({ items: [...this.state.items, item] });
-  };
-
-  componentDidMount() {
-    // if (localStorage.length === 0) {
-    //   this.props.history.replace('/');
-    // } else {
-    //   // user is accessing dashboard via the token in storage
-    //   // TODO: == get userinfo and store to redux state (later on)
-    //   if (!this.props.isLog) {
-    //     console.log('should have to login');
-    //     // this.relog();
-    //   }
-    // }
-  }
-
-  // function to check whether user's token is valid and redirect them to login page if it isn't
-  relog = () => {
-    console.log('relog');
-    const headers = {
-      Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-      'Content-Type': 'application/json'
-    };
-    axios
-      .post('http://localhost:5000/api/login/authorize', null, { headers })
-      .then(res => {
-        console.log(res);
-        this.setState({ items: [{ buyPrice: '50.00', sellPrice: '55.00' }] });
-      })
-      .catch(err => {
-        // The token is invalid - make the user login again
-        this.props.onRelog();
-        this.props.history.replace('/login');
-      });
   };
 
   render() {
@@ -138,16 +103,7 @@ const mapStateToProps = state => {
   return {
     isLog: state.login.isLoggedIn,
     uid: state.login.userId
-    //modal info here
   };
 };
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogout: () => dispatch(actionCreators.logout()),
-    onRelog: () => dispatch(actionCreators.relog())
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard);
+
+export default connect(mapStateToProps)(Dashboard);

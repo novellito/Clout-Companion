@@ -13,11 +13,6 @@ export const logout = () => {
     type: actionTypes.USER_LOGOUT
   };
 };
-export const relog = () => {
-  return {
-    type: actionTypes.USER_RELOG
-  };
-};
 
 export const updateForm = input => {
   return {

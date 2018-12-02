@@ -63,21 +63,6 @@ export class Login extends Component {
     console.log('user not authenticated');
   };
 
-  test = async () => {
-    const headers = {
-      Authorization: `Bearer ${this.state.tempTok}`,
-      'Content-Type': 'application/json'
-    };
-    try {
-      let response = await axios.post(
-        'http://localhost:5000/api/login/authorize',
-        { headers }
-      );
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-  };
   render() {
     const icon = (
       <Fragment>
