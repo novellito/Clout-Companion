@@ -10,6 +10,16 @@ export class ModalContainer extends Component {
   }
 
   render() {
+    const {
+      name,
+      buyPrice,
+      sellPrice,
+      sellDate,
+      buyDate,
+      trigger,
+      category
+    } = this.props;
+
     return (
       <Modal
         id="Dash-Modal"
@@ -19,20 +29,31 @@ export class ModalContainer extends Component {
               modal="close"
               waves="light"
               onClick={() =>
-                this.props.addToList({
-                  name: this.props.name,
-                  buyPrice: this.props.buyPrice,
-                  sellPrice: this.props.sellPrice,
-                  sellDate: this.props.sellDate,
-                  buyDate: this.props.buyDate
-                })
+                !this.props.editingIndex && this.props.editingIndex !== 0
+                  ? this.props.addToList({
+                      name,
+                      buyPrice,
+                      sellPrice,
+                      sellDate,
+                      buyDate
+                    })
+                  : this.props.updateItem(
+                      {
+                        name,
+                        buyPrice,
+                        sellPrice,
+                        sellDate,
+                        buyDate
+                      },
+                      this.props.editingIndex
+                    )
               }
               disabled={
-                this.props.name === '' ||
-                this.props.buyPrice === '' ||
-                this.props.sellPrice === '' ||
-                this.props.buyDate === '' ||
-                this.props.sellDate === ''
+                name === '' ||
+                buyPrice === '' ||
+                sellPrice === '' ||
+                buyDate === '' ||
+                sellDate === ''
               }
               className="btn-primary"
             >
@@ -43,19 +64,18 @@ export class ModalContainer extends Component {
             </Button>
           </div>
         }
-        // open={true}
         modalOptions={{
           complete: () => this.props.onResetModal()
         }}
         header="Add a New Item"
-        trigger={<i className="fa fa-2x fa-plus-circle" />}
+        trigger={trigger}
       >
         <Row>
           <div className="categories">
-            <p>Category: {this.props.category}</p>
+            <p>Category: {category}</p>
             <i
               style={{
-                color: this.props.category === 'shoes' ? '#ff3547b3' : 'white'
+                color: category === 'shoes' ? '#ff3547b3' : 'white'
               }}
               onClick={e => this.props.onSetCategory(e.target.id)}
               id="shoes"
@@ -63,7 +83,7 @@ export class ModalContainer extends Component {
             />
             <i
               style={{
-                color: this.props.category === 'clothes' ? '#ff3547b3' : 'white'
+                color: category === 'clothes' ? '#ff3547b3' : 'white'
               }}
               onClick={e => this.props.onSetCategory(e.target.id)}
               id="clothes"
@@ -71,8 +91,7 @@ export class ModalContainer extends Component {
             />
             <i
               style={{
-                color:
-                  this.props.category === 'accessories' ? '#ff3547b3' : 'white'
+                color: category === 'accessories' ? '#ff3547b3' : 'white'
               }}
               onClick={e => this.props.onSetCategory(e.target.id)}
               id="accessories"
@@ -80,7 +99,7 @@ export class ModalContainer extends Component {
             />
             <i
               style={{
-                color: this.props.category === 'other' ? '#ff3547b3' : 'white'
+                color: category === 'other' ? '#ff3547b3' : 'white'
               }}
               onClick={e => this.props.onSetCategory(e.target.id)}
               id="other"
@@ -92,9 +111,10 @@ export class ModalContainer extends Component {
               s={6}
               maxLength="30"
               type="text"
+              placeholder={name ? name : null}
               label="Name"
               name="name"
-              value={this.props.name}
+              value={name}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'name',
@@ -108,6 +128,7 @@ export class ModalContainer extends Component {
               label="Bought At ($)"
               customInput={Input}
               s={6}
+              value={buyPrice}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'buyPrice',
@@ -121,6 +142,7 @@ export class ModalContainer extends Component {
               label="Sold At ($)"
               customInput={Input}
               s={6}
+              value={sellPrice}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'sellPrice',
@@ -132,6 +154,7 @@ export class ModalContainer extends Component {
               s={6}
               type="date"
               name="buyDate"
+              // value={new Date(buyDate[0], buyDate[1], buyDate[2])}
               date={new Date()}
               label="Buy Date"
               options={{
@@ -157,17 +180,14 @@ export class ModalContainer extends Component {
               type="date"
               name="sellDate"
               label="Sell Date"
+              // value={new Date(sellDate[0], sellDate[1], sellDate[2])}
               options={{
                 selectMonths: true,
                 selectYears: true,
                 defaultDate: null,
                 setDefaultDate: true,
-                format: 'mm/dd/yyyy',
-                min: new Date(
-                  this.props.sellDate[0],
-                  this.props.sellDate[1],
-                  this.props.sellDate[2]
-                )
+                format: 'mm/dd/yyyy'
+                // min: new Date(sellDate[0], sellDate[1], sellDate[2])
               }}
               onChange={e =>
                 this.props.onUpdateForm({
@@ -190,7 +210,8 @@ const mapStateToProps = state => {
     sellPrice: state.modal.sellPrice,
     buyDate: state.modal.buyDate,
     sellDate: state.modal.sellDate,
-    category: state.modal.category
+    category: state.modal.category,
+    editingIndex: state.modal.editingIndex
   };
 };
 
@@ -198,7 +219,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onUpdateForm: input => dispatch(actionCreators.updateForm(input)),
     onSetCategory: input => dispatch(actionCreators.setCategory(input)),
-    onResetModal: () => dispatch(actionCreators.resetModal())
+    onResetModal: () => dispatch(actionCreators.resetModal()),
+    onSetEditingItem: input => dispatch(actionCreators.setItemToEdit(input))
   };
 };
 

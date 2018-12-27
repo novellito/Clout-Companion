@@ -32,3 +32,10 @@ export const resetModal = () => {
     type: actionTypes.RESET_MODAL
   };
 };
+export const setItemToEdit = (value, index) => {
+  return {
+    type: actionTypes.SET_ITEM_EDIT,
+    value,
+    index
+  };
+};

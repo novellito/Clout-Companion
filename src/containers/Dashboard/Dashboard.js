@@ -4,14 +4,34 @@ import AppNavbar from '../../components/AppNavbar/AppNavbar';
 import { Table } from 'react-materialize';
 import './Dashboard.css';
 import ModalContainer from './ModalContainer';
+import * as actionCreators from '../../store/actions/actionCreators';
 
 export class Dashboard extends Component {
   state = {
     items: []
+    // items: [
+    //   {
+    //     category: 'clothes',
+    //     name: 'poop',
+    //     buyPrice: '300',
+    //     sellPrice: '400',
+    //     buyDate: ['12', '17', '2018'],
+    //     sellDate: ['12', '20', '2018']
+    //   }
+    // ]
+    // editing: false
   };
 
   addItemToList = item => {
     this.setState({ items: [...this.state.items, item] });
+  };
+
+  updateItem = (item, index) => {
+    const newState = this.state.items;
+    newState[index] = item;
+    this.setState({
+      items: newState
+    });
   };
 
   render() {
@@ -48,7 +68,12 @@ export class Dashboard extends Component {
                     </thead>
                     <tbody>
                       {this.state.items.map((item, index) => (
-                        <tr key={index}>
+                        <tr
+                          key={index}
+                          onClick={() =>
+                            this.props.onSetEditingItem(item, index)
+                          }
+                        >
                           <td>{item.name}</td>
                           <td>{item.buyPrice}</td>
                           <td>{item.sellPrice}</td>
@@ -71,13 +96,18 @@ export class Dashboard extends Component {
                       )
                       .reduce((acc, cv) => acc + cv)}
                 </div>
-                {/* <div className="item-opts"> */}
-                <ModalContainer addToList={this.addItemToList} />
+                <ModalContainer
+                  addToList={this.addItemToList}
+                  updateItem={(item, index) => this.updateItem(item, index)}
+                  trigger={
+                    this.props.editingIndex || this.props.editingIndex === 0 ? (
+                      <i className="fa fa-2x fa-edit" />
+                    ) : (
+                      <i className="fa fa-2x fa-plus-circle" />
+                    )
+                  }
+                />
                 <i className="fa fa-2x fa-download" />
-                <i className="fa fa-2x fa-edit" />
-
-                {/* <div className="net-profit h3">$200</div> */}
-                {/* </div> */}
               </div>
             </div>
           </div>
@@ -102,8 +132,18 @@ export class Dashboard extends Component {
 const mapStateToProps = state => {
   return {
     isLog: state.login.isLoggedIn,
-    uid: state.login.userId
+    uid: state.login.userId,
+    editingIndex: state.modal.editingIndex
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onSetEditingItem: (input, index) =>
+      dispatch(actionCreators.setItemToEdit(input, index))
   };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);

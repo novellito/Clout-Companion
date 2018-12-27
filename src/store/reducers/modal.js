@@ -6,7 +6,8 @@ const initialState = {
   sellPrice: '',
   buyDate: '',
   sellDate: '',
-  category: 'shoes'
+  category: 'shoes',
+  editingIndex: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,7 +31,19 @@ const reducer = (state = initialState, action) => {
         buyDate: '',
         sellDate: '',
         name: '',
-        category: 'shoes'
+        category: 'shoes',
+        editingIndex: null
+      };
+    case actionTypes.SET_ITEM_EDIT:
+      return {
+        ...state,
+        editingIndex: action.index,
+        buyPrice: action.value.buyPrice,
+        sellPrice: action.value.sellPrice,
+        buyDate: action.value.buyDate,
+        sellDate: action.value.sellDate,
+        name: action.value.name,
+        category: action.value.category
       };
 
     default:
