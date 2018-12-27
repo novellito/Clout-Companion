@@ -45,10 +45,16 @@
   .wrapper .dash-card {
     background-color: #424242;
     border-bottom: 1px solid #303030; }
+  .wrapper .item:hover {
+    background: white;
+    color: black;
+    cursor: pointer; }
   .wrapper .item-opts {
     display: flex; }
     .wrapper .item-opts :first-child {
       margin: 0 auto; }
+    .wrapper .item-opts .net-profit {
+      color: white; }
     .wrapper .item-opts i {
       margin: 0 10px;
       float: right; }

@@ -111,7 +111,6 @@ export class ModalContainer extends Component {
               s={6}
               maxLength="30"
               type="text"
-              placeholder={name ? name : null}
               label="Name"
               name="name"
               value={name}

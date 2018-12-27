@@ -26,11 +26,23 @@ export class Dashboard extends Component {
     this.setState({ items: [...this.state.items, item] });
   };
 
-  updateItem = (item, index) => {
-    const newState = this.state.items;
-    newState[index] = item;
+  deleteItem = () => {
+    console.log('delete');
+    console.log(this.props.editingIndex);
+    const newItems = this.state.items;
+    newItems.splice(this.props.editingIndex, 1);
+    console.log(newItems);
     this.setState({
-      items: newState
+      items: newItems
+    });
+    this.props.cleanupItems(); // reset all the fields
+  };
+
+  updateItem = (item, index) => {
+    const newItems = this.state.items;
+    newItems[index] = item;
+    this.setState({
+      items: newItems
     });
   };
 
@@ -73,11 +85,15 @@ export class Dashboard extends Component {
                           onClick={() =>
                             this.props.onSetEditingItem(item, index)
                           }
+                          className="item"
                         >
                           <td>{item.name}</td>
                           <td>{item.buyPrice}</td>
                           <td>{item.sellPrice}</td>
-                          <td>{item.sellPrice - item.buyPrice}</td>
+                          <td>
+                            {parseFloat(item.sellPrice.replace(/,/g, '')) -
+                              parseFloat(item.buyPrice.replace(/,/g, ''))}
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -94,7 +110,7 @@ export class Dashboard extends Component {
                           parseFloat(elem.sellPrice.replace(/,/g, '')) -
                           parseFloat(elem.buyPrice.replace(/,/g, ''))
                       )
-                      .reduce((acc, cv) => acc + cv)}
+                      .reduce((acc, cv) => acc + cv, 0)}
                 </div>
                 <ModalContainer
                   addToList={this.addItemToList}
@@ -107,6 +123,11 @@ export class Dashboard extends Component {
                     )
                   }
                 />
+                {this.props.editingIndex || this.props.editingIndex === 0 ? (
+                  <i className="fa fa-2x fa-trash" onClick={this.deleteItem} />
+                ) : (
+                  ''
+                )}
                 <i className="fa fa-2x fa-download" />
               </div>
             </div>
@@ -138,6 +159,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
+    cleanupItems: () => dispatch(actionCreators.resetModal()),
     onSetEditingItem: (input, index) =>
       dispatch(actionCreators.setItemToEdit(input, index))
   };

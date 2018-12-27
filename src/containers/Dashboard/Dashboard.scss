@@ -59,6 +59,13 @@
     background-color: #424242;
     border-bottom: 1px solid #303030;
   }
+  .item {
+    &:hover {
+      background: white;
+      color: black;
+      cursor: pointer;
+    }
+  }
   .item-opts {
     display: flex;
     :first-child {
@@ -68,6 +75,7 @@
     }
     .net-profit {
       // position: absolute;
+      color: white;
     }
     i {
       margin: 0 10px;
