@@ -60,6 +60,8 @@
       float: right; }
       .wrapper .item-opts i.fa-plus-circle {
         margin-right: 5px; }
+      .wrapper .item-opts i.fa-trash {
+        margin-left: 20px; }
 
 @media (min-width: 1091px) {
   .wrapper {

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-const UserSchema = mongoose.Schema({
+const UserSchema = new Schema({
   username: {
     type: String,
     require: true
@@ -10,7 +9,14 @@ const UserSchema = mongoose.Schema({
   userId: {
     type: String,
     required: true
-  }
+  },
+
+  items: [
+    {
+      type: Schema.Types.Object,
+      ref: 'Item'
+    }
+  ]
 
   // update for notes & items
 });

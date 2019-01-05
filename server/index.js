@@ -5,7 +5,7 @@ const cors = require('cors');
 const items = require('./routes/items');
 const login = require('./routes/login');
 const ItemsModel = require('./models/item');
-
+const user = require('./routes/user');
 require('dotenv').config();
 require('./config/passport')();
 const app = express();
@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', items);
 app.use('/api/login', login);
+app.use('/api/user', user);
 
 // Index Route
 app.get('/', (req, res) => res.redirect('http://localhost:3000/'));

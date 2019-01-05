@@ -27,11 +27,9 @@ export class Dashboard extends Component {
   };
 
   deleteItem = () => {
-    console.log('delete');
     console.log(this.props.editingIndex);
     const newItems = this.state.items;
     newItems.splice(this.props.editingIndex, 1);
-    console.log(newItems);
     this.setState({
       items: newItems
     });
