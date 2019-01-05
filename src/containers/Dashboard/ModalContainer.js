@@ -9,6 +9,10 @@ export class ModalContainer extends Component {
     this.props.onResetModal();
   }
 
+  shouldComponentUpdate() {
+    return true;
+  }
+
   render() {
     const {
       name,
@@ -20,6 +24,7 @@ export class ModalContainer extends Component {
       category
     } = this.props;
 
+    // console.log('render');
     return (
       <Modal
         id="Dash-Modal"
@@ -57,7 +62,9 @@ export class ModalContainer extends Component {
               }
               className="btn-primary"
             >
-              Add Item
+              {this.props.editingIndex || this.props.editingIndex === 0
+                ? 'Update Item'
+                : 'Add Item'}
             </Button>
             <Button flat modal="close" waves="light">
               dismiss
@@ -149,23 +156,36 @@ export class ModalContainer extends Component {
                 })
               }
             />
+            {buyDate.length > 0 ? <React.Fragment /> : ''}
             <Input
               s={6}
               type="date"
               name="buyDate"
-              // value={new Date(buyDate[0], buyDate[1], buyDate[2])}
-              date={new Date()}
+              // value={
+              // }
+              // date={
+              //   buyDate.length > 0
+              //     ? new Date(buyDate[0], buyDate[1], buyDate[2])
+              //     : null
+              // }
+              // date={new Date()}
               label="Buy Date"
               options={{
                 selectMonths: true,
                 selectYears: true,
-                defaultDate: null,
-                setDefaultDate: true,
-                format: 'mm/dd/yyyy',
-                max: new Date()
-                // onClose: () => {
-                //   this.set(select, ['']);
-                // }
+                // defaultDate:
+                //   buyDate.length > 0
+                //     ? new Date(buyDate[0], buyDate[1], buyDate[2])
+                //     : null,
+                // onOpen: function() {
+                //   console.log(this);
+                //   this.clear();
+                // },
+                onRender: function() {},
+                onStart: function() {},
+                // setDefaultDate: true,
+                format: 'mm/dd/yyyy'
+                // max: new Date(),
               }}
               onChange={e =>
                 this.props.onUpdateForm({
@@ -188,6 +208,7 @@ export class ModalContainer extends Component {
                 format: 'mm/dd/yyyy'
                 // min: new Date(sellDate[0], sellDate[1], sellDate[2])
               }}
+              autoclose={'true'}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'sellDate',
