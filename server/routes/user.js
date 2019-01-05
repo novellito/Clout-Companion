@@ -7,5 +7,6 @@ router.get('/', function(req, res) {
   res.send('helli');
 });
 router.post('/', controller.insertItem);
+router.post('/updateItem', controller.updateItem); // put?
 
 module.exports = router;
