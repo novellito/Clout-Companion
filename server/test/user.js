@@ -1,10 +1,10 @@
 const chai = require('chai');
 const expect = chai.expect;
 const jwt = require('jsonwebtoken');
-const httpMocks = require('node-mocks-http');
 const app = require('../index');
 const UserModel = require('../models/user');
 const ItemsModel = require('../models/item');
+
 describe('User Suite', function() {
   const userInfo = {
     id: 1234,
@@ -111,6 +111,16 @@ describe('User Suite', function() {
       .request(app)
       .put(`/api/user/updateItem`)
       .send({ id: newUser.items[0], payload: { name: 'updated shoe' } })
+      .set('Authorization', `Bearer ${token}`)
+      .then(res => {
+        expect(res.statusCode).to.equal(200);
+      });
+  });
+  it('Should delete an item', () => {
+    return chai
+      .request(app)
+      .delete(`/api/user/deleteItem`)
+      .send({ userId: newUser.userId, itemId: newUser.items[0] })
       .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.statusCode).to.equal(200);

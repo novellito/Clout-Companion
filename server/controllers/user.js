@@ -30,7 +30,6 @@ UserController.insertItem = async (req, res) => {
 };
 
 UserController.updateItem = async (req, res) => {
-  console.log(req.body.payload);
   try {
     const item = await ItemsModel.update(
       { _id: req.body.id },
@@ -44,20 +43,16 @@ UserController.updateItem = async (req, res) => {
 };
 UserController.deleteItem = async (req, res) => {
   try {
-    const user = await UserModel.update(
+    // Remove id from users items array
+    await UserModel.update(
       {
-        userId: '263983797'
+        userId: req.body.userId
       },
-      { $pull: { items: req.body.id } }
+      { $pull: { items: req.body.itemId } }
     );
 
-    const item = await ItemsModel.remove(
-      //   { _id: '5c317b9df6d90e83e75b4278' }
-      { _id: req.body.id }
-      //   { new: true } // return the updated document bc mongoose defaults to returning og one
-    ).exec();
-    // console.log(item);
-    // item.remove(263983797);
+    // Remove from Items collection
+    const item = await ItemsModel.remove({ _id: req.body.itemId }).exec();
     res.status(200).send(JSON.stringify(item));
   } catch (err) {
     console.log(err);

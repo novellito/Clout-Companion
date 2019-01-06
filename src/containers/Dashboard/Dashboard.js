@@ -54,8 +54,7 @@ export class Dashboard extends Component {
 
   updateItem = async (item, index) => {
     try {
-      console.log(item);
-      const { data } = await axios.put(
+      await axios.put(
         '/api/user/updateItem',
         { payload: item, id: this.state.items[index]._id },
         {
