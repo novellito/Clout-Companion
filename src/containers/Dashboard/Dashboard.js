@@ -52,12 +52,26 @@ export class Dashboard extends Component {
     this.props.cleanupItems(); // reset all the fields
   };
 
-  updateItem = (item, index) => {
-    const newItems = this.state.items;
-    newItems[index] = item;
-    this.setState({
-      items: newItems
-    });
+  updateItem = async (item, index) => {
+    try {
+      console.log(item);
+      const { data } = await axios.put(
+        '/api/user/updateItem',
+        { payload: item, id: this.state.items[index]._id },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+          }
+        }
+      );
+      const newItems = [...this.state.items];
+      newItems[index] = item;
+      this.setState({
+        items: newItems
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {

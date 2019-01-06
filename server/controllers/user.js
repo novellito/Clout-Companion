@@ -23,22 +23,45 @@ UserController.insertItem = async (req, res) => {
     )
       .populate('items')
       .exec();
-    return res.status(200).send(JSON.stringify(item));
+    res.status(200).send(JSON.stringify(item));
   } catch (err) {
     res.status(500).send(JSON.stringify({ message: err }));
   }
 };
 
 UserController.updateItem = async (req, res) => {
+  console.log(req.body.payload);
   try {
-    const user = await ItemsModel.update(
+    const item = await ItemsModel.update(
       { _id: req.body.id },
       req.body.payload,
       { new: true } // return the updated document bc mongoose defaults to returning og one
     ).exec();
-    return res.status(200).send(JSON.stringify(user));
+    res.status(200).send(JSON.stringify(item));
   } catch (err) {
-    res.send(500, { message: err });
+    res.status(500).send(JSON.stringify({ message: err }));
+  }
+};
+UserController.deleteItem = async (req, res) => {
+  try {
+    const user = await UserModel.update(
+      {
+        userId: '263983797'
+      },
+      { $pull: { items: req.body.id } }
+    );
+
+    const item = await ItemsModel.remove(
+      //   { _id: '5c317b9df6d90e83e75b4278' }
+      { _id: req.body.id }
+      //   { new: true } // return the updated document bc mongoose defaults to returning og one
+    ).exec();
+    // console.log(item);
+    // item.remove(263983797);
+    res.status(200).send(JSON.stringify(item));
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(JSON.stringify({ message: err }));
   }
 };
 

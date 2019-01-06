@@ -6,5 +6,7 @@ let router = express.Router();
 router.get('/:id', authorize, controller.getUserInfo);
 router.post('/', authorize, controller.insertItem);
 router.put('/updateItem', authorize, controller.updateItem);
+router.delete('/deleteItem', controller.deleteItem);
+// router.delete('/deleteItem', authorize, controller.deleteItem);
 
 module.exports = router;
