@@ -26,7 +26,7 @@ export class Login extends Component {
       };
       try {
         const axiosPost = await axios.post(
-          'http://localhost:3000/api/login/facebook',
+          '/api/login/facebook',
           JSON.stringify({ fb: true, username: res.name, id: res.userID }),
           { headers }
         );
@@ -80,10 +80,10 @@ export class Login extends Component {
                 <div className="btn-container">
                   <div>
                     <TwitterLogin
-                      loginUrl="http://localhost:5000/api/login/auth/twitter"
+                      loginUrl="/api/login/auth/twitter"
                       onFailure={this.onTwitFail}
                       onSuccess={this.onTwitSuccess}
-                      requestTokenUrl="http://localhost:5000/api/login/auth/twitter/reverse"
+                      requestTokenUrl="/api/login/auth/twitter/reverse"
                       className="twit-btn"
                       showIcon={false}
                       children={icon}

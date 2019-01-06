@@ -3,22 +3,19 @@ const ItemsModel = require('../models/item');
 let UserController = {};
 
 UserController.getUserInfo = async (req, res) => {
-  const user = await UserModel.findOne({ userId: req.params.id });
+  const user = await UserModel.findOne({ userId: req.params.id }).populate(
+    'items'
+  );
+  user
+    ? res.status(200).send(JSON.stringify(user))
+    : // ? res.status(200).send(JSON.stringify(user.items))
+      res.status(500).send({ message: 'error retrieving user info' });
   res.send(user);
 };
 
 UserController.insertItem = async (req, res) => {
-  const z = {
-    name: 'kith',
-    buyPrice: '240',
-    sellPrice: '500',
-    buyDate: ['01', '21', '2019'],
-    sellDate: ['01', '31', '2019']
-  };
   try {
-    // Z -- will be coming from req.body
-    // TODO: will need to pass in the new items ObjectId here~
-    const newItem = new ItemsModel(z);
+    const newItem = new ItemsModel(req.body.item);
     const item = await newItem.save();
 
     const user = await UserModel.findOneAndUpdate(
@@ -28,9 +25,8 @@ UserController.insertItem = async (req, res) => {
     )
       .populate('items')
       .exec();
-    return res.status(200).send(JSON.stringify(user));
+    return res.status(200).send(JSON.stringify(user.items));
   } catch (err) {
-    console.log(err);
     res.status(500).send(JSON.stringify({ message: err }));
   }
 };

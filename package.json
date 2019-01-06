@@ -35,5 +35,9 @@
     "eject": "react-scripts eject",
     "dev": "concurrently --kill-others \"react-scripts start\" \"npm run watch-css\""
   },
-  "proxy": "http://localhost:5000"
+  "proxy": {
+    "/api/*": {
+      "target": "http://localhost:5000"
+    }
+  }
 }

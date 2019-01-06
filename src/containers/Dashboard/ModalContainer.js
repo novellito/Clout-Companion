@@ -40,7 +40,8 @@ export class ModalContainer extends Component {
                       buyPrice,
                       sellPrice,
                       sellDate,
-                      buyDate
+                      buyDate,
+                      category
                     })
                   : this.props.updateItem(
                       {
@@ -48,7 +49,8 @@ export class ModalContainer extends Component {
                         buyPrice,
                         sellPrice,
                         sellDate,
-                        buyDate
+                        buyDate,
+                        category
                       },
                       this.props.editingIndex
                     )

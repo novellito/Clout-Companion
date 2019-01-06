@@ -13,6 +13,10 @@ const ItemSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  category: {
+    type: String,
+    required: true
+  },
   buyDate: {
     type: Array,
     required: true

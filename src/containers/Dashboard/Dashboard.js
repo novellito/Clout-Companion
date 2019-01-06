@@ -5,6 +5,7 @@ import { Table } from 'react-materialize';
 import './Dashboard.css';
 import ModalContainer from './ModalContainer';
 import * as actionCreators from '../../store/actions/actionCreators';
+import axios from 'axios';
 
 export class Dashboard extends Component {
   state = {
@@ -22,8 +23,35 @@ export class Dashboard extends Component {
     // editing: false
   };
 
-  addItemToList = item => {
-    this.setState({ items: [...this.state.items, item] });
+  componentDidMount() {
+    axios
+      .get(`/api/user/${this.props.uid}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+      })
+      .then(({ data }) => {
+        console.log(data);
+        this.setState({ items: data.items });
+      })
+      .catch(err => console.log(err));
+  }
+
+  addItemToList = async item => {
+    try {
+      await axios.post(
+        '/api/user',
+        { item, userId: this.props.uid },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+          }
+        }
+      );
+      this.setState({ items: [...this.state.items, item] });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   deleteItem = () => {
