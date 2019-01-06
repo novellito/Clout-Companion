@@ -40,7 +40,6 @@ UserSchema.statics.upsertNewUser = function(profile, cb) {
           if (error) {
             console.log(error);
           }
-          console.log('saved user', savedUser);
           console.log(`New user - ${savedUser.username} was saved!`);
           return cb(error, savedUser);
         });

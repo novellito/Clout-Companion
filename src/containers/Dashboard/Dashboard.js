@@ -10,17 +10,6 @@ import axios from 'axios';
 export class Dashboard extends Component {
   state = {
     items: []
-    // items: [
-    //   {
-    //     category: 'clothes',
-    //     name: 'poop',
-    //     buyPrice: '300',
-    //     sellPrice: '400',
-    //     buyDate: ['12', '17', '2018'],
-    //     sellDate: ['12', '20', '2018']
-    //   }
-    // ]
-    // editing: false
   };
 
   componentDidMount() {
@@ -31,15 +20,14 @@ export class Dashboard extends Component {
         }
       })
       .then(({ data }) => {
-        console.log(data);
-        this.setState({ items: data.items });
+        this.setState({ items: data });
       })
       .catch(err => console.log(err));
   }
 
   addItemToList = async item => {
     try {
-      await axios.post(
+      const { data } = await axios.post(
         '/api/user',
         { item, userId: this.props.uid },
         {
@@ -48,7 +36,7 @@ export class Dashboard extends Component {
           }
         }
       );
-      this.setState({ items: [...this.state.items, item] });
+      this.setState({ items: [...this.state.items, data] });
     } catch (err) {
       console.log(err);
     }
