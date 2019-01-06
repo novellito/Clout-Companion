@@ -2,11 +2,8 @@ const express = require('express');
 const controller = require('../controllers/user');
 let router = express.Router();
 
-router.get('/', function(req, res) {
-  console.log('hello world');
-  res.send('helli');
-});
+router.get('/:id', controller.getUserInfo);
 router.post('/', controller.insertItem);
-router.post('/updateItem', controller.updateItem); // put?
+router.put('/updateItem', controller.updateItem);
 
 module.exports = router;
