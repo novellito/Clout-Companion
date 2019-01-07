@@ -4,6 +4,7 @@ import * as actionCreators from '../../store/actions/actionCreators';
 import { Modal, Input, Row, Button } from 'react-materialize';
 import './Dashboard.css';
 import NumberFormat from 'react-number-format';
+
 export class ModalContainer extends Component {
   componentWillUnmount() {
     this.props.onResetModal();
@@ -24,7 +25,6 @@ export class ModalContainer extends Component {
       category
     } = this.props;
 
-    // console.log('render');
     return (
       <Modal
         id="Dash-Modal"
@@ -163,31 +163,14 @@ export class ModalContainer extends Component {
               s={6}
               type="date"
               name="buyDate"
-              // value={
-              // }
-              // date={
-              //   buyDate.length > 0
-              //     ? new Date(buyDate[0], buyDate[1], buyDate[2])
-              //     : null
-              // }
-              // date={new Date()}
               label="Buy Date"
               options={{
                 selectMonths: true,
                 selectYears: true,
-                // defaultDate:
-                //   buyDate.length > 0
-                //     ? new Date(buyDate[0], buyDate[1], buyDate[2])
-                //     : null,
-                // onOpen: function() {
-                //   console.log(this);
-                //   this.clear();
-                // },
                 onRender: function() {},
                 onStart: function() {},
-                // setDefaultDate: true,
-                format: 'mm/dd/yyyy'
-                // max: new Date(),
+                format: 'mm/dd/yyyy',
+                max: new Date()
               }}
               onChange={e =>
                 this.props.onUpdateForm({
@@ -201,14 +184,13 @@ export class ModalContainer extends Component {
               type="date"
               name="sellDate"
               label="Sell Date"
-              // value={new Date(sellDate[0], sellDate[1], sellDate[2])}
               options={{
                 selectMonths: true,
                 selectYears: true,
                 defaultDate: null,
                 setDefaultDate: true,
-                format: 'mm/dd/yyyy'
-                // min: new Date(sellDate[0], sellDate[1], sellDate[2])
+                format: 'mm/dd/yyyy',
+                min: new Date(sellDate[0], sellDate[1], sellDate[2])
               }}
               autoclose={'true'}
               onChange={e =>

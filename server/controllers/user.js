@@ -2,6 +2,7 @@ const UserModel = require('../models/user');
 const ItemsModel = require('../models/item');
 let UserController = {};
 
+// Returns the user's information (items & notes)
 UserController.getUserInfo = async (req, res) => {
   const user = await UserModel.findOne({ userId: req.params.id }).populate(
     'items'
@@ -11,6 +12,7 @@ UserController.getUserInfo = async (req, res) => {
     : res.status(500).send({ message: 'error retrieving user info' });
 };
 
+// Insert a new Item to the collection
 UserController.insertItem = async (req, res) => {
   try {
     const newItem = new ItemsModel(req.body.item);
@@ -29,6 +31,7 @@ UserController.insertItem = async (req, res) => {
   }
 };
 
+// Update the item
 UserController.updateItem = async (req, res) => {
   try {
     const item = await ItemsModel.update(
@@ -41,9 +44,10 @@ UserController.updateItem = async (req, res) => {
     res.status(500).send(JSON.stringify({ message: err }));
   }
 };
+
+// Delete an item
 UserController.deleteItem = async (req, res) => {
   try {
-    console.log(req.body);
     // Remove id from users items array
     await UserModel.update(
       {
@@ -56,7 +60,6 @@ UserController.deleteItem = async (req, res) => {
     const item = await ItemsModel.remove({ _id: req.body.itemId }).exec();
     res.status(200).send(JSON.stringify(item));
   } catch (err) {
-    console.log(err);
     res.status(500).send(JSON.stringify({ message: err }));
   }
 };

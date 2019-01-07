@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// console.log(mongoose.Types);
 const UserSchema = new Schema({
   username: {
     type: String,
@@ -14,7 +13,6 @@ const UserSchema = new Schema({
 
   items: [
     {
-      // type: Object
       type: Schema.Types.ObjectId,
       ref: 'Item'
     }
@@ -50,4 +48,4 @@ UserSchema.statics.upsertNewUser = function(profile, cb) {
   );
 };
 
-const User = (module.exports = mongoose.model('User', UserSchema));
+module.exports = mongoose.model('User', UserSchema);
