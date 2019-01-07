@@ -42,14 +42,27 @@ export class Dashboard extends Component {
     }
   };
 
-  deleteItem = () => {
-    console.log(this.props.editingIndex);
-    const newItems = this.state.items;
-    newItems.splice(this.props.editingIndex, 1);
-    this.setState({
-      items: newItems
-    });
-    this.props.cleanupItems(); // reset all the fields
+  deleteItem = async () => {
+    try {
+      await axios.delete(' /api/user/deleteItem', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        },
+        data: {
+          userId: this.props.uid,
+          itemId: this.state.items[this.props.editingIndex]._id
+        }
+      });
+
+      const newItems = [...this.state.items];
+      newItems.splice(this.props.editingIndex, 1);
+      this.setState({
+        items: newItems
+      });
+      this.props.cleanupItems(); // reset all the fields
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   updateItem = async (item, index) => {

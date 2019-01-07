@@ -43,6 +43,7 @@ UserController.updateItem = async (req, res) => {
 };
 UserController.deleteItem = async (req, res) => {
   try {
+    console.log(req.body);
     // Remove id from users items array
     await UserModel.update(
       {
