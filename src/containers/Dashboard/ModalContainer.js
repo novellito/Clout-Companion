@@ -4,13 +4,13 @@ import * as actionCreators from '../../store/actions/actionCreators';
 import { Modal, Input, Row, Button } from 'react-materialize';
 import './Dashboard.css';
 import NumberFormat from 'react-number-format';
-
+console.log(Input);
 export class ModalContainer extends Component {
   componentWillUnmount() {
     this.props.onResetModal();
   }
 
-  shouldComponentUpdate() {
+  shouldComponentUpdate(nextProps, nextState) {
     return true;
   }
 
@@ -28,6 +28,7 @@ export class ModalContainer extends Component {
     return (
       <Modal
         id="Dash-Modal"
+        open={true}
         actions={
           <div>
             <Button
@@ -77,7 +78,7 @@ export class ModalContainer extends Component {
           complete: () => this.props.onResetModal()
         }}
         header="Add a New Item"
-        trigger={trigger}
+        // trigger={trigger}
       >
         <Row>
           <div className="categories">
@@ -122,7 +123,10 @@ export class ModalContainer extends Component {
               type="text"
               label="Name"
               name="name"
-              value={name}
+              labelClassName={name ? 'active' : ''}
+              defaultValue={name ? name : ''}
+              // defaultValue={name}
+              // value={name ? name : ''}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'name',
@@ -130,13 +134,18 @@ export class ModalContainer extends Component {
                 })
               }
             />
-            <NumberFormat
-              thousandSeparator={true}
-              decimalScale={2}
-              label="Bought At ($)"
-              customInput={Input}
+            <Input
               s={6}
-              value={buyPrice}
+              type="number"
+              label="buyPrice"
+              name="buyPrice"
+              labelClassName={buyPrice ? 'active' : ''}
+              // defaultValue={
+              //   buyPrice ? parseFloat(buyPrice).toLocaleString('en') : ''
+              // }
+              // defaultValue={name}
+              value={buyPrice ? buyPrice : ''}
+              // value={buyPrice ? parseFloat(buyPrice).toLocaleString('en') : ''}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'buyPrice',
@@ -144,31 +153,60 @@ export class ModalContainer extends Component {
                 })
               }
             />
-            <NumberFormat
+            {/* <NumberFormat
+              thousandSeparator={true}
+              name="buyPrice"
+              decimalScale={2}
+              label="Bought At ($)"
+              // labelClassName={buyPrice ? 'active' : ''}
+              customInput={Input}
+              // customInput={Input}
+              // defaultValue={''}
+              defaultValue={buyPrice ? buyPrice : ''}
+              value={buyPrice ? buyPrice : ''}
+              s={6}
+              onChange={e =>
+                this.props.onUpdateForm({
+                  option: 'buyPrice',
+                  value: e.target.value
+                })
+              }
+            /> */}
+            {/* <NumberFormat
               thousandSeparator={true}
               decimalScale={2}
               label="Sold At ($)"
+              labelClassName={sellPrice ? 'active' : ''}
               customInput={Input}
               s={6}
-              value={sellPrice}
+              defaultValue={sellPrice ? sellPrice : ''}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'sellPrice',
                   value: e.target.value
                 })
               }
-            />
+            /> */}
             {buyDate.length > 0 ? <React.Fragment /> : ''}
-            <Input
+            {/* <Input
               s={6}
               type="date"
               name="buyDate"
               label="Buy Date"
+              // value={new Date()}
               options={{
                 selectMonths: true,
                 selectYears: true,
-                onRender: function() {},
-                onStart: function() {},
+                setDefaultDate: true,
+                // defaultDate: new Date(buyDate[0], buyDate[1], buyDate[2]),
+                onStart: function() {
+                  console.log(buyDate);
+
+                  this.set(
+                    'select',
+                    new Date(buyDate[2], buyDate[0], buyDate[1])
+                  );
+                },
                 format: 'mm/dd/yyyy',
                 max: new Date()
               }}
@@ -187,19 +225,22 @@ export class ModalContainer extends Component {
               options={{
                 selectMonths: true,
                 selectYears: true,
-                defaultDate: null,
-                setDefaultDate: true,
+                // onStart: function() {
+                //   this.set(
+                //     'select',
+                //     new Date(sellDate[0], sellDate[1], sellDate[2])
+                //   );
+                // },
                 format: 'mm/dd/yyyy',
                 min: new Date(sellDate[0], sellDate[1], sellDate[2])
               }}
-              autoclose={'true'}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'sellDate',
                   value: e.target.value.split('/')
                 })
               }
-            />
+            /> */}
           </div>
         </Row>
       </Modal>

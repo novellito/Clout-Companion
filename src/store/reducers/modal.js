@@ -13,6 +13,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.UPDATE_FORM:
+      // console.log(action.input.value);
       return {
         ...state,
         [action.input.option]: action.input.value

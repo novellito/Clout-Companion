@@ -6,10 +6,47 @@ import './Dashboard.css';
 import ModalContainer from './ModalContainer';
 import * as actionCreators from '../../store/actions/actionCreators';
 import axios from 'axios';
-
+import { Line } from 'react-chartjs';
+var a = {
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: true
+        }
+      }
+    ]
+  }
+};
+var data = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'My First dataset',
+      fillColor: 'rgba(220,220,220,0.2)',
+      strokeColor: 'rgba(220,220,220,1)',
+      pointColor: 'rgba(220,220,220,1)',
+      pointStrokeColor: '#fff',
+      pointHighlightFill: '#fff',
+      pointHighlightStroke: 'rgba(220,220,220,1)',
+      data: [65, 59, 80, 81, 56, 55, 40]
+    },
+    {
+      label: 'My Second dataset',
+      fillColor: 'rgba(151,187,205,0.2)',
+      strokeColor: 'rgba(151,187,205,1)',
+      pointColor: 'rgba(151,187,205,1)',
+      pointStrokeColor: '#fff',
+      pointHighlightFill: '#fff',
+      pointHighlightStroke: 'rgba(151,187,205,1)',
+      data: [28, 48, 40, 19, 86, 27, 90]
+    }
+  ]
+};
 export class Dashboard extends Component {
   state = {
-    items: []
+    items: [],
+    foo: false
   };
 
   componentDidMount() {
@@ -86,6 +123,9 @@ export class Dashboard extends Component {
     }
   };
 
+  test = () => {
+    this.setState({ foo: true });
+  };
   render() {
     return (
       <div>
@@ -96,11 +136,7 @@ export class Dashboard extends Component {
             <div className="card dash-card">
               <div className="card-content white-text">
                 <span className="card-title">Graph</span>
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively.
-                </p>
+                <Line data={data} width="600" height="250" />
               </div>
             </div>
           </div>
@@ -152,23 +188,36 @@ export class Dashboard extends Component {
                       )
                       .reduce((acc, cv) => acc + cv, 0)}
                 </div>
-                <ModalContainer
-                  addToList={this.addItemToList}
-                  updateItem={(item, index) => this.updateItem(item, index)}
-                  trigger={
-                    this.props.editingIndex || this.props.editingIndex === 0 ? (
-                      <i className="fa fa-2x fa-edit" />
-                    ) : (
-                      <i className="fa fa-2x fa-plus-circle" />
-                    )
-                  }
-                />
+                {this.state.foo ? (
+                  <ModalContainer
+                    // active={true}
+                    addToList={this.addItemToList}
+                    updateItem={(item, index) => this.updateItem(item, index)}
+                    // trigger={
+                    //   this.props.editingIndex ||
+                    //   this.props.editingIndex === 0 ? (
+                    //     <i
+                    //       className="fa fa-2x fa-edit"
+                    //       // onClick={() => this.forceUpdate()}
+                    //     />
+                    //   ) : (
+                    //     <i className="fa fa-2x fa-plus-circle" />
+                    //   )
+                    // }
+                  />
+                ) : (
+                  ''
+                )}
                 {this.props.editingIndex || this.props.editingIndex === 0 ? (
                   <i className="fa fa-2x fa-trash" onClick={this.deleteItem} />
                 ) : (
                   ''
                 )}
-                <i className="fa fa-2x fa-download" />
+                <i className="fa fa-2x fa-edit" onClick={() => this.test()} />
+                <i
+                  className="fa fa-2x fa-download"
+                  onClick={() => this.test()}
+                />
               </div>
             </div>
           </div>
