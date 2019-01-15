@@ -23,7 +23,6 @@ export default function(ChildComponent) {
       ) {
         this.props.onLogout();
       } else if (!isAuthenticated) {
-        console.log('check jwt');
         if (!jwt) {
           history.replace('/login');
           return;

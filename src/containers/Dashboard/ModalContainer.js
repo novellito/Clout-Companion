@@ -4,7 +4,6 @@ import * as actionCreators from '../../store/actions/actionCreators';
 import { Modal, Input, Row, Button } from 'react-materialize';
 import './Dashboard.css';
 import NumberFormat from 'react-number-format';
-console.log(Input);
 export class ModalContainer extends Component {
   componentWillUnmount() {
     this.props.onResetModal();
@@ -28,7 +27,7 @@ export class ModalContainer extends Component {
     return (
       <Modal
         id="Dash-Modal"
-        open={true}
+        // open={true}
         actions={
           <div>
             <Button
@@ -78,7 +77,7 @@ export class ModalContainer extends Component {
           complete: () => this.props.onResetModal()
         }}
         header="Add a New Item"
-        // trigger={trigger}
+        trigger={trigger}
       >
         <Row>
           <div className="categories">
@@ -172,7 +171,7 @@ export class ModalContainer extends Component {
                 })
               }
             /> */}
-            {/* <NumberFormat
+            <NumberFormat
               thousandSeparator={true}
               decimalScale={2}
               label="Sold At ($)"
@@ -186,7 +185,7 @@ export class ModalContainer extends Component {
                   value: e.target.value
                 })
               }
-            /> */}
+            />
             {buyDate.length > 0 ? <React.Fragment /> : ''}
             {/* <Input
               s={6}

@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
-import { Table } from 'react-materialize';
+import { Table, Button } from 'react-materialize';
 import './Dashboard.css';
 import ModalContainer from './ModalContainer';
 import * as actionCreators from '../../store/actions/actionCreators';
 import axios from 'axios';
-import { Line } from 'react-chartjs';
+import { Line } from 'react-chartjs-2';
+import { getChartData, defaultDataStyles, getDataPoint } from './ChartLogic';
+
 var a = {
+  responsive: true,
+
   scales: {
     yAxes: [
       {
+        scaleLabel: {
+          display: true,
+          labelString: 'value'
+        },
         ticks: {
           beginAtZero: true
         }
@@ -18,34 +26,43 @@ var a = {
     ]
   }
 };
-var data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      fillColor: 'rgba(220,220,220,0.2)',
-      strokeColor: 'rgba(220,220,220,1)',
-      pointColor: 'rgba(220,220,220,1)',
-      pointStrokeColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(220,220,220,1)',
-      data: [65, 59, 80, 81, 56, 55, 40]
-    },
-    {
-      label: 'My Second dataset',
-      fillColor: 'rgba(151,187,205,0.2)',
-      strokeColor: 'rgba(151,187,205,1)',
-      pointColor: 'rgba(151,187,205,1)',
-      pointStrokeColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(151,187,205,1)',
-      data: [28, 48, 40, 19, 86, 27, 90]
-    }
-  ]
+// will be years
+const dataset = {
+  // label: 'My First dataset',
+  ...defaultDataStyles,
+  data: []
 };
+
+const labels = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
+// var currentChart = {
+//   labels,
+//   datasets: [dataset]
+//   // datasets: [defaultDataStyles]
+// };
 export class Dashboard extends Component {
   state = {
     items: [],
+    chartData: null,
+    currentYear: '2019',
+    currentChart: {
+      labels
+      // datasets: [dataset]
+      // datasets: [defaultDataStyles]
+    },
     foo: false
   };
 
@@ -57,12 +74,21 @@ export class Dashboard extends Component {
         }
       })
       .then(({ data }) => {
-        this.setState({ items: data });
+        // default chart to 2019
+        const defaultData = getChartData(data);
+        dataset.data = getDataPoint(defaultData['2019']);
+        this.setState({
+          items: data,
+          chartData: getChartData(data),
+          currentChart: { ...this.state.currentChart, datasets: [dataset] }
+        });
+        // this.setState({ items: data, chartData: currentChart });
       })
       .catch(err => console.log(err));
   }
 
   addItemToList = async item => {
+    // will probably recalcualte chart here
     try {
       const { data } = await axios.post(
         '/api/user',
@@ -123,9 +149,63 @@ export class Dashboard extends Component {
     }
   };
 
+  // loadData = () => {
+  //   console.log(data);
+  //   data = {
+  //     ...data
+  //     // datasets: []
+  //   };
+  //   console.log(data);
+  //   return data;
+  // };
+
   test = () => {
     this.setState({ foo: true });
   };
+
+  changeYear = (left = true) => {
+    let data = { ...this.state.currentChart };
+    if (left) {
+      // go to prev year
+      const yrs = Object.keys(this.state.chartData);
+
+      if (yrs.indexOf(this.state.currentYear) - 1 !== -1) {
+        // if the item to the left exists pick it
+        const currentYear = yrs[yrs.indexOf(this.state.currentYear) - 1];
+        data.datasets[0].data = getDataPoint(this.state.chartData[currentYear]);
+        this.setState({ currentChart: data, currentYear });
+      } else {
+        // at the beginning so chose the end
+        const currentYear = yrs[yrs.length - 1];
+
+        data.datasets[0].data = getDataPoint(
+          this.state.chartData[yrs[yrs.length - 1]]
+        );
+        this.setState({ currentChart: data, currentYear });
+      }
+    } else {
+      // go to next year
+      const yrs = Object.keys(this.state.chartData);
+
+      if (yrs[yrs.indexOf(this.state.currentYear) + 1]) {
+        // if the item to the left exists pick it
+        const currentYear = yrs[yrs.indexOf(this.state.currentYear) + 1];
+        data.datasets[0].data = getDataPoint(this.state.chartData[currentYear]);
+        this.setState({ currentChart: data, currentYear });
+      } else {
+        // at the beginning so chose the end
+        const currentYear = yrs[0];
+
+        data.datasets[0].data = getDataPoint(this.state.chartData[yrs[0]]);
+        this.setState({ currentChart: data, currentYear });
+      }
+    }
+    // getDataPoint(this.state.chartData['2019']);
+    // data.datasets[0].data = getDataPoint(this.state.chartData['2018']);
+    // this.setState({ currentChart: data });
+    console.log(dataset);
+  };
+
   render() {
     return (
       <div>
@@ -136,7 +216,28 @@ export class Dashboard extends Component {
             <div className="card dash-card">
               <div className="card-content white-text">
                 <span className="card-title">Graph</span>
-                <Line data={data} width="600" height="250" />
+                {this.state.items.length === 0 ? (
+                  'loading...'
+                ) : (
+                  <Line
+                    options={a}
+                    // options={{ scaleGridLineColor: 'red' }}
+                    data={this.state.currentChart}
+
+                    // width="600"
+                    // height="2new Date(50"
+                  />
+                )}
+                <i
+                  className="fa fa-2x fa-chevron-left"
+                  onClick={this.changeYear}
+                />
+                <Button onClick={this.changeYear}>Toggle</Button>
+                <i
+                  className="fa fa-2x fa-chevron-right"
+                  onClick={() => this.changeYear(false)}
+                />
+                {this.state.currentYear}
               </div>
             </div>
           </div>
@@ -193,17 +294,17 @@ export class Dashboard extends Component {
                     // active={true}
                     addToList={this.addItemToList}
                     updateItem={(item, index) => this.updateItem(item, index)}
-                    // trigger={
-                    //   this.props.editingIndex ||
-                    //   this.props.editingIndex === 0 ? (
-                    //     <i
-                    //       className="fa fa-2x fa-edit"
-                    //       // onClick={() => this.forceUpdate()}
-                    //     />
-                    //   ) : (
-                    //     <i className="fa fa-2x fa-plus-circle" />
-                    //   )
-                    // }
+                    trigger={
+                      this.props.editingIndex ||
+                      this.props.editingIndex === 0 ? (
+                        <i
+                          className="fa fa-2x fa-edit"
+                          // onClick={() => this.forceUpdate()}
+                        />
+                      ) : (
+                        <i className="fa fa-2x fa-plus-circle" />
+                      )
+                    }
                   />
                 ) : (
                   ''
@@ -218,18 +319,6 @@ export class Dashboard extends Component {
                   className="fa fa-2x fa-download"
                   onClick={() => this.test()}
                 />
-              </div>
-            </div>
-          </div>
-          <div className="box notes">
-            <div className="card  dash-card">
-              <div className="card-content white-text">
-                <span className="card-title">Notes</span>
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively.
-                </p>
               </div>
             </div>
           </div>
