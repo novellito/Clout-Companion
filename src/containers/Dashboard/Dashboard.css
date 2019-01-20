@@ -75,6 +75,13 @@
   .chart {
     grid-column: 1 /2;
     grid-row: 1; }
+    .chart .chart-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .chart .chart-toggle p {
+        margin: 0 15px;
+        font-size: 2em; }
   .item-list {
     grid-column: 2;
     grid-row: 1 / 3; }

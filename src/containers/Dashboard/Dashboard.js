@@ -63,7 +63,7 @@ export class Dashboard extends Component {
       // datasets: [dataset]
       // datasets: [defaultDataStyles]
     },
-    foo: false
+    toggleModal: false
   };
 
   componentDidMount() {
@@ -159,8 +159,8 @@ export class Dashboard extends Component {
   //   return data;
   // };
 
-  test = () => {
-    this.setState({ foo: true });
+  toggleModal = () => {
+    this.setState({ toggleModal: !this.state.toggleModal });
   };
 
   changeYear = (left = true) => {
@@ -200,10 +200,6 @@ export class Dashboard extends Component {
         this.setState({ currentChart: data, currentYear });
       }
     }
-    // getDataPoint(this.state.chartData['2019']);
-    // data.datasets[0].data = getDataPoint(this.state.chartData['2018']);
-    // this.setState({ currentChart: data });
-    console.log(dataset);
   };
 
   render() {
@@ -223,21 +219,19 @@ export class Dashboard extends Component {
                     options={a}
                     // options={{ scaleGridLineColor: 'red' }}
                     data={this.state.currentChart}
-
-                    // width="600"
-                    // height="2new Date(50"
                   />
                 )}
-                <i
-                  className="fa fa-2x fa-chevron-left"
-                  onClick={this.changeYear}
-                />
-                <Button onClick={this.changeYear}>Toggle</Button>
-                <i
-                  className="fa fa-2x fa-chevron-right"
-                  onClick={() => this.changeYear(false)}
-                />
-                {this.state.currentYear}
+                <div className="chart-toggle">
+                  <i
+                    className="fa fa-2x fa-chevron-left"
+                    onClick={this.changeYear}
+                  />
+                  <p>{this.state.currentYear}</p>
+                  <i
+                    className="fa fa-2x fa-chevron-right"
+                    onClick={() => this.changeYear(false)}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -289,36 +283,32 @@ export class Dashboard extends Component {
                       )
                       .reduce((acc, cv) => acc + cv, 0)}
                 </div>
-                {this.state.foo ? (
+                {this.state.toggleModal ? (
                   <ModalContainer
-                    // active={true}
                     addToList={this.addItemToList}
                     updateItem={(item, index) => this.updateItem(item, index)}
-                    trigger={
-                      this.props.editingIndex ||
-                      this.props.editingIndex === 0 ? (
-                        <i
-                          className="fa fa-2x fa-edit"
-                          // onClick={() => this.forceUpdate()}
-                        />
-                      ) : (
-                        <i className="fa fa-2x fa-plus-circle" />
-                      )
-                    }
+                    toggleModal={this.toggleModal}
                   />
                 ) : (
                   ''
                 )}
                 {this.props.editingIndex || this.props.editingIndex === 0 ? (
-                  <i className="fa fa-2x fa-trash" onClick={this.deleteItem} />
+                  <React.Fragment>
+                    <i
+                      className="fa fa-2x fa-trash"
+                      onClick={this.deleteItem}
+                    />
+                    <i
+                      className="fa fa-2x fa-edit"
+                      onClick={this.toggleModal}
+                    />
+                  </React.Fragment>
                 ) : (
-                  ''
+                  <i
+                    className="fa fa-2x fa-plus-circle"
+                    onClick={this.toggleModal}
+                  />
                 )}
-                <i className="fa fa-2x fa-edit" onClick={() => this.test()} />
-                <i
-                  className="fa fa-2x fa-download"
-                  onClick={() => this.test()}
-                />
               </div>
             </div>
           </div>

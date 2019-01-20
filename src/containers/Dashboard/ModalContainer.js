@@ -4,9 +4,10 @@ import * as actionCreators from '../../store/actions/actionCreators';
 import { Modal, Input, Row, Button } from 'react-materialize';
 import './Dashboard.css';
 import NumberFormat from 'react-number-format';
+import Categories from './Categories';
 export class ModalContainer extends Component {
   componentWillUnmount() {
-    this.props.onResetModal();
+    this.props.toggleModal();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -20,21 +21,21 @@ export class ModalContainer extends Component {
       sellPrice,
       sellDate,
       buyDate,
-      trigger,
-      category
+      category,
+      editingIndex
     } = this.props;
 
     return (
       <Modal
         id="Dash-Modal"
-        // open={true}
+        open={true}
         actions={
           <div>
             <Button
               modal="close"
               waves="light"
               onClick={() =>
-                !this.props.editingIndex && this.props.editingIndex !== 0
+                !editingIndex && editingIndex !== 0
                   ? this.props.addToList({
                       name,
                       buyPrice,
@@ -52,7 +53,7 @@ export class ModalContainer extends Component {
                         buyDate,
                         category
                       },
-                      this.props.editingIndex
+                      editingIndex
                     )
               }
               disabled={
@@ -64,9 +65,7 @@ export class ModalContainer extends Component {
               }
               className="btn-primary"
             >
-              {this.props.editingIndex || this.props.editingIndex === 0
-                ? 'Update Item'
-                : 'Add Item'}
+              {editingIndex || editingIndex === 0 ? 'Update Item' : 'Add Item'}
             </Button>
             <Button flat modal="close" waves="light">
               dismiss
@@ -77,55 +76,17 @@ export class ModalContainer extends Component {
           complete: () => this.props.onResetModal()
         }}
         header="Add a New Item"
-        trigger={trigger}
       >
         <Row>
-          <div className="categories">
-            <p>Category: {category}</p>
-            <i
-              style={{
-                color: category === 'shoes' ? '#ff3547b3' : 'white'
-              }}
-              onClick={e => this.props.onSetCategory(e.target.id)}
-              id="shoes"
-              className="fas shoes fa-3x fa-shoe-prints"
-            />
-            <i
-              style={{
-                color: category === 'clothes' ? '#ff3547b3' : 'white'
-              }}
-              onClick={e => this.props.onSetCategory(e.target.id)}
-              id="clothes"
-              className="fas fa-3x fa-tshirt"
-            />
-            <i
-              style={{
-                color: category === 'accessories' ? '#ff3547b3' : 'white'
-              }}
-              onClick={e => this.props.onSetCategory(e.target.id)}
-              id="accessories"
-              className="fas fa-3x fa-glasses"
-            />
-            <i
-              style={{
-                color: category === 'other' ? '#ff3547b3' : 'white'
-              }}
-              onClick={e => this.props.onSetCategory(e.target.id)}
-              id="other"
-              className="fas fa-3x fa-ellipsis-h"
-            />
-          </div>
+          <Categories click={this.props.onSetCategory} category={category} />
           <div className="item-info">
             <Input
               s={6}
               maxLength="30"
-              type="text"
               label="Name"
               name="name"
               labelClassName={name ? 'active' : ''}
               defaultValue={name ? name : ''}
-              // defaultValue={name}
-              // value={name ? name : ''}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'name',
@@ -133,18 +94,15 @@ export class ModalContainer extends Component {
                 })
               }
             />
-            <Input
-              s={6}
-              type="number"
-              label="buyPrice"
+            <NumberFormat
+              thousandSeparator={true}
               name="buyPrice"
+              decimalScale={2}
+              label="Bought At ($)"
               labelClassName={buyPrice ? 'active' : ''}
-              // defaultValue={
-              //   buyPrice ? parseFloat(buyPrice).toLocaleString('en') : ''
-              // }
-              // defaultValue={name}
+              customInput={Input}
               value={buyPrice ? buyPrice : ''}
-              // value={buyPrice ? parseFloat(buyPrice).toLocaleString('en') : ''}
+              s={6}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'buyPrice',
@@ -152,25 +110,7 @@ export class ModalContainer extends Component {
                 })
               }
             />
-            {/* <NumberFormat
-              thousandSeparator={true}
-              name="buyPrice"
-              decimalScale={2}
-              label="Bought At ($)"
-              // labelClassName={buyPrice ? 'active' : ''}
-              customInput={Input}
-              // customInput={Input}
-              // defaultValue={''}
-              defaultValue={buyPrice ? buyPrice : ''}
-              value={buyPrice ? buyPrice : ''}
-              s={6}
-              onChange={e =>
-                this.props.onUpdateForm({
-                  option: 'buyPrice',
-                  value: e.target.value
-                })
-              }
-            /> */}
+
             <NumberFormat
               thousandSeparator={true}
               decimalScale={2}
@@ -178,7 +118,8 @@ export class ModalContainer extends Component {
               labelClassName={sellPrice ? 'active' : ''}
               customInput={Input}
               s={6}
-              defaultValue={sellPrice ? sellPrice : ''}
+              value={sellPrice ? sellPrice : ''}
+              s={6}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'sellPrice',
@@ -186,25 +127,21 @@ export class ModalContainer extends Component {
                 })
               }
             />
-            {buyDate.length > 0 ? <React.Fragment /> : ''}
-            {/* <Input
+            <Input
               s={6}
               type="date"
               name="buyDate"
               label="Buy Date"
-              // value={new Date()}
               options={{
                 selectMonths: true,
                 selectYears: true,
                 setDefaultDate: true,
-                // defaultDate: new Date(buyDate[0], buyDate[1], buyDate[2]),
                 onStart: function() {
-                  console.log(buyDate);
-
-                  this.set(
-                    'select',
-                    new Date(buyDate[2], buyDate[0], buyDate[1])
-                  );
+                  if (buyDate.length === 3)
+                    this.set(
+                      'select',
+                      new Date(buyDate[2], buyDate[0], buyDate[1])
+                    );
                 },
                 format: 'mm/dd/yyyy',
                 max: new Date()
@@ -224,13 +161,14 @@ export class ModalContainer extends Component {
               options={{
                 selectMonths: true,
                 selectYears: true,
-                // onStart: function() {
-                //   this.set(
-                //     'select',
-                //     new Date(sellDate[0], sellDate[1], sellDate[2])
-                //   );
-                // },
                 format: 'mm/dd/yyyy',
+                onStart: function() {
+                  if (sellDate.length === 3)
+                    this.set(
+                      'select',
+                      new Date(sellDate[2], sellDate[0], sellDate[1])
+                    );
+                },
                 min: new Date(sellDate[0], sellDate[1], sellDate[2])
               }}
               onChange={e =>
@@ -239,7 +177,7 @@ export class ModalContainer extends Component {
                   value: e.target.value.split('/')
                 })
               }
-            /> */}
+            />
           </div>
         </Row>
       </Modal>
