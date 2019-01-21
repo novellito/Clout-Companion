@@ -48,11 +48,6 @@ const labels = [
   'December'
 ];
 
-// var currentChart = {
-//   labels,
-//   datasets: [dataset]
-//   // datasets: [defaultDataStyles]
-// };
 export class Dashboard extends Component {
   state = {
     items: [],
@@ -60,8 +55,6 @@ export class Dashboard extends Component {
     currentYear: '2019',
     currentChart: {
       labels
-      // datasets: [dataset]
-      // datasets: [defaultDataStyles]
     },
     toggleModal: false
   };
@@ -99,7 +92,17 @@ export class Dashboard extends Component {
           }
         }
       );
-      this.setState({ items: [...this.state.items, data] });
+
+      // Get the updated chart data list & update the chart for the given year
+      const newDataset = getChartData([...this.state.items, data]);
+      const currentYear = data.sellDate[2];
+      dataset.data = getDataPoint(newDataset[currentYear]);
+      this.setState({
+        items: [...this.state.items, data],
+        chartData: getChartData([...this.state.items, data]),
+        currentChart: { ...this.state.currentChart, datasets: [dataset] },
+        currentYear
+      });
     } catch (err) {
       console.log(err);
     }
@@ -149,7 +152,7 @@ export class Dashboard extends Component {
     }
   };
 
-  // loadData = () => {
+  // updateChartData = () => {
   //   console.log(data);
   //   data = {
   //     ...data
