@@ -7,46 +7,13 @@ import ModalContainer from './ModalContainer';
 import * as actionCreators from '../../store/actions/actionCreators';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
-import { getChartData, defaultDataStyles, getDataPoint } from './ChartLogic';
-
-var a = {
-  responsive: true,
-
-  scales: {
-    yAxes: [
-      {
-        scaleLabel: {
-          display: true,
-          labelString: 'value'
-        },
-        ticks: {
-          beginAtZero: true
-        }
-      }
-    ]
-  }
-};
-// will be years
-const dataset = {
-  // label: 'My First dataset',
-  ...defaultDataStyles,
-  data: []
-};
-
-const labels = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December'
-];
+import {
+  getChartData,
+  getDataPoint,
+  chartOptions,
+  labels,
+  dataset
+} from './ChartLogic';
 
 export class Dashboard extends Component {
   state = {
@@ -75,7 +42,6 @@ export class Dashboard extends Component {
           chartData: getChartData(data),
           currentChart: { ...this.state.currentChart, datasets: [dataset] }
         });
-        // this.setState({ items: data, chartData: currentChart });
       })
       .catch(err => console.log(err));
   }
@@ -121,9 +87,18 @@ export class Dashboard extends Component {
       });
 
       const newItems = [...this.state.items];
+      const itemToDelete = newItems[this.props.editingIndex];
       newItems.splice(this.props.editingIndex, 1);
+
+      const newDataset = getChartData(newItems);
+      const currentYear = itemToDelete.sellDate[2];
+      dataset.data = getDataPoint(newDataset[currentYear]);
+
       this.setState({
-        items: newItems
+        items: newItems,
+        chartData: getChartData(newItems),
+        currentChart: { ...this.state.currentChart, datasets: [dataset] },
+        currentYear
       });
       this.props.cleanupItems(); // reset all the fields
     } catch (err) {
@@ -142,25 +117,24 @@ export class Dashboard extends Component {
           }
         }
       );
+
       const newItems = [...this.state.items];
       newItems[index] = item;
+
+      const newDataset = getChartData(newItems);
+      const currentYear = item.sellDate[2];
+      dataset.data = getDataPoint(newDataset[currentYear]);
+
       this.setState({
-        items: newItems
+        items: newItems,
+        chartData: getChartData(newItems),
+        currentChart: { ...this.state.currentChart, datasets: [dataset] },
+        currentYear
       });
     } catch (err) {
       console.log(err);
     }
   };
-
-  // updateChartData = () => {
-  //   console.log(data);
-  //   data = {
-  //     ...data
-  //     // datasets: []
-  //   };
-  //   console.log(data);
-  //   return data;
-  // };
 
   toggleModal = () => {
     this.setState({ toggleModal: !this.state.toggleModal });
@@ -219,7 +193,7 @@ export class Dashboard extends Component {
                   'loading...'
                 ) : (
                   <Line
-                    options={a}
+                    options={chartOptions}
                     // options={{ scaleGridLineColor: 'red' }}
                     data={this.state.currentChart}
                   />
@@ -246,7 +220,9 @@ export class Dashboard extends Component {
                   <Table>
                     <thead>
                       <tr>
-                        <th data-field="id">Item</th>
+                        <th data-field="item">Item</th>
+                        <th data-field="buy-date">Buy Date</th>
+                        <th data-field="sell-date">Sell Date</th>
                         <th data-field="buy-price">Buy Price ($)</th>
                         <th data-field="sell-price">Sell Price ($)</th>
                         <th data-field="item-profit">Item Profit ($)</th>
@@ -259,9 +235,17 @@ export class Dashboard extends Component {
                           onClick={() =>
                             this.props.onSetEditingItem(item, index)
                           }
-                          className="item"
+                          className={
+                            this.props.editingIndex === index
+                              ? 'item clicked'
+                              : 'item'
+                          }
                         >
-                          <td>{item.name}</td>
+                          <td>
+                            <p>{item.name}</p>
+                          </td>
+                          <td>{item.sellDate.join('-')}</td>
+                          <td>{item.buyDate.join('-')}</td>
                           <td>{item.buyPrice}</td>
                           <td>{item.sellPrice}</td>
                           <td>

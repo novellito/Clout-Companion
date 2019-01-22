@@ -1,7 +1,6 @@
-export const defaultDataStyles = {
+const defaultDataStyles = {
   backgroundColor: 'rgba(75,192,192,0.4)',
   borderColor: 'rgba(75,192,192,1)',
-  borderCapStyle: 'butt',
   borderDash: [],
   borderDashOffset: 0.0,
   borderJoinStyle: 'miter',
@@ -15,7 +14,44 @@ export const defaultDataStyles = {
   pointRadius: 1,
   pointHitRadius: 10
 };
+export const labels = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
 
+export const dataset = {
+  ...defaultDataStyles,
+  data: []
+};
+
+export const chartOptions = {
+  legend: {
+    display: false
+  },
+  scales: {
+    yAxes: [
+      {
+        scaleLabel: {
+          display: true,
+          labelString: 'Net Profit'
+        },
+        ticks: {
+          beginAtZero: true
+        }
+      }
+    ]
+  }
+};
 export const getChartData = (items, yearSelected = '2018') => {
   let calendarMap = {};
 
