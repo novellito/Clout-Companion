@@ -1,15 +1,13 @@
+const WHITE = 'white';
+const PRIMARY_COLOR = '#ff3547b3';
 const defaultDataStyles = {
-  backgroundColor: 'rgba(75,192,192,0.4)',
-  borderColor: 'rgba(75,192,192,1)',
-  borderDash: [],
-  borderDashOffset: 0.0,
-  borderJoinStyle: 'miter',
-  pointBorderColor: 'rgba(75,192,192,1)',
-  pointBackgroundColor: '#fff',
+  borderColor: PRIMARY_COLOR,
+  pointBackgroundColor: PRIMARY_COLOR,
+  pointHoverBackgroundColor: PRIMARY_COLOR,
+  pointBorderColor: WHITE,
+  pointHoverBorderColor: WHITE,
   pointBorderWidth: 1,
   pointHoverRadius: 5,
-  pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-  pointHoverBorderColor: 'rgba(220,220,220,1)',
   pointHoverBorderWidth: 2,
   pointRadius: 1,
   pointHitRadius: 10
@@ -31,10 +29,14 @@ export const labels = [
 
 export const dataset = {
   ...defaultDataStyles,
-  data: []
+  data: [],
+  label: 'Net Profit'
 };
 
 export const chartOptions = {
+  tooltips: {
+    displayColors: false
+  },
   legend: {
     display: false
   },

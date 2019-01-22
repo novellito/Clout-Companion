@@ -192,11 +192,7 @@ export class Dashboard extends Component {
                 {this.state.items.length === 0 ? (
                   'loading...'
                 ) : (
-                  <Line
-                    options={chartOptions}
-                    // options={{ scaleGridLineColor: 'red' }}
-                    data={this.state.currentChart}
-                  />
+                  <Line options={chartOptions} data={this.state.currentChart} />
                 )}
                 <div className="chart-toggle">
                   <i
