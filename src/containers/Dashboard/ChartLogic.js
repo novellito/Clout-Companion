@@ -45,10 +45,20 @@ export const chartOptions = {
       {
         scaleLabel: {
           display: true,
+          fontColor: 'white',
           labelString: 'Net Profit'
         },
         ticks: {
-          beginAtZero: true
+          beginAtZero: true,
+          fontColor: 'white'
+        }
+      }
+    ],
+    xAxes: [
+      {
+        ticks: {
+          beginAtZero: true,
+          fontColor: 'white'
         }
       }
     ]

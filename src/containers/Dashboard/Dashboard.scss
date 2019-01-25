@@ -9,6 +9,7 @@ td {
     white-space: nowrap;
   }
 }
+
 #Dash-Modal {
   background-color: #424242;
   border-bottom: 1px solid #303030;
@@ -108,6 +109,9 @@ td {
   }
 }
 @media (min-width: 1091px) {
+  #chart {
+    margin-bottom: -25px;
+  }
   .wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;

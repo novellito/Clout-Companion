@@ -188,11 +188,15 @@ export class Dashboard extends Component {
           <div className="box chart">
             <div className="card dash-card">
               <div className="card-content white-text">
-                <span className="card-title">Graph</span>
+                <span className="card-title">Profit Breakdown</span>
                 {this.state.items.length === 0 ? (
                   'loading...'
                 ) : (
-                  <Line options={chartOptions} data={this.state.currentChart} />
+                  <Line
+                    options={chartOptions}
+                    data={this.state.currentChart}
+                    id="chart"
+                  />
                 )}
                 <div className="chart-toggle">
                   <i
@@ -256,7 +260,7 @@ export class Dashboard extends Component {
               </div>
               <div className="card-action item-opts">
                 <div className="net-profit h3">
-                  Net Profit:{' '}
+                  Net Profit: $
                   {this.state.items.length > 0 &&
                     this.state.items
                       .map(
