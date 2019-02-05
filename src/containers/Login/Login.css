@@ -6,34 +6,34 @@
   margin-top: 10%;
   background-color: #424242;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  height: 400px; }
+  height: 335px; }
   .log-card .card-content {
     color: white;
-    text-align: center;
-    vertical-align: middle; }
+    text-align: center; }
     .log-card .card-content p {
       font-size: 2.56rem;
       line-height: 110%;
-      margin: 1.78rem 0 1.424rem 0; }
+      margin: 1.78rem 0 2.424rem 0; }
 
 .fb-btn {
   box-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
   font-size: 1.2em;
   background-color: #4c69ba;
   border: 1px solid #4c69ba;
-  padding: 20px;
+  padding: 10px;
   width: 100%; }
   .fb-btn:hover {
     background-color: #7c92d1;
     border: 1px solid #7c92d1;
-    transition: .8s; }
+    transition: 0.8s; }
   .fb-btn .fa-facebook {
     margin-right: 12px;
-    font-size: 1.8em; }
+    font-size: 1.6em;
+    vertical-align: middle; }
 
 .twit-btn {
   background-color: #00aced;
-  padding: 20px;
+  padding: 10px;
   color: white;
   font-size: 1.2em;
   margin-bottom: 15px;
@@ -43,8 +43,9 @@
   .twit-btn:hover {
     background-color: #68d0f8;
     border: 1px solid #68d0f8;
-    transition: .8s; }
+    transition: 0.8s; }
   .twit-btn .fa-twitter {
     color: white;
     margin-right: 12px;
-    font-size: 1.8em; }
+    vertical-align: middle;
+    font-size: 1.6em; }
