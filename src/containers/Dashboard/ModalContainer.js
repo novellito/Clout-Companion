@@ -119,7 +119,6 @@ export class ModalContainer extends Component {
               customInput={Input}
               s={6}
               value={sellPrice ? sellPrice : ''}
-              s={6}
               onChange={e =>
                 this.props.onUpdateForm({
                   option: 'sellPrice',

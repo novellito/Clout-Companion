@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AppNavbar from '../../components/AppNavbar/AppNavbar';
-import { Table, Button } from 'react-materialize';
+import { Table } from 'react-materialize';
 import './Dashboard.css';
 import ModalContainer from './ModalContainer';
 import * as actionCreators from '../../store/actions/actionCreators';
@@ -36,18 +36,33 @@ export class Dashboard extends Component {
       .then(({ data }) => {
         // default chart to 2019
         const defaultData = getChartData(data);
-        dataset.data = getDataPoint(defaultData['2019']);
-        this.setState({
-          items: data,
-          chartData: getChartData(data),
-          currentChart: { ...this.state.currentChart, datasets: [dataset] }
-        });
+        const defaultYear = Object.keys(defaultData)[0];
+        console.log(data);
+        if (data.length === 0) {
+          console.log('0 dats');
+          dataset.data = [];
+          this.setState({
+            currentYear: 'No Data!',
+            items: data,
+            chartData: getChartData(data),
+            currentChart: { ...this.state.currentChart, datasets: [dataset] }
+          });
+        } else {
+          // let default
+          dataset.data = getDataPoint(defaultData[defaultYear]);
+          console.log(dataset.data);
+          this.setState({
+            currentYear: defaultYear,
+            items: data,
+            chartData: getChartData(data),
+            currentChart: { ...this.state.currentChart, datasets: [dataset] }
+          });
+        }
       })
       .catch(err => console.log(err));
   }
 
   addItemToList = async item => {
-    // will probably recalcualte chart here
     try {
       const { data } = await axios.post(
         '/api/user',
@@ -90,16 +105,25 @@ export class Dashboard extends Component {
       const itemToDelete = newItems[this.props.editingIndex];
       newItems.splice(this.props.editingIndex, 1);
 
-      const newDataset = getChartData(newItems);
       const currentYear = itemToDelete.sellDate[2];
-      dataset.data = getDataPoint(newDataset[currentYear]);
+      if (newItems.length !== 0) {
+        const newDataset = getChartData(newItems);
+        dataset.data = getDataPoint(newDataset[currentYear]);
 
-      this.setState({
-        items: newItems,
-        chartData: getChartData(newItems),
-        currentChart: { ...this.state.currentChart, datasets: [dataset] },
-        currentYear
-      });
+        this.setState({
+          items: newItems,
+          currentChart: { ...this.state.currentChart, datasets: [dataset] },
+          currentYear
+        });
+      } else {
+        // last item to delete
+        dataset.data = newItems;
+        this.setState({
+          items: newItems,
+          currentChart: { ...this.state.currentChart, datasets: [dataset] },
+          currentYear
+        });
+      }
       this.props.cleanupItems(); // reset all the fields
     } catch (err) {
       console.log(err);
@@ -190,7 +214,11 @@ export class Dashboard extends Component {
               <div className="card-content white-text">
                 <span className="card-title">Profit Breakdown</span>
                 {this.state.items.length === 0 ? (
-                  'loading...'
+                  <Line
+                    options={chartOptions}
+                    data={this.state.currentChart}
+                    id="chart"
+                  />
                 ) : (
                   <Line
                     options={chartOptions}
