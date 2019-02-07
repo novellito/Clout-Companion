@@ -118,6 +118,7 @@ export const getDataPoint = calendarMap => {
     }
   }
 
+  // Fill empty positions in the arry with 0
   for (let i = 0; i <= 11; i++) {
     if (!data[i]) {
       data[i] = 0;

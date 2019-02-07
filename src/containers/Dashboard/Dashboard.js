@@ -48,7 +48,7 @@ export class Dashboard extends Component {
             currentChart: { ...this.state.currentChart, datasets: [dataset] }
           });
         } else {
-          // let default
+          // set default
           dataset.data = getDataPoint(defaultData[defaultYear]);
           console.log(dataset.data);
           this.setState({

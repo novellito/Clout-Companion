@@ -20,7 +20,6 @@ export class Login extends Component {
       console.log('user not authenticated');
     } else {
       this.props.setUser(res.userID, res.name);
-
       const headers = {
         'Content-Type': 'application/json'
       };

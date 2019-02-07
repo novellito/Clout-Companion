@@ -142,8 +142,8 @@ export class ModalContainer extends Component {
                       new Date(buyDate[2], buyDate[0], buyDate[1])
                     );
                 },
-                format: 'mm/dd/yyyy'
-                // max: new Date()
+                format: 'mm/dd/yyyy',
+                max: new Date()
               }}
               onChange={e =>
                 this.props.onUpdateForm({
@@ -167,8 +167,8 @@ export class ModalContainer extends Component {
                       'select',
                       new Date(sellDate[2], sellDate[0], sellDate[1])
                     );
-                }
-                // min: new Date(sellDate[0], sellDate[1], sellDate[2])
+                },
+                min: new Date(sellDate[0], sellDate[1], sellDate[2])
               }}
               onChange={e =>
                 this.props.onUpdateForm({
