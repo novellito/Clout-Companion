@@ -214,29 +214,36 @@ export class Dashboard extends Component {
               <div className="card-content white-text">
                 <span className="card-title">Profit Breakdown</span>
                 {this.state.items.length === 0 ? (
-                  <Line
-                    options={chartOptions}
-                    data={this.state.currentChart}
-                    id="chart"
-                  />
+                  <React.Fragment>
+                    <Line
+                      options={chartOptions}
+                      data={this.state.currentChart}
+                      id="chart"
+                    />
+                    <div className="chart-toggle">
+                      <p>{this.state.currentYear}</p>
+                    </div>
+                  </React.Fragment>
                 ) : (
-                  <Line
-                    options={chartOptions}
-                    data={this.state.currentChart}
-                    id="chart"
-                  />
+                  <React.Fragment>
+                    <Line
+                      options={chartOptions}
+                      data={this.state.currentChart}
+                      id="chart"
+                    />
+                    <div className="chart-toggle">
+                      <i
+                        className="fa fa-2x fa-chevron-left"
+                        onClick={this.changeYear}
+                      />
+                      <p>{this.state.currentYear}</p>
+                      <i
+                        className="fa fa-2x fa-chevron-right"
+                        onClick={() => this.changeYear(false)}
+                      />
+                    </div>
+                  </React.Fragment>
                 )}
-                <div className="chart-toggle">
-                  <i
-                    className="fa fa-2x fa-chevron-left"
-                    onClick={this.changeYear}
-                  />
-                  <p>{this.state.currentYear}</p>
-                  <i
-                    className="fa fa-2x fa-chevron-right"
-                    onClick={() => this.changeYear(false)}
-                  />
-                </div>
               </div>
             </div>
           </div>
