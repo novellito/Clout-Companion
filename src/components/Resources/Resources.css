@@ -15,7 +15,11 @@
   font-size: 200px; }
 
 .copy {
-  color: white; }
+  color: white;
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  cursor: pointer; }
   .copy:hover {
     cursor: pointer;
     color: #ffffffb5; }

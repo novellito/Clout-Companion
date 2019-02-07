@@ -32,7 +32,7 @@ class Clipboard extends React.Component {
     return (
       <div>
         <CopyToClipboard text={this.state.template} onCopy={() => this.copy()}>
-          <a className="copy">Copy to clipboard</a>
+          <button className="copy">Copy to clipboard</button>
         </CopyToClipboard>
 
         {this.state.copied ? (

@@ -41,7 +41,6 @@ export const AppNavbar = props => {
       ) : (
         ''
       )}
-      {/* <NavItem onClick={() => logout()}>Logout</NavItem> */}
     </Navbar>
   );
 };
