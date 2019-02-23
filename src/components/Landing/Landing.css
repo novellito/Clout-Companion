@@ -8,5 +8,17 @@
     display: grid;
     grid-template-columns: 1fr 1fr; }
 
-.foofoo {
-  color: red; }
+.fa-calculator,
+.fa-chart-line,
+.fa-toolbox {
+  font-size: 9em; }
+
+.feature-container {
+  position: relative;
+  top: 120px;
+  width: 60%;
+  margin: 0 auto;
+  color: white; }
+
+.carousel .slide {
+  background-color: #eb3349; }
