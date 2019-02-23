@@ -19,7 +19,7 @@ export const AppNavbar = props => {
       right
     >
       <li>
-        <NavLink exact activeClassName="nav-active" to="/">
+        <NavLink exact activeClassName="nav-active" to="/calculator">
           Calculator
         </NavLink>
       </li>
