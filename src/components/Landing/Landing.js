@@ -12,7 +12,7 @@ const Landing = props => {
 
       <section id="landing">
         <div className="container ">
-          <div className="row">
+          <div className="landing-row">
             <div className="">
               <div className="white-text landing-text">
                 <h1>A Hypebeast sales tracker</h1>
@@ -36,7 +36,6 @@ const Landing = props => {
               showThumbs={false}
             >
               <div className="feature-container">
-                {/* <img src={calculator} /> */}
                 <i className="fas fa-calculator" />
                 <p>Calculate shipping fees for Paypal, StockX, and Grailed</p>
               </div>
@@ -49,7 +48,6 @@ const Landing = props => {
                 <p>Access tools</p>
               </div>
             </Carousel>
-            <div className="card landing-text">hello</div>
           </div>
         </div>
       </section>
