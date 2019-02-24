@@ -211,10 +211,10 @@ export class Dashboard extends Component {
         <div className="wrapper">
           <div className="box chart">
             <div className="card dash-card">
-              <div className="card-content white-text">
+              <div className="card-content  white-text">
                 <span className="card-title">Profit Breakdown</span>
                 {this.state.items.length === 0 ? (
-                  <React.Fragment>
+                  <>
                     <Line
                       options={chartOptions}
                       data={this.state.currentChart}
@@ -223,9 +223,9 @@ export class Dashboard extends Component {
                     <div className="chart-toggle">
                       <p>{this.state.currentYear}</p>
                     </div>
-                  </React.Fragment>
+                  </>
                 ) : (
-                  <React.Fragment>
+                  <>
                     <Line
                       options={chartOptions}
                       data={this.state.currentChart}
@@ -242,7 +242,7 @@ export class Dashboard extends Component {
                         onClick={() => this.changeYear(false)}
                       />
                     </div>
-                  </React.Fragment>
+                  </>
                 )}
               </div>
             </div>
@@ -315,7 +315,7 @@ export class Dashboard extends Component {
                   ''
                 )}
                 {this.props.editingIndex || this.props.editingIndex === 0 ? (
-                  <React.Fragment>
+                  <>
                     <i
                       className="fa fa-2x fa-trash"
                       onClick={this.deleteItem}
@@ -324,7 +324,7 @@ export class Dashboard extends Component {
                       className="fa fa-2x fa-edit"
                       onClick={this.toggleModal}
                     />
-                  </React.Fragment>
+                  </>
                 ) : (
                   <i
                     className="fa fa-2x fa-plus-circle"

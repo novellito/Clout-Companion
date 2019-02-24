@@ -75,7 +75,9 @@ td p {
 .chart-toggle {
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  position: relative;
+  top: 20px; }
   .chart-toggle p {
     margin: 0 15px !important;
     font-size: 2em; }
