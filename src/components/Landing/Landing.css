@@ -22,6 +22,21 @@
     opacity: 0.6;
     z-index: -1; }
 
+.landing-row {
+  text-align: center; }
+  .landing-row p {
+    font-size: 1.2em; }
+
+.action-btns {
+  margin-top: 25px;
+  margin-bottom: 15px; }
+  .action-btns button {
+    color: white;
+    height: 50px;
+    background-color: #ff3547; }
+    .action-btns button:hover {
+      background-color: #f15258; }
+
 .fa-calculator,
 .fa-chart-line,
 .fa-toolbox {
@@ -34,13 +49,14 @@
 
 .feature-container {
   position: relative;
-  top: 120px;
+  top: 105px;
   width: 60%;
   margin: 0 auto;
   color: white; }
 
 .carousel.carousel-slider {
-  max-width: 400px; }
+  max-width: 400px;
+  margin: 0 auto; }
 
 .carousel .slide {
   background: rgba(0, 0, 0, 0.5);
@@ -50,5 +66,4 @@
   .landing-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    justify-items: center;
-    text-align: center; } }
+    justify-items: center; } }

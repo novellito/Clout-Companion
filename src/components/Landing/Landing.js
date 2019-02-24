@@ -8,18 +8,15 @@ import { Link } from 'react-router-dom';
 
 const Landing = props => {
   return (
-    <div>
+    <>
       <AppNavbar history={props.history} />
-
       <section id="landing">
-        <div className="container ">
+        <div className="container">
           <div className="landing-row">
-            <div className="">
+            <div>
               <div className="white-text landing-text">
-                <h1>A Hypebeast sales tracker</h1>
-                <h6>
-                  With the resources you need to become a successful reseller
-                </h6>
+                <h1>A hypebeast sales tracker</h1>
+                <p>with the tools you need to become a successful reseller</p>
               </div>
               <div className="action-btns">
                 {localStorage.length > 0 ? (
@@ -37,13 +34,11 @@ const Landing = props => {
                 )}
               </div>
             </div>
-
             <Carousel
               showArrows={false}
               showStatus={false}
-              // interval={2000}
               infiniteLoop={true}
-              // autoPlay={true}
+              autoPlay={true}
               showThumbs={false}
             >
               <div className="feature-container">
@@ -52,17 +47,17 @@ const Landing = props => {
               </div>
               <div className="feature-container">
                 <i className="fas fa-chart-line" />
-                <p>Track sales</p>
+                <p>Keep track of past sales</p>
               </div>
               <div className="feature-container">
                 <i className="fas fa-toolbox" />
-                <p>Access tools</p>
+                <p>Resources to help beginner resellers</p>
               </div>
             </Carousel>
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
