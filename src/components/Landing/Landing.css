@@ -26,6 +26,11 @@
 .fa-chart-line,
 .fa-toolbox {
   font-size: 9em; }
+  .fa-calculator:hover,
+  .fa-chart-line:hover,
+  .fa-toolbox:hover {
+    cursor: default;
+    color: white; }
 
 .feature-container {
   position: relative;

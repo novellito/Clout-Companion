@@ -29,6 +29,10 @@ $red-primary: #eb3349;
 .fa-chart-line,
 .fa-toolbox {
   font-size: 9em;
+  &:hover {
+    cursor: default;
+    color: white;
+  }
 }
 .feature-container {
   position: relative;

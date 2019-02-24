@@ -4,6 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Button } from 'react-materialize';
 import './Landing.css';
+import { Link } from 'react-router-dom';
 
 const Landing = props => {
   return (
@@ -21,9 +22,19 @@ const Landing = props => {
                 </h6>
               </div>
               <div className="action-btns">
-                <Button modal="close" waves="light">
-                  login
-                </Button>
+                {localStorage.length > 0 ? (
+                  <Link to="/dashboard">
+                    <Button modal="close" waves="light">
+                      Dashboard
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <Button modal="close" waves="light">
+                      Login
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
 
