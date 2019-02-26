@@ -1,32 +1,31 @@
 UI:
 
   Containers:
-    ☐ User dashboard
-    ☐ App.js
+    ✔ User dashboard
+    ✔ App.js
 
   Components:
     ✔ Navbar @done(18-06-10 14:07)
-    ☐ Landing Page
+    ✔ Landing Page
     ✔ Calculators @done(18-06-10 14:07)
         ✔ Test Calculator Components @done(18-05-16 23:29)
     ✔ Useful Resources @done(18-06-10 14:07)
-    ☐ Contact links / Donate
-    ☐ Items (either bought or sold)
-        ☐ Item
+    ✔ Items (either bought or sold)
+        ✔ Item
 
 Backend:
 
   Database:
-    ☐ Set up User schemas
-    ☐ Set up Item Schemas
+    ✔ Set up User schemas
+    ✔ Set up Item Schemas
 
   use format /api/:something
   Endpoints:
-    ☐  Login
+    ✔  Login
         ✔ Facebook @done(18-06-10 14:06)
         ✔ Twitter @done(18-06-10 14:06)
-    ☐ User info
-    ☐ Items info
+    ✔ User info
+    ✔ Items info
 
   Login:
       ✔ Facebook Login @done(18-06-10 14:07)
@@ -37,9 +36,8 @@ Backend:
     ✔ Grailed fees calculator @done(18-05-15 22:40)
     ✔ Stockx fees calculator @done(18-05-15 22:40)
     ✔ Useful resources & guides section @done(18-06-10 14:07)
-    ☐ Manage Profits & Inventory 
-        ☐ Look for react components (npm) that displays data in charts (look at nivo)
-        ☐ Download list as a csv
+    ✔ Manage Profits & Inventory 
+        ✔ Look for react components (npm) that displays data in charts (look at nivo)
   
   Infastructure:
     ✔ Set up folder structure @done(18-05-16 23:39)
@@ -48,9 +46,9 @@ Backend:
     ✔ Set up routing @done(18-05-16 23:39)
   
   Misc:
-    ☐ Ensure overall responsiveness
-    ☐ Add auth hoc
-    ☐ refactor modal reducers
+    ✔ Ensure overall responsiveness
+    ✔ Add auth hoc
+    ✔ refactor modal reducers
   
 ----------------------------------------------------------
 remember to somehow say these are your opinions
@@ -81,5 +79,4 @@ Resources Page:
 -----------------------------------------------
 
 MVPs:
-  ☐ Calculator Page with resources page & updated ui for navigation (consider deployment)
-  ☐ Final polished product
+  ✔ Calculator Page with resources page & updated ui for navigation (consider deployment)
