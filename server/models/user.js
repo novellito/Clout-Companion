@@ -5,20 +5,16 @@ const UserSchema = new Schema({
     type: String,
     require: true
   },
-
   userId: {
     type: String,
     required: true
   },
-
   items: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Item'
     }
   ]
-
-  // update for notes & items
 });
 
 UserSchema.statics.upsertNewUser = function(profile, cb) {
@@ -33,7 +29,6 @@ UserSchema.statics.upsertNewUser = function(profile, cb) {
           username: profile.username,
           userId: profile.id
         });
-
         newUser.save((error, savedUser) => {
           if (error) {
             console.log(error);

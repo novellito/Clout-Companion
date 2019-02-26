@@ -37,9 +37,7 @@ export class Dashboard extends Component {
         // default chart to 2019
         const defaultData = getChartData(data);
         const defaultYear = Object.keys(defaultData)[0];
-        console.log(data);
         if (data.length === 0) {
-          console.log('0 dats');
           dataset.data = [];
           this.setState({
             currentYear: 'No Data!',
@@ -50,7 +48,6 @@ export class Dashboard extends Component {
         } else {
           // set default
           dataset.data = getDataPoint(defaultData[defaultYear]);
-          console.log(dataset.data);
           this.setState({
             currentYear: defaultYear,
             items: data,

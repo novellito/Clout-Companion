@@ -98,6 +98,7 @@ export class Login extends Component {
                       icon="fa-facebook"
                       cssClass="fb-btn"
                       textButton="Login with Facebook"
+                      isDisabled={true}
                     />
                   </div>
                 </div>

@@ -2,7 +2,8 @@
   background-color: #303030; }
   .navbar li a:hover {
     color: black;
-    background-color: white; }
+    background-color: white;
+    cursor: pointer; }
 
 .cc-logo {
   position: relative;

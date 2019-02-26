@@ -13,7 +13,6 @@ export const AppNavbar = props => {
   };
   return (
     <Navbar
-      // brand={'cool'}
       brand={Img}
       className="navbar"
       alt="clout companion logo (link to home page)"

@@ -4,11 +4,12 @@ const ItemsModel = require('../models/item');
 
 //List all items
 router.get('/item', (req, res, next) => {
-  let item = ItemsModel.findOne({});
+  let item = ItemsModel.find({});
 
   item.then(
     data => {
-      res.json({ items: data.items });
+      console.log('data', data);
+      res.json({ items: data });
     },
     e => {
       res.json({ msg: 'error!' });
@@ -29,21 +30,8 @@ router.post('/item', async (req, res, next) => {
 
   let newItem = new ItemsModel(z);
   let item = await newItem.save();
-  console.log(item);
 
-  //need to return _id to client in response
-
-  res.send('hi');
-  // item.then((data)=>{
-
-  //     data.items.push(req.body.item);
-  //     data.save();
-  //     res.json({msg:'Item Added!', data:data.items});
-
-  // },(e)=> {
-  //     console.log('saving error!');
-  //     res.json({msg:'error!'});
-  // });
+  res.send(item);
 });
 
 //update an item

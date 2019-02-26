@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const items = require('./routes/items');
 const login = require('./routes/login');
-const ItemsModel = require('./models/item');
 const user = require('./routes/user');
 require('dotenv').config();
 require('./config/passport')();
@@ -13,10 +12,8 @@ const port = 5000;
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(
-  'mongodb://localhost:27017/CloutCompanion',
-  {},
-  err => (err ? console.log(err) : console.log('Connected!'))
+mongoose.connect('mongodb://localhost:27017/CloutCompanion', {}, err =>
+  err ? console.log(err) : console.log('Connected!')
 );
 var corsOption = {
   origin: true,
