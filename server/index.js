@@ -12,7 +12,9 @@ const port = 5000;
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/CloutCompanion', {}, err =>
+mongoose.connect('mongodb://mongo:27017/CloutCompanion', {}, err =>
+  // Used for local dev
+  // mongoose.connect('mongodb://localhost:27017/CloutCompanion', {}, err =>
   err ? console.log(err) : console.log('Connected!')
 );
 var corsOption = {

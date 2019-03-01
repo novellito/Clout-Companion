@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App';
-import registerServiceWorker from './registerServiceWorker';
 import loginReducer from './store/reducers/login';
 import modalReducer from './store/reducers/modal';
 import thunk from 'redux-thunk';
@@ -42,5 +41,3 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
-
-registerServiceWorker();
