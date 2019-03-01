@@ -27,7 +27,16 @@ The app should now be serving on http://localhost:3000/
 ### Running locally (without Docker)
 
 Run `npm install` in both the client and server directories
+
 Uncomment the code in setupProxy.js and comment the existing app.use
+
+Uncomment the mongoose section in server/index.js and comment the existing mongoose.connect
+
+`npm start` in client folder
+
+`nodemon` in server folder
+
+Make sure mongo is running in the background as well
 
 
 ***Note: You will need to create a .env file in the server directory with the following content***
